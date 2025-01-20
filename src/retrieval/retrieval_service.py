@@ -2,6 +2,7 @@
 import json
 from typing import List, Optional, Dict
 from weaviate.collections.classes.filters import Filter
+from weaviate.classes.query import MetadataQuery
 
 class RetrievalService:
     def __init__(self, collection, embedding_service):
@@ -13,7 +14,7 @@ class RetrievalService:
         query_text: str,
         task_id: str,
         k: int = 5,
-        similarity_threshold: float = 0.7
+        similarity_threshold: float = 0.6
     ) -> List[Dict]:
         query_vec = self.embedding_service.embed_text(query_text)
         
@@ -27,9 +28,9 @@ class RetrievalService:
                 near_vector=query_vec,
                 limit=k,
                 certainty=similarity_threshold,
-                filters=task_filter
+                filters=task_filter,
+                return_metadata=MetadataQuery(distance=True, certainty=True)
             )
-            .with_additional(["distance", "certainty"])
             .objects
         )
         
@@ -38,8 +39,8 @@ class RetrievalService:
             results.append({
                 "text": obj.properties["text"],
                 "content": json.loads(obj.properties["content"]),
-                "similarity": obj.certainty,
-                "distance": obj.distance
+                "similarity": obj.metadata.certainty,
+                "distance": obj.metadata.distance
             })
         
         return results

@@ -27,13 +27,18 @@ def main():
     ingester = DataIngester(collection, embedding_service=embedding_service)
     sample_examples = [
         Example(
-            text="Sample text for multi-task scenario",
+            text="Sample text for first scenario",
             task_id="task_foo",
             content={"any_json": "structure"},
         ),
         Example(
-            text="Another example for the same task",
+            text="Another example for the first task",
             task_id="task_foo",
+            content={"key": "value"},
+        ),
+        Example(
+            text="Another example for the second task",
+            task_id="task_foo_2",
             content={"key": "value"},
         )
     ]
@@ -51,7 +56,17 @@ def main():
     )
     
     # 6. Print the retrieved results
-    logger.info(f"Retrieved {len(results)} results")
+    logger.info(f"Retrieved {len(results)} results for first task:")
+    logger.info(json.dumps(results, indent=2))
+    
+    results = retriever.retrieve_examples(
+        query_text="Similar content to the second sample text",
+        task_id="task_foo_2",
+        k=2
+    )
+    
+    # 6. Print the retrieved results
+    logger.info(f"Retrieved {len(results)} results for second task:")
     logger.info(json.dumps(results, indent=2))
 
 if __name__ == "__main__":
