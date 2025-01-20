@@ -9,3 +9,20 @@ services:
       AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
       PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
       DEFAULT_VECTORIZER_MODULE: 'none'
+
+  langchain-inference:
+      build:
+        context: .
+      container_name: langchain_inference
+      ports:
+        - "8000:8000"
+      depends_on:
+        - weaviate
+      deploy:
+        resources:
+          reservations:
+            devices:
+              - capabilities: ["gpu"]
+      volumes:
+        - ./:workspace/
+      command: ["tail", "-f", "/dev/null"]
