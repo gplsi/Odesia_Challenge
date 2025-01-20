@@ -9,8 +9,6 @@ from setup_database import create_weaviate_client, setup_collection
 
 def main():
     # 1. Retrieve Hugging Face API Key from environment variable or another secure source
-    hf_api_key = "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"
-
     # 2. Create Weaviate client pointing to your Docker-based instance
     client = create_weaviate_client(huggingface_api_key=hf_api_key)
     
