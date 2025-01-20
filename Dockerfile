@@ -19,31 +19,25 @@ RUN apt-get update && \
 #     sh get-docker.sh && \
 #     rm get-docker.sh
 
+# Copy requirements earlier to leverage cache
+COPY requirements.txt /tmp/requirements.txt
+
 # Actualizar pip e instalar dependencias de Python
 RUN pip install --upgrade pip && \
-    pip install \
-        langchain \
-        langchain-community \
-        sentence-transformers \
-        weaviate-client \
-        transformers \
-        datasets \
-        accelerate \
-        faiss-gpu \
-        python-dotenv \
-        tiktoken \
-        fastapi \
-        uvicorn[standard] \
-        gradio
+    pip install -r /tmp/requirements.txt
+
+# Provide defaults for Weaviate access
+ENV WEAVIATE_HOST=weaviate
+ENV WEAVIATE_PORT=8080
 
 # Crear directorio de trabajo
 WORKDIR /workspace
 
 # Copiar tu script de LangChain (opcional si vas a montarlo como volumen)
-COPY langchain_script.py /workspace/
+# COPY langchain_script.py /workspace/
 
-# (Opcional) Copiar un script de API
-COPY inference_api.py /workspace/inference_api.py
+# # (Opcional) Copiar un script de API
+# COPY inference_api.py /workspace/inference_api.py
 
 # Exponer puertos, por ejemplo 8000 si vas a servir tu API con FastAPI
 EXPOSE 8000

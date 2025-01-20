@@ -11,3 +11,20 @@ services:
       ENABLE_MODULES: 'text2vec-huggingface'
       PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
       HUGGINGFACE_APIKEY: ${HUGGINGFACE_APIKEY}
+
+  langchain-inference:
+      build:
+        context: .
+      container_name: langchain_inference
+      ports:
+        - "8000:8000"
+      depends_on:
+        - weaviate
+      deploy:
+        resources:
+          reservations:
+            devices:
+              - capabilities: ["gpu"]
+      volumes:
+        - ./:workspace/
+      command: ["tail", "-f", "/dev/null"]

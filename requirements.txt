@@ -1,3 +1,17 @@
 pandas
 torch
 transformers
+weaviate-client
+langchain
+langchain-community
+sentence-transformers
+weaviate-client
+transformers
+datasets
+accelerate
+faiss-gpu
+python-dotenv
+tiktoken
+fastapi
+uvicorn[standard]
+gradio
