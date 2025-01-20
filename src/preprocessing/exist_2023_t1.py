@@ -11,8 +11,8 @@ def calculate_value_binary(file_path, output_path):
         total = yes_count + no_count
 
         entry['value_binary'] = {
-            "YES": round((yes_count / total) * 100, 4) if total > 0 else 0,
-            "NO": round((no_count / total) * 100, 4) if total > 0 else 0
+            "YES": round((yes_count / total), 4) if total > 0 else 0,
+            "NO": round((no_count / total), 4) if total > 0 else 0
         }
 
     with open(output_path, 'w', encoding='utf-8') as output_file:

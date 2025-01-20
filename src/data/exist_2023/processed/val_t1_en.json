@@ -38,8 +38,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -81,8 +81,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -124,8 +124,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -167,8 +167,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -210,8 +210,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -253,8 +253,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -297,7 +297,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -339,8 +339,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -382,8 +382,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -425,8 +425,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -468,8 +468,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -511,8 +511,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -554,8 +554,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -597,8 +597,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -640,8 +640,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -683,8 +683,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -726,8 +726,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -769,8 +769,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -812,8 +812,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -855,7 +855,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -898,8 +898,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -942,7 +942,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -985,7 +985,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -1027,8 +1027,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -1071,7 +1071,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -1114,7 +1114,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -1157,7 +1157,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -1199,8 +1199,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -1242,8 +1242,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -1285,8 +1285,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -1328,8 +1328,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -1371,8 +1371,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -1414,8 +1414,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -1457,8 +1457,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -1501,7 +1501,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -1543,8 +1543,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -1586,8 +1586,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -1629,8 +1629,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -1672,8 +1672,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -1715,8 +1715,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -1759,7 +1759,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -1802,7 +1802,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -1844,8 +1844,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -1887,8 +1887,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -1930,7 +1930,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -1973,8 +1973,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -2016,8 +2016,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -2060,7 +2060,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -2103,7 +2103,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -2145,8 +2145,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -2188,8 +2188,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -2231,8 +2231,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -2275,7 +2275,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -2317,8 +2317,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -2360,8 +2360,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -2404,7 +2404,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -2447,7 +2447,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -2489,8 +2489,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -2532,8 +2532,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -2575,8 +2575,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -2618,8 +2618,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -2661,7 +2661,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -2704,8 +2704,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -2747,8 +2747,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -2790,7 +2790,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -2833,8 +2833,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -2876,8 +2876,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -2919,8 +2919,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -2962,7 +2962,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -3006,7 +3006,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -3048,8 +3048,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -3091,8 +3091,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -3134,8 +3134,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -3178,7 +3178,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -3220,8 +3220,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -3263,8 +3263,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -3306,8 +3306,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -3349,8 +3349,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -3392,8 +3392,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -3435,7 +3435,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -3478,8 +3478,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -3522,7 +3522,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -3564,8 +3564,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -3607,8 +3607,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -3651,7 +3651,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -3694,7 +3694,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -3736,8 +3736,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -3779,8 +3779,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -3823,7 +3823,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -3866,7 +3866,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -3908,8 +3908,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -3951,7 +3951,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -3994,8 +3994,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -4037,7 +4037,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -4080,7 +4080,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -4123,7 +4123,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -4166,8 +4166,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -4209,8 +4209,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -4252,8 +4252,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -4296,7 +4296,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -4338,8 +4338,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -4381,8 +4381,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -4425,7 +4425,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -4467,8 +4467,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -4511,7 +4511,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -4553,8 +4553,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -4596,7 +4596,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -4639,8 +4639,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -4683,7 +4683,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -4725,8 +4725,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -4768,8 +4768,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -4811,8 +4811,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -4854,8 +4854,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -4897,7 +4897,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -4940,8 +4940,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -4984,7 +4984,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5026,8 +5026,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -5069,8 +5069,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -5112,8 +5112,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -5155,8 +5155,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -5198,8 +5198,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -5242,7 +5242,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5285,7 +5285,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5327,8 +5327,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -5371,7 +5371,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5413,8 +5413,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -5456,8 +5456,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -5499,8 +5499,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -5543,7 +5543,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5586,7 +5586,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5629,7 +5629,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5672,7 +5672,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5714,7 +5714,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -5757,8 +5757,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -5800,8 +5800,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -5844,7 +5844,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5887,7 +5887,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5930,7 +5930,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -5972,8 +5972,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -6015,7 +6015,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -6058,8 +6058,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -6102,7 +6102,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -6145,7 +6145,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -6187,7 +6187,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -6231,7 +6231,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -6273,8 +6273,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -6317,7 +6317,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -6359,8 +6359,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -6402,8 +6402,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -6445,8 +6445,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -6488,8 +6488,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -6531,8 +6531,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -6574,8 +6574,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -6617,8 +6617,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -6660,8 +6660,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -6703,8 +6703,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -6746,8 +6746,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -6789,8 +6789,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -6832,7 +6832,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -6875,8 +6875,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -6918,8 +6918,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -6961,8 +6961,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -7004,8 +7004,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -7047,8 +7047,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -7090,8 +7090,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -7133,8 +7133,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -7176,8 +7176,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -7219,8 +7219,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -7262,8 +7262,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -7305,7 +7305,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -7349,7 +7349,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -7391,8 +7391,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -7434,8 +7434,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -7477,8 +7477,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -7520,8 +7520,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -7563,8 +7563,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -7607,7 +7607,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -7650,7 +7650,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -7692,8 +7692,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -7736,7 +7736,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -7778,8 +7778,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -7821,7 +7821,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -7864,8 +7864,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -7907,7 +7907,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -7950,8 +7950,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -7993,7 +7993,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -8036,8 +8036,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -8079,7 +8079,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -8122,8 +8122,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -8165,8 +8165,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -8208,8 +8208,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -8251,8 +8251,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -8294,8 +8294,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -8337,8 +8337,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -8380,7 +8380,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -8423,8 +8423,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -8466,8 +8466,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -8510,7 +8510,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -8552,8 +8552,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -8596,7 +8596,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -8638,7 +8638,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -8681,8 +8681,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -8724,8 +8724,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -8767,7 +8767,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -8810,8 +8810,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -8854,7 +8854,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -8897,7 +8897,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -8939,8 +8939,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -8983,7 +8983,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -9025,8 +9025,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -9069,7 +9069,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -9112,7 +9112,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -9155,7 +9155,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -9197,8 +9197,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -9241,7 +9241,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -9283,8 +9283,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -9326,8 +9326,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -9369,7 +9369,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -9412,8 +9412,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -9455,8 +9455,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -9498,8 +9498,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -9541,7 +9541,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -9584,8 +9584,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -9627,8 +9627,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -9670,8 +9670,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -9713,8 +9713,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -9756,7 +9756,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -9799,7 +9799,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -9842,8 +9842,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -9885,8 +9885,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -9928,8 +9928,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -9971,8 +9971,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -10015,7 +10015,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -10058,7 +10058,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -10100,8 +10100,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -10143,7 +10143,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -10186,8 +10186,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -10229,8 +10229,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -10273,7 +10273,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -10315,8 +10315,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -10358,8 +10358,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -10401,8 +10401,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -10444,8 +10444,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -10487,8 +10487,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -10530,8 +10530,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -10573,8 +10573,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -10616,8 +10616,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -10659,8 +10659,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -10702,8 +10702,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -10745,8 +10745,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -10788,8 +10788,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -10831,8 +10831,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -10874,8 +10874,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -10917,8 +10917,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -10960,8 +10960,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -11004,7 +11004,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -11046,8 +11046,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -11089,8 +11089,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -11132,8 +11132,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -11175,8 +11175,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -11218,8 +11218,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -11262,7 +11262,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -11305,7 +11305,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -11348,7 +11348,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -11390,8 +11390,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -11433,8 +11433,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -11476,8 +11476,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -11519,7 +11519,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -11562,8 +11562,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -11605,7 +11605,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -11648,8 +11648,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -11691,7 +11691,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -11734,8 +11734,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -11778,7 +11778,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -11821,7 +11821,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -11863,8 +11863,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -11906,8 +11906,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -11949,8 +11949,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -11992,8 +11992,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -12035,8 +12035,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -12078,8 +12078,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -12122,7 +12122,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -12165,7 +12165,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -12207,8 +12207,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -12251,7 +12251,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -12293,8 +12293,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -12336,8 +12336,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -12379,8 +12379,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -12422,7 +12422,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -12465,8 +12465,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -12508,8 +12508,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -12551,8 +12551,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -12594,8 +12594,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -12637,8 +12637,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -12680,8 +12680,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -12723,7 +12723,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -12766,7 +12766,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -12809,8 +12809,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -12852,8 +12852,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -12896,7 +12896,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -12938,8 +12938,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -12981,8 +12981,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -13024,8 +13024,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -13068,7 +13068,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -13110,8 +13110,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -13153,8 +13153,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -13196,8 +13196,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -13239,7 +13239,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -13282,8 +13282,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -13325,8 +13325,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -13368,8 +13368,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -13411,8 +13411,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -13455,7 +13455,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -13498,7 +13498,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -13541,7 +13541,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -13584,7 +13584,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -13626,8 +13626,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -13669,8 +13669,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -13712,8 +13712,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -13755,8 +13755,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -13798,7 +13798,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -13841,8 +13841,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -13884,8 +13884,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -13928,7 +13928,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -13971,7 +13971,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -14013,8 +14013,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -14057,7 +14057,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -14099,7 +14099,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -14142,8 +14142,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -14185,8 +14185,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -14228,8 +14228,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -14271,8 +14271,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -14315,7 +14315,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -14358,7 +14358,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -14401,7 +14401,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -14443,8 +14443,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -14486,8 +14486,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -14529,8 +14529,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -14572,8 +14572,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -14615,8 +14615,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -14658,8 +14658,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -14701,8 +14701,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -14744,8 +14744,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -14787,8 +14787,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -14830,8 +14830,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -14873,8 +14873,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -14916,8 +14916,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -14959,8 +14959,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -15002,8 +15002,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -15046,7 +15046,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -15088,8 +15088,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -15131,8 +15131,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -15175,7 +15175,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -15217,8 +15217,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -15261,7 +15261,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -15304,7 +15304,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -15346,8 +15346,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -15389,8 +15389,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -15432,7 +15432,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -15475,7 +15475,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -15518,8 +15518,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -15561,8 +15561,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -15604,8 +15604,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -15647,8 +15647,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -15690,8 +15690,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -15734,7 +15734,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -15777,7 +15777,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -15819,8 +15819,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -15862,8 +15862,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -15905,7 +15905,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -15948,8 +15948,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -15991,7 +15991,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -16034,8 +16034,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -16077,7 +16077,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -16120,7 +16120,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -16164,7 +16164,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -16207,7 +16207,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -16250,7 +16250,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -16292,8 +16292,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -16335,8 +16335,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -16378,8 +16378,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -16421,8 +16421,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -16464,7 +16464,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -16507,7 +16507,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -16551,7 +16551,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -16593,8 +16593,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -16637,7 +16637,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -16680,7 +16680,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -16723,7 +16723,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -16766,7 +16766,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -16808,7 +16808,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -16851,8 +16851,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -16894,8 +16894,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -16937,8 +16937,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -16981,7 +16981,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -17024,7 +17024,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -17066,8 +17066,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -17109,8 +17109,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -17152,8 +17152,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -17196,7 +17196,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -17238,8 +17238,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -17282,7 +17282,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -17324,7 +17324,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -17368,7 +17368,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -17411,7 +17411,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -17453,8 +17453,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -17496,8 +17496,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -17539,7 +17539,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -17582,8 +17582,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -17625,8 +17625,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -17668,8 +17668,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -17712,7 +17712,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -17754,8 +17754,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -17798,7 +17798,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -17840,8 +17840,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -17883,8 +17883,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -17926,8 +17926,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -17969,8 +17969,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -18013,7 +18013,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -18056,7 +18056,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -18098,8 +18098,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -18142,7 +18142,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -18184,8 +18184,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -18227,7 +18227,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -18270,8 +18270,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -18313,8 +18313,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -18356,8 +18356,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -18399,8 +18399,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -18442,8 +18442,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -18485,8 +18485,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -18529,7 +18529,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -18571,8 +18571,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -18614,8 +18614,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -18657,8 +18657,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -18700,8 +18700,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -18743,8 +18743,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -18786,7 +18786,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -18829,7 +18829,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -18872,8 +18872,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -18915,8 +18915,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -18958,8 +18958,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -19001,8 +19001,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -19044,8 +19044,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -19087,8 +19087,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -19130,8 +19130,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -19173,8 +19173,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -19216,8 +19216,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -19260,7 +19260,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -19302,8 +19302,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -19346,7 +19346,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -19388,8 +19388,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -19431,8 +19431,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -19474,8 +19474,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -19517,8 +19517,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -19560,8 +19560,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -19603,8 +19603,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -19646,7 +19646,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -19689,7 +19689,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -19732,7 +19732,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -19775,7 +19775,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -19818,8 +19818,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -19861,8 +19861,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -19904,8 +19904,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -19947,7 +19947,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -19990,8 +19990,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -20033,8 +20033,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -20076,8 +20076,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -20119,8 +20119,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -20162,8 +20162,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -20205,8 +20205,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 50.0,
-            "NO": 50.0
+            "YES": 0.5,
+            "NO": 0.5
         }
     },
     {
@@ -20248,8 +20248,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -20291,8 +20291,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -20335,7 +20335,7 @@
         "test_case": "EXIST2023",
         "value_binary": {
             "YES": 0.0,
-            "NO": 100.0
+            "NO": 1.0
         }
     },
     {
@@ -20377,8 +20377,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -20420,8 +20420,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -20463,8 +20463,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -20506,8 +20506,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 16.6667,
-            "NO": 83.3333
+            "YES": 0.1667,
+            "NO": 0.8333
         }
     },
     {
@@ -20549,7 +20549,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -20592,7 +20592,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -20635,8 +20635,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -20678,8 +20678,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -20721,8 +20721,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 66.6667,
-            "NO": 33.3333
+            "YES": 0.6667,
+            "NO": 0.3333
         }
     },
     {
@@ -20764,8 +20764,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 33.3333,
-            "NO": 66.6667
+            "YES": 0.3333,
+            "NO": 0.6667
         }
     },
     {
@@ -20807,7 +20807,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -20850,7 +20850,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -20893,8 +20893,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -20936,8 +20936,8 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 83.3333,
-            "NO": 16.6667
+            "YES": 0.8333,
+            "NO": 0.1667
         }
     },
     {
@@ -20979,7 +20979,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     },
@@ -21022,7 +21022,7 @@
         ],
         "test_case": "EXIST2023",
         "value_binary": {
-            "YES": 100.0,
+            "YES": 1.0,
             "NO": 0.0
         }
     }
