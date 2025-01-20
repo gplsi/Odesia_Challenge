@@ -15,7 +15,6 @@ schema = {
         Property(name="text", data_type=DataType.TEXT),
         Property(name="task_id", data_type=DataType.TEXT),
         Property(name="content", data_type=DataType.TEXT),
-        Property(name="vector", data_type=DataType.VECTOR, vector_size=VECTOR_SIZE),
     ],
     "vector_index_config": Configure.VectorIndex.hnsw()
 }

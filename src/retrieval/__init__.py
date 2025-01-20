@@ -6,17 +6,25 @@ from data_ingestion import DataIngester, Example
 from retrieval_service import RetrievalService
 from schema import schema
 from setup_database import create_weaviate_client, setup_collection
+from embedding_service import LocalEmbeddingService
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def main():
     # 1. Retrieve Hugging Face API Key from environment variable or another secure source
     # 2. Create Weaviate client pointing to your Docker-based instance
-    client = create_weaviate_client(huggingface_api_key=hf_api_key)
+    client = create_weaviate_client()
     
     # 3. Set up (or reset) TaskExamples collection
     collection = setup_collection(client, schema)
     
+    # Initialize embedding service
+    embedding_service = LocalEmbeddingService()
+    
     # 4. Create DataIngester and ingest sample data
-    ingester = DataIngester(collection)
+    ingester = DataIngester(collection, embedding_service=embedding_service)
     sample_examples = [
         Example(
             text="Sample text for multi-task scenario",
@@ -29,19 +37,22 @@ def main():
             content={"key": "value"},
         )
     ]
-    ingester.ingest_examples(sample_examples)
+    
+    # Ingest with statistics
+    stats = ingester.ingest_examples(sample_examples)
+    logger.info(f"Ingestion stats: {stats}")
 
     # 5. Use the RetrievalService to fetch relevant examples
-    retriever = RetrievalService(collection)
+    retriever = RetrievalService(collection, embedding_service)
     results = retriever.retrieve_examples(
         query_text="Similar content to the first sample text",
-        task_id="task_123",
+        task_id="task_foo",
         k=2
     )
     
     # 6. Print the retrieved results
-    print("Retrieved Results:")
-    print(json.dumps(results, indent=2))
+    logger.info(f"Retrieved {len(results)} results")
+    logger.info(json.dumps(results, indent=2))
 
 if __name__ == "__main__":
     main()
