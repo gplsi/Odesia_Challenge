@@ -1,7 +1,6 @@
 import json
 import os
 
-
 def calculate_value(file_path, output_path):
     import json
 

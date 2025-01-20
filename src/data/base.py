@@ -1,21 +1,22 @@
 import json
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from typing import Tuple, List, Dict
 
 
 # Base class for datasets, which defines the structure for loading and iterating over dataset items.
 class Dataset:
-    def __init__(self, data: List[dict], text_key: str):
+    def __init__(self, data: List[dict], text_key: str, transform: Callable[[dict], str] = None):
         self.data = data
-        self.text_key = text_key
+        self.transform = (lambda row: row[text_key]) if transform is None else transform
 
     @classmethod
-    def load(cls, path: str) -> "Dataset":
+    def load(cls, path: str, text_key: str, transform: Callable[[dict], str] = None) -> "Dataset":
         data = json.load(open(path))
-        return Dataset(data)
+        return Dataset(data, text_key, transform)
 
     def items(self) -> List[Tuple[str, dict]]:
-        return [(row[self.text_key], row) for row in self.data]
+        return [(self.transform(row), row) for row in self.data]
 
 
 # Base class for retrievers, which defines the structure for retrieving data based on keys and tasks.
@@ -74,7 +75,7 @@ class DataEncoder(ABC):
     ) -> Dict[str, str | List[str]]:
         return {
             "system": system_prompt,
-            "prompts": self.encode_all(
+            "prompts": self.build_prompt(
                 source,
                 retriever,
                 prompt_builder,
