@@ -19,7 +19,7 @@ run_weaviate:
 		-e HUGGINGFACE_APIKEY=$$HUGGINGFACE_APIKEY \
 		semitechnologies/weaviate:latest
 
-run_langchain_inference:
+run_langchain_inference: docker
 	docker run -d \
 		--name langchain_inference \
 		-p 8001:8001 \
