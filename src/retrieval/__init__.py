@@ -77,11 +77,6 @@ class ReRankRetriever(Retriever):
                 "Dataset ID is required for adding new examples and creating the collection"
             )
         else:
-            # if both dataset and dataset_id are provided, then we start in write mode
-            # if the collection already exists, we overwrite the data
-            if self.client.collections.exists(self.dataset_id):
-                self.client.collections.delete(self.dataset_id)
-
             self.vectorstore = get_vectorstore(
                 self.client, self.embeddings, self.dataset_id
             )
@@ -96,7 +91,10 @@ class ReRankRetriever(Retriever):
 
             self.rag_service.add_examples(examples)
 
-    def overwrite_data(self, dataset_id: str, dataset: Dataset):
+    def clear_collections(self):
+        self.client.collections.delete_all()
+    
+    def add_data(self, dataset_id: str, dataset: Dataset):
         """
         Overwrite the existing collection data with a new dataset.
         :param dataset_id: The identifier for the new dataset collection.
@@ -140,7 +138,7 @@ if __name__ == "__main__":
         {"text": "My phone is pretty old", "info": "Phone"},
         {"text": "I dont hear you more", "info": "Phone"},
         {"text": "I want to watch TV", "info": "Cable"},
-        {"text": "Turn off that thing, it is too bright", "info": "Cable"},
+        {"text": "Turn off that thing, it is too bright for the tele on my room", "info": "Cable"},
     ]
     
     mock_dataset = Dataset(data=mock_data, text_key="text")
@@ -148,22 +146,12 @@ if __name__ == "__main__":
     
     retriever = ReRankRetriever()
     
-    retriever.overwrite_data("mock_collection", mock_dataset)
-    retriever.overwrite_data("mock_collection_2", mock_dataset_2)
+    retriever.add_data("mock_collection_3", mock_dataset)
+    retriever.add_data("mock_collection_3", mock_dataset_2)
     
     print("Testing collection 1")
-    retriever.set_retrieve_mode("mock_collection")
-    results = retriever.retrieve("Recipe", limit=2)
-    
-    import pprint
-    pprint.pprint(results)
-    
-    print()
-    print("Testing collection 2")
-    retriever.set_retrieve_mode("mock_collection_2")
+    retriever.set_retrieve_mode("mock_collection_3")
     results = retriever.retrieve("Television", limit=2)
     
     import pprint
     pprint.pprint(results)
-    print()
-    

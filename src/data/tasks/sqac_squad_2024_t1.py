@@ -42,7 +42,7 @@ class SqacSquad2024PromptBuilder(TaskPromptBuilder):
         return entry["question"]
 
     def format_context(self, entry):
-        return f"{entry["title"]}\n{entry["context"]}"
+        return f"{entry['title']}\n{entry['context']}"
 
     def format_output(self, entry):
         return entry["value"]

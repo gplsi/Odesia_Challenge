@@ -1,12 +1,8 @@
-import ollama
-from langchain_ollama import ChatOllama
-import base64
-from ollama import Client
 from dotenv import load_dotenv
-import os
 import argparse
-from src.data.base import Dataset, DataEncoder
+from src.data.base import Dataset
 from src.data.tasks import TASK_CONFIG
+from src.retrieval import ReRankRetriever
 
 load_dotenv()  # Loads variables from .env into environment
 
@@ -26,10 +22,9 @@ def main(args):
     text_key, transform = TASK_CONFIG[dataset_name]
     dataset_dir = f"data/{dataset_name}/{partition}_{task}_{language}.json"
     dataset = Dataset.load(dataset_dir, text_key, transform)
-    print(f"Dataset len: {len(dataset.items())}")
-    # for key, content in dataset.items():
-    #     print(f"Key: {key}")
-    #     print(f"Content: {content}")
+    
+    # initialize datasets in weaviate
+    ReRankRetriever(dataset_id=dataset_name, dataset=dataset)
 
 
 if __name__ == '__main__':
