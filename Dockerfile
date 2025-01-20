@@ -24,8 +24,8 @@ COPY requirements.txt /tmp/requirements.txt
 
 # Actualizar pip e instalar dependencias de Python
 RUN pip install --upgrade pip && \
-    pip install -r /tmp/requirements.txt
-
+    pip install -r /tmp/requirements.txt \
+    pip install -Uqq langchain-weaviate
 # Provide defaults for Weaviate access
 ENV WEAVIATE_HOST=weaviate
 ENV WEAVIATE_PORT=8080
