@@ -26,3 +26,14 @@ TASK_CONFIG = {
         "simple": "This task (Sexism Categorization) is a six-class, multi-label classification task where each sexist tweet must be classified according to the type of sexism. The labels are 'IDEOLOGICAL-INEQUALITY', 'MISOGYNY-NON-SEXUAL-VIOLENCE', 'OBJECTIFICATION', 'SEXUAL-VIOLENCE', 'STEREOTYPING-DOMINANCE', and 'NO'. The prediction for each instance is the set of probabilities of the possible labels, i.e., 'IDEOLOGICAL-INEQUALITY', 'MISOGYNY-NON-SEXUAL-VIOLENCE', 'OBJECTIFICATION', 'SEXUAL-VIOLENCE', 'STEREOTYPING-DOMINANCE', and 'NO'.",
     },
 }
+
+from .diann_2023_t1 import Diann2023T1PromptBuilderBIO
+from .dipromats_t1 import  DipromatsT1PromptBuilder
+from .dipromats_t2 import DipromatsT2PromptBuilder
+from .dipromats_t3 import DipromatsT3PromptBuilder
+from .exist_2022_t1 import Exist2022T1PromptBuilder
+from .exist_2022_t2 import Exist2022T2PromptBuilder
+from .exist_2023_t1 import Exist2023T1PromptBuilder
+from .exist_2023_t2 import Exist2023T2PromptBuilder
+from .exist_2023_t3 import Exist2023T3PromptBuilder
+from .sqac_squad_2024_t1 import SqacSquad2024PromptBuilder

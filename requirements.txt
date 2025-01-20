@@ -1,3 +1,7 @@
 pandas
 torch
 transformers
+langgraph
+ollama
+langchain_ollama
+python-dotenv
