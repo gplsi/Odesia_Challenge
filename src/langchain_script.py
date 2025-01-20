@@ -8,7 +8,7 @@ from langchain.vectorstores import Weaviate
 
 client = weaviate.WeaviateClient("http://localhost:8080")
 
-dataset_schema = {
+""" dataset_schema = {
     "class": "dataset",
     "properties": [
         {"name": "title", "dataType": ["text"]},
@@ -18,13 +18,13 @@ dataset_schema = {
     ]
 }
 
-client.schema.create_class(dataset_schema)
+client.schema.create_class(dataset_schema) """
 
 # Configurar embeddings de Hugging Face
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 # Configurar el vector store de Weaviate
-vector_store = Weaviate(client=client, index_name="Noticias", text_key="content")
+vector_store = Weaviate(client=client, index_name="Noticias", text_key="content", embeddings=embeddings)
 
 
 loader = json_loader.JSONLoader(
