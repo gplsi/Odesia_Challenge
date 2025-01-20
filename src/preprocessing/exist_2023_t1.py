@@ -7,17 +7,22 @@ def calculate_value_binary(file_path, output_path):
         data = json.load(file)
 
     for entry in data:
-        yes_count = entry["value"].count("YES")
-        no_count = entry["value"].count("NO")
-        total = yes_count + no_count
-
-        entry["value_binary"] = {
-            "YES": round((yes_count / total), 4) if total > 0 else 0,
-            "NO": round((no_count / total), 4) if total > 0 else 0,
-        }
+        counts = get_counts(entry)
+        entry["value_binary"] = counts
 
     with open(output_path, "w", encoding="utf-8") as output_file:
         json.dump(data, output_file, ensure_ascii=False, indent=4)
+
+
+def get_counts(entry):
+    yes_count = entry["value"].count("YES")
+    no_count = entry["value"].count("NO")
+    total = yes_count + no_count
+
+    return {
+        "YES": round((yes_count / total), 4) if total > 0 else 0,
+        "NO": round((no_count / total), 4) if total > 0 else 0,
+    }
 
 
 if __name__ == "__main__":
