@@ -3,7 +3,7 @@ import json
 from typing import List, Dict, Any
 from dataclasses import dataclass
 from weaviate.util import generate_uuid5
-from encoder_service import EncoderService
+from embedding_service import EncoderService
 
 @dataclass
 class Example:

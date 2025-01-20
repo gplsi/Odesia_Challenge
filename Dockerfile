@@ -1,5 +1,5 @@
 # Imagen base de PyTorch optimizada para GPU
-FROM nvcr.io/nvidia/pytorch:23.02-py3
+FROM pytorch/pytorch:2.5.1-cuda12.1-cudnn9-runtime
 
 # Evitar prompts interactivos
 ENV DEBIAN_FRONTEND=noninteractive
