@@ -33,6 +33,7 @@ ENV WEAVIATE_PORT=8080
 # Crear directorio de trabajo
 WORKDIR /workspace
 
+COPY . /workspace/
 # Copiar tu script de LangChain (opcional si vas a montarlo como volumen)
 # COPY langchain_script.py /workspace/
 
