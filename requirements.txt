@@ -16,3 +16,7 @@ uvicorn[standard]
 gradio
 cohere
 FlagEmbedding
+langgraph
+ollama
+langchain_ollama
+python-dotenv
