@@ -4,6 +4,11 @@ FROM pytorch/pytorch:2.5.1-cuda12.1-cudnn9-runtime
 # Evitar prompts interactivos
 ENV DEBIAN_FRONTEND=noninteractive
 
+
+RUN apt-get update --allow-insecure-repositories && \
+    apt-get install -y --allow-unauthenticated git curl wget build-essential unzip && \
+    rm -rf /var/lib/apt/lists/*
+
 # Instalar herramientas del sistema
 RUN apt-get update && \
     apt-get install -y \
@@ -24,9 +29,10 @@ COPY requirements.txt /tmp/requirements.txt
 
 # Actualizar pip e instalar dependencias de Python
 RUN pip install --upgrade pip && \
-    pip install -r /tmp/requirements.txt \
+    pip install -r /tmp/requirements.txt && \
     pip install -Uqq langchain-weaviate
-# Provide defaults for Weaviate access
+
+    # Provide defaults for Weaviate access
 ENV WEAVIATE_HOST=weaviate
 ENV WEAVIATE_PORT=8080
 
