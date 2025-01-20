@@ -1,32 +1,38 @@
 # your_langchain_script.py
 import weaviate
-from langchain.vectorstores import Weaviate
+from langchain_community.document_loaders import json_loader
 from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_weaviate import WeaviateVectorStore
+from langchain.vectorstores import Weaviate
 
-# Conectar a Weaviate (usando la red interna de Docker Compose)
-client = weaviate.Client(url="http://weaviate:8080")
+
+client = weaviate.WeaviateClient("http://localhost:8080")
+
+dataset_schema = {
+    "class": "dataset",
+    "properties": [
+        {"name": "title", "dataType": ["text"]},
+        {"name": "content", "dataType": ["text"]},
+        {"name": "author", "dataType": ["text"]},
+        {"name": "date", "dataType": ["date"]}
+    ]
+}
+
+client.schema.create_class(dataset_schema)
 
 # Configurar embeddings de Hugging Face
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-# Crear/usar un vector store en Weaviate
-vector_store = Weaviate(
-    client=client,
-    index_name="Documents",     # Nombre de la "clase" en Weaviate
-    text_key="content",         # Nombre del campo de texto
-    embedding_function=embeddings.embed_query,
+# Configurar el vector store de Weaviate
+vector_store = Weaviate(client=client, index_name="Noticias", text_key="content")
+
+
+loader = json_loader.JSONLoader(
+    file_path='./dataset.json',
+    jq_schema='.documents[]',
+    context_key='text',
+    metadata_key="metadata"
 )
 
-# Insertar documentos
-docs = ["Hola mundo", "Weaviate es una base de datos vectorial", "LangChain facilita RAG"]
-vector_store.add_texts(docs)
-
-# Hacer una búsqueda
-query = "¿Qué es LangChain?"
-retriever = vector_store.as_retriever()
-results = retriever.get_relevant_documents(query)
-
-print("Resultados de la búsqueda:\n")
-for doc in results:
-    print(doc.page_content)
-
+documents = loader.load()
+vector_store.add_documents(documents)
