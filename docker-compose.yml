@@ -26,5 +26,5 @@ services:
             devices:
               - capabilities: ["gpu"]
       volumes:
-        - ./:workspace/
+        - ./:/workspace/
       command: ["tail", "-f", "/dev/null"]
