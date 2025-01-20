@@ -88,7 +88,7 @@ def main():
         
         # Retrieve examples
         results, stats = rag_service.retrieve_examples(
-            query_text="T-Rex!! What a surprise!",
+            query_text="a fish once saw a scorpio and ran away",
             k=2
         )
         

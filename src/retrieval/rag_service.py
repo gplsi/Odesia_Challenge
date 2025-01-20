@@ -28,7 +28,7 @@ class RAGService:
     def __init__(
         self, 
         vectorstore: Weaviate,
-        similarity_threshold: float = 0.5,
+        similarity_threshold: float = 0.6,
         diversity_bias: float = 0.3,
         embedding_function=None
     ):
@@ -71,9 +71,16 @@ class RAGService:
         
         # Rerank using BAAI/bge-reranker-v2-m3
         rerank_scores = self.reranker.compute_score(rerank_inputs)
+    
+        # Normalize scores to [0,1] range using softmax
+        normalized_scores = np.exp(rerank_scores) / np.sum(np.exp(rerank_scores))
         
-        # Sort and select top k results
-        reranked_results = sorted(zip(candidates, rerank_scores), key=lambda x: x[1], reverse=True)[:k]
+        # Sort and select top k results using normalized scores
+        reranked_results = sorted(
+            zip(candidates, normalized_scores), 
+            key=lambda x: x[1], 
+            reverse=True
+        )[:k]
         
         # Calculate similarities for stats
         similarities = [score for _, score in reranked_results]
