@@ -7,22 +7,26 @@ def calculate_value(file_path, output_path):
         data = json.load(file)
 
     for entry in data:
-        reported_count = entry["value"].count("REPORTED")
-        direct_count = entry["value"].count("DIRECT")
-        no_count = entry["value"].count("-")
-        judgemental_count = entry["value"].count("JUDGEMENTAL")
-        total = reported_count + direct_count + no_count + judgemental_count
-
-        entry["value_probability"] = {
-            "REPORTED": round((reported_count / total), 4) if total > 0 else 0,
-            "DIRECT": round((direct_count / total), 4) if total > 0 else 0,
-            "NO": round((no_count / total), 4) if total > 0 else 0,
-            "JUDGEMENTAL": round((judgemental_count / total), 4) if total > 0 else 0,
-        }
+        counts = get_counts(entry)
+        entry["value_binary"] = counts
 
     with open(output_path, "w", encoding="utf-8") as output_file:
         json.dump(data, output_file, ensure_ascii=False, indent=4)
 
+
+def get_counts(entry):
+    reported_count = entry["value"].count("REPORTED")
+    direct_count = entry["value"].count("DIRECT")
+    no_count = entry["value"].count("-")
+    judgemental_count = entry["value"].count("JUDGEMENTAL")
+    total = reported_count + direct_count + no_count + judgemental_count
+
+    return {
+        "REPORTED": round((reported_count / total), 4) if total > 0 else 0,
+        "DIRECT": round((direct_count / total), 4) if total > 0 else 0,
+        "NO": round((no_count / total), 4) if total > 0 else 0,
+        "JUDGEMENTAL": round((judgemental_count / total), 4) if total > 0 else 0,
+    }
 
 if __name__ == "__main__":
     # Obtener el directorio donde se encuentra el script

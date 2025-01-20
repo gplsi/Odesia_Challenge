@@ -11,7 +11,15 @@ def calculate_value(file_path, output_path):
 
     # Iterate through each entry in the data
     for entry in data:
-        # Flatten the nested lists in "value"
+        counts = get_counts(entry)
+        entry["value_binary"] = counts
+
+    # Save the updated data to the output file
+    with open(output_path, "w", encoding="utf-8") as output_file:
+        json.dump(data, output_file, ensure_ascii=False, indent=4)
+
+def get_counts(entry):
+    # Flatten the nested lists in "value"
         flattened_values = [item for sublist in entry["value"] for item in sublist]
 
         # Count occurrences of each category
@@ -26,7 +34,7 @@ def calculate_value(file_path, output_path):
         total = 6
 
         # Calculate probabilities for each category
-        entry["value_probability"] = {
+        return {
             "MISOGYNY-NON-SEXUAL-VIOLENCE": (
                 round((misogyny_count / total), 4) if total > 0 else 0
             ),
@@ -44,11 +52,6 @@ def calculate_value(file_path, output_path):
                 round((objectification_count / total), 4) if total > 0 else 0
             ),
         }
-
-    # Save the updated data to the output file
-    with open(output_path, "w", encoding="utf-8") as output_file:
-        json.dump(data, output_file, ensure_ascii=False, indent=4)
-
 
 if __name__ == "__main__":
     # Obtener el directorio donde se encuentra el script
