@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  main: &main
+    container_name: odesia
+    image: "gplsi/odesia"
+    build: "."
+    volumes:
+      - "./:/home/coder/odesia"
+      - "~/.ssh:/home/coder/.ssh"
+      - "~/.gitconfig:/home/coder/.gitconfig"
+      - "./src:/usr/lib/python3/dist-packages/src"
+    network_mode: "host"
+    user: "1000:1000"
+    working_dir: /home/coder/odesia
+
+  main-gpu:
+    <<: *main
+    container_name: "odesia-gpu"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  main-all-gpus:
+    <<: *main
+    container_name: "odesia-all-gpus"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
