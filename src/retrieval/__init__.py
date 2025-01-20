@@ -1,73 +1,102 @@
 # main.py
-import os
-import json
-
-from data_ingestion import DataIngester, Example
-from retrieval_service import RetrievalService
-from schema import schema
-from setup_database import create_weaviate_client, setup_collection
-from embedding_service import LocalEmbeddingService
+from embedding_service import get_embeddings
+from setup_database import get_weaviate_client, get_vectorstore
+from rag_service import RAGService, Example
 import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def main():
-    # 1. Retrieve Hugging Face API Key from environment variable or another secure source
-    # 2. Create Weaviate client pointing to your Docker-based instance
-    client = create_weaviate_client()
-    
-    # 3. Set up (or reset) TaskExamples collection
-    collection = setup_collection(client, schema)
-    
-    # Initialize embedding service
-    embedding_service = LocalEmbeddingService()
-    
-    # 4. Create DataIngester and ingest sample data
-    ingester = DataIngester(collection, embedding_service=embedding_service)
-    sample_examples = [
+def get_task_foo_examples():
+    task_id = "task_foo"
+    examples = [
         Example(
-            text="Sample text for first scenario",
-            task_id="task_foo",
-            content={"any_json": "structure"},
-        ),
-        Example(
-            text="Another example for the first task",
-            task_id="task_foo",
-            content={"key": "value"},
-        ),
-        Example(
-            text="Another example for the second task",
-            task_id="task_foo_2",
-            content={"key": "value"},
-        )
+                text="TASK ANOTHER GORILLA!",
+                task_id =task_id,
+                content={"any_json": "structure"}
+            ),
+            Example(
+                text="TASK FOO OMG a t-rex!",
+                task_id =task_id,
+                content={"key": "value"}
+            ),
+            
+            Example(
+                text="ANIMALS AND DINOSAURS WOW",
+                task_id =task_id,
+                content={"key": "value"}
+            ),
+            Example(
+                text="I ran until i found a dinosaur",
+                task_id =task_id,
+                content={"key": "value"}
+            ),
     ]
+    return task_id, examples
     
-    # Ingest with statistics
-    stats = ingester.ingest_examples(sample_examples)
-    logger.info(f"Ingestion stats: {stats}")
 
-    # 5. Use the RetrievalService to fetch relevant examples
-    retriever = RetrievalService(collection, embedding_service)
-    results = retriever.retrieve_examples(
-        query_text="Similar content to the first sample text",
-        task_id="task_foo",
-        k=2
-    )
+def get_task_foo_2_examples():
+    task_id = "task_foo_2"
+    examples = [
+        Example(
+                text="my car is big",
+                task_id =task_id,
+                content={"any_json": "structure"}
+            ),
+            Example(
+                text="a truck can run faster than a bird but not as much as a dwarf t-rex",
+                task_id =task_id,
+                content={"key": "value"}
+            ),
+            
+            Example(
+                text="a t-rex can play dirty with a cat, but the cat is faster",
+                task_id =task_id,
+                content={"key": "value"}
+            ),
+            Example(
+                text="a fish once saw a scorpio and ran away",
+                task_id =task_id,
+                content={"key": "value"}
+            ),
+    ]
+    return task_id, examples
+
+def initialize_example_data(client, embeddings):
+    task_id, examples = get_task_foo_examples()
+    vectorstore = get_vectorstore(client, embeddings, task_id)
+    rag_service = RAGService(vectorstore, embedding_function=embeddings)
+    rag_service.add_examples(examples)
     
-    # 6. Print the retrieved results
-    logger.info(f"Retrieved {len(results)} results for first task:")
-    logger.info(json.dumps(results, indent=2))
-    
-    results = retriever.retrieve_examples(
-        query_text="Similar content to the second sample text",
-        task_id="task_foo_2",
-        k=2
-    )
-    
-    # 6. Print the retrieved results
-    logger.info(f"Retrieved {len(results)} results for second task:")
-    logger.info(json.dumps(results, indent=2))
+    task_id, examples = get_task_foo_2_examples()
+    vectorstore = get_vectorstore(client, embeddings, task_id)
+    rag_service = RAGService(vectorstore, embedding_function=embeddings)
+    rag_service.add_examples(examples)
+
+def main():
+    # Initialize components
+    with get_weaviate_client() as client:
+        client.collections.delete_all()
+        embeddings = get_embeddings("sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
+        
+        initialize_example_data(client, embeddings)
+        
+        task_id = "task_foo_2"
+        # using the vectorstore for no memory leaks
+        vectorstore = get_vectorstore(client, embeddings, task_id)
+        rag_service = RAGService(vectorstore, embedding_function=embeddings)
+        
+        # Retrieve examples
+        results, stats = rag_service.retrieve_examples(
+            query_text="T-Rex!! What a surprise!",
+            k=2
+        )
+        
+        logger.info(f"Retrieved {len(results)} results:")
+        for result in results:
+            logger.info(f"Text: {result['text']}")
+            logger.info(f"Similarity: {result['similarity']}")
+            logger.info(f"Content: {result['content']}\n")
 
 if __name__ == "__main__":
     main()

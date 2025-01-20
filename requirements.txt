@@ -4,6 +4,7 @@ transformers
 weaviate-client
 langchain
 langchain-community
+langchain-weaviate
 sentence-transformers
 transformers
 datasets
@@ -13,3 +14,5 @@ tiktoken
 fastapi
 uvicorn[standard]
 gradio
+cohere
+FlagEmbedding

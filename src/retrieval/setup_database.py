@@ -1,45 +1,38 @@
-# setup_database.py
-import weaviate
+# retrieval/setup_database.py
 from weaviate import WeaviateClient
-from weaviate.classes.init import AdditionalConfig, Timeout, Auth
 from weaviate.connect import ConnectionParams
-from weaviate.classes.config import Configure
+from langchain_weaviate.vectorstores import WeaviateVectorStore
+from schema import schema
+import contextlib
 
-def create_weaviate_client():
-    """
-    Create a WeaviateClient (v4) pointing to your Weaviate deployment.
-    Note: We do not pass 'url' directly; instead we use ConnectionParams(endpoint=...).
-    """
-    connection_params=ConnectionParams.from_params(
-        http_host="172.17.0.4",
+
+
+@contextlib.contextmanager
+def get_weaviate_client():
+    connection_params = ConnectionParams.from_params(
+        http_host="127.0.0.1",
         http_port=8080,
-        http_secure=False,
-        grpc_host="172.17.0.4",
+        grpc_host="127.0.0.1",
         grpc_port=50051,
-        grpc_secure=False,
-    ),
-    client = WeaviateClient(
-        connection_params=connection_params[0],
-        additional_config=AdditionalConfig(
-            timeout=Timeout(init=30, query=60, insert=120),  # Values in seconds
-        ),
-        skip_init_checks=False
-        # embedded_options=EmbeddedOptions()  # Only if you need embedded mode
+        http_secure=False,
+        grpc_secure=False
     )
+    client = WeaviateClient(connection_params=connection_params)
     client.connect()
-    return client
+    try:
+        yield client
+    finally:
+        client.close()
 
-def setup_collection(client: WeaviateClient, schema: dict):
-    """
-    Drops the collection if it exists, then creates it based on the provided schema.
-    """
-    if client.collections.exists(schema["name"]):
-        client.collections.delete(schema["name"])
+def get_vectorstore(client: WeaviateClient, embedding_function, task_id: str = "task_foo") -> WeaviateVectorStore:
+    # Create or update the schema
+    if not client.collections.exists(task_id):
+        client.collections.create(name=task_id, **schema)
     
-    collection = client.collections.create(
-        name=schema["name"],
-        vectorizer_config=schema["vectorizer_config"],
-        properties=schema["properties"],
-        vector_index_config=schema["vector_index_config"],
+    return WeaviateVectorStore(
+        client=client,
+        index_name=task_id,
+        text_key="text",
+        embedding=embedding_function,
+        attributes=["content"],
     )
-    return collection

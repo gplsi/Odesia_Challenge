@@ -1,21 +1,33 @@
-# encoder_service.py
+# retrieval/embedding_service.py
+from typing import List, Union
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from typing import List
+from langchain_core.embeddings import Embeddings
 import torch
 
-class LocalEmbeddingService:
-    def __init__(self, model_name_or_path: str = "sentence-transformers/all-MiniLM-L6-v2"):
-        self.model_name = model_name_or_path
-        self.embedding_model = HuggingFaceEmbeddings(
-            model_name=model_name_or_path,
-            model_kwargs={'device': 'cuda' if torch.cuda.is_available() else 'cpu'},
-            encode_kwargs={'normalize_embeddings': True}
-        )
+def get_embeddings(
+    model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
+    device: str = None,
+    normalize: bool = True
+) -> Embeddings:
+    """
+    Creates and returns a HuggingFace embeddings model with specified configuration.
+    
+    Args:
+        model_name: Name or path of the sentence-transformer model
+        device: Device to use (cuda/cpu). If None, automatically detects
+        normalize: Whether to normalize embeddings
         
-    def embed_text(self, text: str) -> List[float]:
-        """Embed a single text."""
-        return self.embedding_model.embed_query(text)
-
-    def embed_texts(self, texts: List[str]) -> List[List[float]]:
-        """Embed multiple texts."""
-        return self.embedding_model.embed_documents(texts)
+    Returns:
+        A configured HuggingFaceEmbeddings instance
+    """
+    if device is None:
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    
+    model_kwargs = {'device': device}
+    encode_kwargs = {'normalize_embeddings': normalize}
+    
+    return HuggingFaceEmbeddings(
+        model_name=model_name,
+        model_kwargs=model_kwargs,
+        encode_kwargs=encode_kwargs
+    )

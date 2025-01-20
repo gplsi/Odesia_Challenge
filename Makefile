@@ -4,7 +4,7 @@ docker:
 langchain_container:
 	docker-compose up -d langchain-inference
 
-weaviate_container:
+weaviate_container: docker
 	docker-compose up -d weaviate
 
 run_weaviate:
@@ -17,12 +17,17 @@ run_weaviate:
 		-e ENABLE_MODULES=text2vec-huggingface \
 		-e PERSISTENCE_DATA_PATH=/var/lib/weaviate \
 		-e HUGGINGFACE_APIKEY=$$HUGGINGFACE_APIKEY \
+		--network="host" \
 		semitechnologies/weaviate:latest
 
-run_langchain_inference: docker
+run_langchain_inference:
 	docker run -d \
 		--name langchain_inference \
 		-p 8001:8001 \
 		--gpus all \
 		-v ./:/workspace/ \
+		--network="host" \
 		langchain_inference tail -f /dev/null
+
+main: run_weaviate run_langchain_inference
+	docker exec -it langchain_inference bash
