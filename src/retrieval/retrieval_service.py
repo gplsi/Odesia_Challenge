@@ -27,7 +27,6 @@ class RetrievalService:
             results.append({
                 "text": obj.properties["text"],
                 "content": json.loads(obj.properties["content"]),
-                "metadata": obj.properties["metadata"]
             })
         
         return results

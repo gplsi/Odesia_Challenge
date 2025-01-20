@@ -1,21 +1,24 @@
-from weaviate.classes.config import Configure, Property, DataType
+from weaviate.classes.config import (
+    Configure,
+    Property,
+    DataType,
+)
 
-COLLECTION_NAME = "TaskExamples"
+COLLECTION_NAME = "ODESIA_TASKS"
+VECTOR_SIZE = 384  # Adjust based on your chosen embedding model
 
 schema = {
     "name": COLLECTION_NAME,
-    "vectorizer_config": Configure.Vectorizer.text2vec_openai(),
+    "vectorizer_config": Configure.Vectorizer.none(),  # We'll handle vectorization ourselves
     "properties": [
         Property(name="text", data_type=DataType.TEXT),
         Property(name="task_id", data_type=DataType.TEXT),
-        Property(name="content", data_type=DataType.TEXT),  # JSON-serialized content
-        Property(name="metadata", data_type=DataType.OBJECT)  # Additional metadata
+        Property(name="content", data_type=DataType.TEXT),
+        Property(name="vector", data_type=DataType.VECTOR, vector_size=VECTOR_SIZE),
     ],
-    "vectorIndexConfig": {
-        "distance": "cosine",
-        "ef": 100,  # Balance between search speed and accuracy
-        "maxConnections": 64,
-        "dynamicEfMin": 100,
-        "dynamicEfMax": 500
-    }
+    "vector_index_config": Configure.VectorIndex.hnsw(
+        quantizer=Configure.VectorIndex.Quantizer.pq(
+            training_limit=10000
+        )
+    )
 }
