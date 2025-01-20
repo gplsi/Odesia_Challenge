@@ -1,9 +1,4 @@
-from weaviate.classes.config import (
-    Configure,
-    Property,
-    DataType,
-    VectorDistances
-)
+from weaviate.classes.config import Configure, Property, DataType, VectorDistances
 
 COLLECTION_NAME = "ODESIA_TASKS"
 VECTOR_SIZE = 768  # Adjust based on your chosen embedding model

@@ -35,6 +35,9 @@ RUN pip install --upgrade pip && \
 ENV WEAVIATE_HOST=weaviate
 ENV WEAVIATE_PORT=8080
 
+# Set PYTHONPATH to include the src directory
+ENV PYTHONPATH=/workspace/src
+
 # Crear directorio de trabajo
 WORKDIR /workspace
 
@@ -47,6 +50,7 @@ COPY . /workspace/
 
 # Exponer puertos, por ejemplo 8000 si vas a servir tu API con FastAPI
 EXPOSE 8000
+EXPOSE 8001
 
 # Comando por defecto: podrías lanzar un script de Python o un servidor
 CMD ["/bin/bash"]

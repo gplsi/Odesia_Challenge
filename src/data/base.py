@@ -22,7 +22,15 @@ class Dataset:
 class Retriever(ABC):
     # Abstract method to retrieve data given a key, task name, and optional limit for the number of items to return.
     @abstractmethod
-    def retrieve(self, key: str, task: str, limit=5) -> object:
+    def overwrite_data(self, task: str, dataset: Dataset) -> None:
+        pass
+    
+    @abstractmethod
+    def set_retrieve_mode(self, task: str) -> None:
+        pass
+    
+    @abstractmethod
+    def retrieve(self, query: str, limit=5) -> object:
         pass
 
 
