@@ -24,12 +24,12 @@ def main(args):
     dataset = Dataset.load(dataset_dir, text_key, transform)
     
     # initialize datasets in weaviate
-    ReRankRetriever(dataset_id=dataset_name, dataset=dataset)
+    ReRankRetriever(dataset_id=task_key, dataset=dataset)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Language chain pipeline')
-    parser.add_argument('--task_key', type=str, help='Task key', default='diann_2023_t1')
+    parser.add_argument('--task_key', type=str, help='Task key', default='dipromats_2023_t1')
     parser.add_argument('--partition', type=str, help='Partition file', default='train')
     parser.add_argument('--language', type=str, help='Language key', default='es')
     args = parser.parse_args()

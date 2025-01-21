@@ -2,6 +2,7 @@ import json
 from abc import ABC, abstractmethod
 from collections.abc import Callable
 from typing import Tuple, List, Dict
+from tqdm import tqdm
 
 
 # Base class for datasets, which defines the structure for loading and iterating over dataset items.
@@ -63,7 +64,12 @@ class TaskPromptBuilder(ABC):
 
 
 # Base class for data encoders, which include the logic to encode a dataset into prompts.
-class DataEncoder(ABC):
+class DataEncoder:
+
+    def __init__(self, answer: bool):
+        self.answer = answer
+
+
     # Method to encode the system prompt and associated prompts for the given dataset, retriever, prompt builder, etc.
     def encode(
         self,
@@ -83,12 +89,15 @@ class DataEncoder(ABC):
             ),
         }
 
-    # Abstract method to build prompts for the dataset, retriever, prompt builder, and prompt syntax.
-    @abstractmethod
-    def build_prompt(
+    # Method to build prompts for the dataset, retriever, prompt builder, and prompt syntax.
+    def build_prompt(self,
         source: Dataset,
         retriever: Retriever,
         prompt_builder: TaskPromptBuilder,
         prompt_syntax: PromptSyntax,
     ) -> List[str]:
-        pass
+        prompts = []
+        for key, item in tqdm(source.items()):
+            docs_retrieval = retriever.retrieve(key)
+            prompts.append(prompt_builder.build(prompt_syntax, item, docs_retrieval, self.answer))
+        return prompts
