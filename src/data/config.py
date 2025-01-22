@@ -18,8 +18,7 @@ PROMPT_SYNTAX = "syntax_prompt"
 TEXT_KEY = "text_key"
 TRANSFORM = "transform"
 
-TASK_CONFIG = (
-    {
+TASK_CONFIG = {
         "diann_2023_t1": {
             CLASS_BUILDER: Diann2023T1PromptBuilderBIO(),
             SYSTEM_PROMPT: None,
@@ -27,7 +26,7 @@ TASK_CONFIG = (
             TEXT_KEY: "tokens",
             TRANSFORM: lambda row: " ".join(row["tokens"]),
         },
-        "dipromats_t1": {
+        "dipromats_2023_t1": {
             CLASS_BUILDER: DipromatsT1PromptBuilder(
                 "This task (Propaganda Identification) consists on determining whether in a tweet propaganda techniques are used or not."
                 "This is a classification task and the labels are 'true' or 'false'."
@@ -36,13 +35,13 @@ TASK_CONFIG = (
             PROMPT_SYNTAX: BasicSyntax(),
             TEXT_KEY: "text",
         },
-        "dipromats_t2": {
+        "dipromats_2023_t2": {
             CLASS_BUILDER: DipromatsT2PromptBuilder,
             SYSTEM_PROMPT: None,
             PROMPT_SYNTAX: None,
             TEXT_KEY: None,
         },
-        "dipromats_t3": {
+        "dipromats_2023_t3": {
             CLASS_BUILDER: DipromatsT3PromptBuilder,
             SYSTEM_PROMPT: None,
             PROMPT_SYNTAX: None,
@@ -84,5 +83,4 @@ TASK_CONFIG = (
             PROMPT_SYNTAX: None,
             TEXT_KEY: None,
         },
-    },
-)
+    }

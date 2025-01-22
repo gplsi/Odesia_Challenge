@@ -5,7 +5,7 @@ class BasicSyntax(PromptSyntax):
     def build(
         self,
         formated_question: str,
-        formated_context: str,
+        formated_context: str = None,
         formated_answer: str = None,
     ) -> str:
         prompt = ""

@@ -48,7 +48,7 @@ def main(args):
         print(json.dumps(encoded, indent=2))
     else:
         with open(output_path, "w") as fd:
-            json.dump(encoded, fd)
+            json.dump(encoded, fd, indent=4)
 
 
 if __name__ == "__main__":

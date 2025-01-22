@@ -93,7 +93,7 @@ class DataEncoder:
         system_prompt: str,
     ) -> Dict[str, str | List[Dict[str, str]]]:
         return {
-            self.ANSWER: system_prompt,
+            self.SYSTEM: system_prompt,
             self.PROMPTS: self.build_prompt(
                 source,
                 retriever,
