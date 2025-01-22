@@ -7,12 +7,22 @@ from tqdm import tqdm
 
 # Base class for datasets, which defines the structure for loading and iterating over dataset items.
 class Dataset:
-    def __init__(self, data: List[dict], text_key: str, transform: Callable[[dict], str] = None):
+    def __init__(
+        self,
+        data: List[dict],
+        text_key: str,
+        transform: Callable[[dict], str] = None,
+    ):
         self.data = data
         self.transform = (lambda row: row[text_key]) if transform is None else transform
 
     @classmethod
-    def load(cls, path: str, text_key: str, transform: Callable[[dict], str] = None) -> "Dataset":
+    def load(
+        cls,
+        path: str,
+        text_key: str,
+        transform: Callable[[dict], str] = None,
+    ) -> "Dataset":
         data = json.load(open(path))
         return Dataset(data, text_key, transform)
 
@@ -26,11 +36,11 @@ class Retriever(ABC):
     @abstractmethod
     def add_data(self, task: str, dataset: Dataset) -> None:
         pass
-    
+
     @abstractmethod
     def set_retrieve_mode(self, task: str) -> None:
         pass
-    
+
     @abstractmethod
     def retrieve(self, query: str, limit=5) -> object:
         pass
@@ -43,7 +53,7 @@ class PromptSyntax(ABC):
     def build(
         self,
         formated_question: str,
-        formated_context: str,
+        formated_context: str = None,
         formated_answer: str = None,
     ) -> str:
         pass
@@ -59,16 +69,19 @@ class TaskPromptBuilder(ABC):
         input: dict,
         retrieved: List[dict],
         answer: bool,
-    ) -> str:
+    ) -> Tuple[str, str]:
         pass
 
 
 # Base class for data encoders, which include the logic to encode a dataset into prompts.
 class DataEncoder:
+    SYSTEM = "system"
+    PROMPTS = "prompts"
+    USER = "user"
+    ANSWER = "answer"
 
     def __init__(self, answer: bool):
         self.answer = answer
-
 
     # Method to encode the system prompt and associated prompts for the given dataset, retriever, prompt builder, etc.
     def encode(
@@ -78,10 +91,10 @@ class DataEncoder:
         prompt_builder: TaskPromptBuilder,
         prompt_syntax: PromptSyntax,
         system_prompt: str,
-    ) -> Dict[str, str | List[str]]:
+    ) -> Dict[str, str | List[Dict[str, str]]]:
         return {
-            "system": system_prompt,
-            "prompts": self.build_prompt(
+            self.ANSWER: system_prompt,
+            self.PROMPTS: self.build_prompt(
                 source,
                 retriever,
                 prompt_builder,
@@ -90,14 +103,22 @@ class DataEncoder:
         }
 
     # Method to build prompts for the dataset, retriever, prompt builder, and prompt syntax.
-    def build_prompt(self,
+    def build_prompt(
+        self,
         source: Dataset,
         retriever: Retriever,
         prompt_builder: TaskPromptBuilder,
         prompt_syntax: PromptSyntax,
-    ) -> List[str]:
-        prompts = []
+    ) -> List[Dict[str, str]]:
+        samples = []
         for key, item in tqdm(source.items()):
             docs_retrieval = retriever.retrieve(key)
-            prompts.append(prompt_builder.build(prompt_syntax, item, docs_retrieval, self.answer))
-        return prompts
+            prompt, anwser = prompt_builder.build(
+                prompt_syntax,
+                item,
+                docs_retrieval,
+                self.answer,
+            )
+            sample = {self.USER: prompt, self.ANSWER: anwser}
+            samples.append(sample)
+        return samples

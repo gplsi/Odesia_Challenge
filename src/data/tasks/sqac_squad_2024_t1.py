@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 from src.data.base import TaskPromptBuilder, PromptSyntax
 
 
@@ -22,21 +22,23 @@ class SqacSquad2024PromptBuilder(TaskPromptBuilder):
         input: dict,
         retrieved: List[dict],
         answer: bool,
-    ) -> str:
+    ) -> Tuple[str, str]:
         retrieved_prompts = [
             prompt_syntax.build(
-                self.format_input(entry),
-                self.format_context(entry),
-                self.format_output(entry),
+                formated_question=self.format_input(entry),
+                formated_context=self.format_context(entry),
+                formated_answer=self.format_output(entry),
             )
             for entry in retrieved
         ]
         prompt = prompt_syntax.build(
-            self.format_input(input),
-            self.format_context(input),
+            formated_question=self.format_input(input),
+            formated_context=self.format_context(input),
+        )
+        return (
+            self.prompt_start + "\n".join(retrieved_prompts) + "\n" + prompt,
             self.format_output(input) if answer else None,
         )
-        return self.prompt_start + "\n".join(retrieved_prompts) + "\n" + prompt
 
     def format_input(self, entry):
         return entry["question"]
