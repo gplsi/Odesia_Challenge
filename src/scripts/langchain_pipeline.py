@@ -18,6 +18,9 @@ from src.data.config import (
     TRANSFORM,
     K,
 )
+from tqdm.auto import tqdm
+
+
 
 load_dotenv()  # Loads variables from .env into environment
 
@@ -60,7 +63,7 @@ def main(args):
     shot_count = args.shot_value
 
     reRankRetrieval = ReRankRetriever(dataset_id=task_key)
-    answer = partition == "train"
+    answer = partition != "test"
     encoder = DataEncoder(answer)
 
     task_config = TASK_CONFIG[task_key]
@@ -78,10 +81,6 @@ def main(args):
         dataset, reRankRetrieval, k, class_builder, syntax, system_prompt
     )
 
-    # ollama_client = get_client(os.getenv("OLLAMA_SERVER"), os.getenv("OLLAMA_USERNAME"), os.getenv("OLLAMA_PASSWORD"))
-    # responses = [get_request(ollama_client, instruction, encoder_dict['system']) for instruction in
-    #              encoder_dict['prompts']]
-
     messages = [
         [
             {"role": "system", "content": encoder_dict[encoder.SYSTEM]},
@@ -89,16 +88,29 @@ def main(args):
         ]
         for instruction in encoder_dict[encoder.PROMPTS]
     ]
+  
+
     pipe = pipeline(
         "text-generation",
-        model=os.getenv("HUGGING_FACE_MODEL"),
-        token=os.getenv("HUGGING_FACE_TOKEN"),
+        model=os.getenv("HUGGINGFACE_MODEL"),
+        token=os.getenv("HUGGINGFACE_APIKEY"),
         max_length=3000,
-        device=0,
+        device_map="auto"
     )
-    print(messages[0])
-    results = pipe(messages[0])
+    pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
+
+    results = []
+    generate_kwargs = {
+        "do_sample": True,
+        "temperature": 1e-3,
+        "top_p": 0.9,
+    }
+   
+    for out in tqdm(pipe(messages, batch_size=32, truncation="only_first", **generate_kwargs), total=len(messages)):
+        results.append(out)
     print(results)
+    # 
+    # results = pipe(messages)
 
 
 if __name__ == "__main__":
