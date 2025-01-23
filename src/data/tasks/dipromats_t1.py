@@ -1,38 +1,15 @@
-from typing import List, Tuple
-from src.data.base import Dataset, TaskPromptBuilder, PromptSyntax
+from src.data.tasks.base import GenericTaskPromptBuilder
 
 
-class DipromatsT1PromptBuilder(TaskPromptBuilder):
+class DipromatsT1PromptBuilder(GenericTaskPromptBuilder):
+
     def __init__(
         self,
         prompt_start="For this task, solve the following classification problem:\n",
-        prompt_guide = "",
-        prompt_end= ""
+        prompt_guide="",
+        prompt_end="",
     ):
-        self.prompt_start = prompt_start
-        self.prompt_guide = prompt_guide
-        self.prompt_end = prompt_end
-
-    def build(
-        self,
-        prompt_syntax: PromptSyntax,
-        input: dict,
-        retrieved: List[dict],
-        answer: bool,
-    ) -> Tuple[str, str]:
-        retrieved_prompts = [
-            prompt_syntax.build(
-                formated_question=self.format_input(entry),
-                formated_answer=self.format_output(entry),
-            )
-            for entry in retrieved
-        ]
-        prompt = prompt_syntax.build(self.format_input(input))
-        examples_prompt = "\n" + self.prompt_guide + "\n".join(retrieved_prompts) if retrieved_prompts else ""
-        return (
-            self.prompt_start + examples_prompt + "\n" + self.prompt_end + prompt,
-            self.format_output(input) if answer else None,
-        )
+        super().__init__(prompt_start, prompt_guide, prompt_end)
 
     def format_input(self, entry):
         return entry["text"]
