@@ -8,6 +8,7 @@ from src.data.config import (
     PROMPT_SYNTAX,
     TEXT_KEY,
     TRANSFORM,
+    K,
 )
 from src.retrieval import ReRankRetriever
 
@@ -24,6 +25,7 @@ def main(args):
     partition = args.partition
     language = args.language
     output_path = args.output
+    shot_count = args.shot_value
 
     task_config = TASK_CONFIG[task_key]
     text_key = task_config[TEXT_KEY]
@@ -31,6 +33,7 @@ def main(args):
     system_prompt = task_config[SYSTEM_PROMPT]
     prompt_syntax = task_config[PROMPT_SYNTAX]
     transform = task_config.get(TRANSFORM)
+    k = task_config[K] if K in task_config else shot_count
 
     dataset = get_dataset(task_key, partition, language, text_key, transform)
     reRankRetrieval = ReRankRetriever(dataset_id=task_key)
@@ -39,6 +42,7 @@ def main(args):
     encoded = encoder.encode(
         dataset,
         reRankRetrieval,
+        k,
         class_builder,
         prompt_syntax,
         system_prompt,
@@ -58,6 +62,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--partition", type=str, help="Partition file", default="val")
     parser.add_argument("--language", type=str, help="Language key", default="es")
-    parser.add_argument("--output", type=str, help="Output file", default=None)
+    parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
+    parser.add_argument("--output", type=str, help="Output file", default="dipromats_2023_t1.json")
     args = parser.parse_args()
     main(args)

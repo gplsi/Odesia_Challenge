@@ -9,21 +9,17 @@ from src.data.base import Dataset, DataEncoder
 from src.data import *
 from src.retrieval import ReRankRetriever
 from transformers import pipeline
-
+from src.data.config import (
+    TASK_CONFIG,
+    CLASS_BUILDER,
+    SYSTEM_PROMPT,
+    PROMPT_SYNTAX,
+    TEXT_KEY,
+    TRANSFORM,
+    K,
+)
 
 load_dotenv()  # Loads variables from .env into environment
-
-TASK_CONFIG = {
-    "diann_2023_t1": {"class_builder": Diann2023T1PromptBuilderBIO},
-    "dipromats_2023_t1": {
-        "class_builder": DipromatsT1PromptBuilder(
-            "This task (Propaganda Identification) consists on determining whether in a tweet propaganda techniques are used or not. This is a classification task and the labels are 'true' or 'false'."
-        ),
-        "system_prompt": "You are a machine learning model that excels on solving classification problems.",
-        "syntax_prompt": BasicSyntax(),
-        "text_key": "text",
-    },
-}
 
 
 def get_request(ollama_client, instruction, system_prompt):
@@ -50,24 +46,36 @@ def get_client(server: str, username: str, password: str) -> Client:
     return Client(host=server, headers=headers)
 
 
+def get_dataset(task_key, partition, language, text_key, transform=None):
+    dataset_name, task = task_key[:-3], task_key[-2:]
+    dataset_dir = f"data/{dataset_name}/{partition}_{task}_{language}.json"
+    dataset = Dataset.load(dataset_dir, text_key, transform)
+    return dataset
+
+
 def main(args):
     task_key = args.task_key
     partition = args.partition
     language = args.language
-
-    dataset_name, task = task_key[:-3], task_key[-2:]
-    text_key = TASK_CONFIG[task_key]["text_key"]
-    dataset_dir = f"data/{dataset_name}/{partition}_{task}_{language}.json"
-    dataset = Dataset.load(dataset_dir, text_key)
+    shot_count = args.shot_value
 
     reRankRetrieval = ReRankRetriever(dataset_id=task_key)
     answer = partition == "train"
     encoder = DataEncoder(answer)
-    class_builder = TASK_CONFIG[task_key]["class_builder"]
-    system_prompt = TASK_CONFIG[task_key]["system_prompt"]
-    syntax = TASK_CONFIG[task_key]["syntax_prompt"]
+
+    task_config = TASK_CONFIG[task_key]
+    text_key = task_config[TEXT_KEY]
+    class_builder = task_config[CLASS_BUILDER]
+    system_prompt = task_config[SYSTEM_PROMPT]
+    syntax = task_config[PROMPT_SYNTAX]
+    transform = task_config.get(TRANSFORM)
+
+    k = task_config[K] if K in task_config else shot_count
+
+    dataset = get_dataset(task_key, partition, language, text_key, transform)
+
     encoder_dict = encoder.encode(
-        dataset, reRankRetrieval, class_builder, syntax, system_prompt
+        dataset, reRankRetrieval, k, class_builder, syntax, system_prompt
     )
 
     # ollama_client = get_client(os.getenv("OLLAMA_SERVER"), os.getenv("OLLAMA_USERNAME"), os.getenv("OLLAMA_PASSWORD"))
@@ -100,5 +108,6 @@ if __name__ == "__main__":
     )
     parser.add_argument("--partition", type=str, help="Partition file", default="val")
     parser.add_argument("--language", type=str, help="Language key", default="es")
+    parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
     args = parser.parse_args()
     main(args)

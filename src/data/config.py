@@ -17,6 +17,7 @@ SYSTEM_PROMPT = "system_prompt"
 PROMPT_SYNTAX = "syntax_prompt"
 TEXT_KEY = "text_key"
 TRANSFORM = "transform"
+K = "k"
 
 TASK_CONFIG = {
         "diann_2023_t1": {
@@ -28,8 +29,9 @@ TASK_CONFIG = {
         },
         "dipromats_2023_t1": {
             CLASS_BUILDER: DipromatsT1PromptBuilder(
-                "This task (Propaganda Identification) consists on determining whether in a tweet propaganda techniques are used or not."
-                "This is a classification task and the labels are 'true' or 'false'."
+                "This task (Propaganda Identification) consists on determining whether in a tweet propaganda techniques are used or not. "
+                "This is a classification task and the labels are 'true' or 'false'.",
+                "Here are some examples to guide you:", "Now, classify the following text:"
             ),
             SYSTEM_PROMPT: "You are a machine learning model that excels on solving classification problems.",
             PROMPT_SYNTAX: BasicSyntax(),

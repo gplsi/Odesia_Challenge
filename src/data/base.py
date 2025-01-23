@@ -88,6 +88,7 @@ class DataEncoder:
         self,
         source: Dataset,
         retriever: Retriever,
+        k: int,
         prompt_builder: TaskPromptBuilder,
         prompt_syntax: PromptSyntax,
         system_prompt: str,
@@ -97,6 +98,7 @@ class DataEncoder:
             self.PROMPTS: self.build_prompt(
                 source,
                 retriever,
+                k,
                 prompt_builder,
                 prompt_syntax,
             ),
@@ -107,12 +109,13 @@ class DataEncoder:
         self,
         source: Dataset,
         retriever: Retriever,
+        k: int,
         prompt_builder: TaskPromptBuilder,
         prompt_syntax: PromptSyntax,
     ) -> List[Dict[str, str]]:
         samples = []
         for key, item in tqdm(source.items()):
-            docs_retrieval = retriever.retrieve(key)
+            docs_retrieval = retriever.retrieve(key,limit=k) if k>0 else []
             prompt, anwser = prompt_builder.build(
                 prompt_syntax,
                 item,

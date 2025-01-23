@@ -6,8 +6,12 @@ class DipromatsT1PromptBuilder(TaskPromptBuilder):
     def __init__(
         self,
         prompt_start="For this task, solve the following classification problem:\n",
+        prompt_guide = "",
+        prompt_end= ""
     ):
         self.prompt_start = prompt_start
+        self.prompt_guide = prompt_guide
+        self.prompt_end = prompt_end
 
     def build(
         self,
@@ -24,8 +28,9 @@ class DipromatsT1PromptBuilder(TaskPromptBuilder):
             for entry in retrieved
         ]
         prompt = prompt_syntax.build(self.format_input(input))
+        examples_prompt = "\n" + self.prompt_guide + "\n".join(retrieved_prompts) if retrieved_prompts else ""
         return (
-            self.prompt_start + "\n".join(retrieved_prompts) + "\n" + prompt,
+            self.prompt_start + examples_prompt + "\n" + self.prompt_end + prompt,
             self.format_output(input) if answer else None,
         )
 
