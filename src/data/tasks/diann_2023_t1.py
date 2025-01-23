@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, Tuple
 from src.data.base import Dataset, TaskPromptBuilder, PromptSyntax
 from src.preprocessing.diann_2023_t1 import extract_bio_tokens
+
 
 class Diann2023T1PromptBuilderBIO(TaskPromptBuilder):
     def __init__(
@@ -15,18 +16,23 @@ class Diann2023T1PromptBuilderBIO(TaskPromptBuilder):
         input: dict,
         retrieved: List[dict],
         answer: bool,
-    ) -> str:
+    ) -> Tuple[str, str]:
         retrieved_prompts = [
-            prompt_syntax.build(self.format_input(entry), "", self.format_output(entry))
+            prompt_syntax.build(
+                formated_question=self.format_input(entry),
+                formated_answer=self.format_output(entry),
+            )
             for entry in retrieved
         ]
-        formated_answer = self.format_output(input) if answer else None
-        prompt = prompt_syntax.build(self.format_input(input), "", formated_answer)
-        return self.prompt_start + "\n".join(retrieved_prompts) + "\n" + prompt
+        prompt = prompt_syntax.build(self.format_input(input))
+        return (
+            self.prompt_start + "\n".join(retrieved_prompts) + "\n" + prompt,
+            self.format_output(input) if answer else None,
+        )
 
     def format_input(self, entry):
         return str(entry["tokens"])
-    
+
     def format_output(self, entry):
         return str(entry["value"])
 
@@ -44,19 +50,22 @@ class Diann2023T1PromptBuilderTokenIdentification(TaskPromptBuilder):
         input: dict,
         retrieved: List[dict],
         answer: bool,
-    ) -> str:
+    ) -> Tuple[str, str]:
         retrieved_prompts = [
-            prompt_syntax.build(self.format_input(entry), "", self.format_output(entry))
+            prompt_syntax.build(
+                formated_question=self.format_input(entry),
+                formated_answer=self.format_output(entry),
+            )
             for entry in retrieved
         ]
-        formated_answer = self.format_output(input) if answer else None
-        prompt = prompt_syntax.build(self.format_input(input), "", formated_answer)
-        return self.prompt_start + "\n".join(retrieved_prompts) + "\n" + prompt
+        prompt = prompt_syntax.build(self.format_input(input))
+        return (
+            self.prompt_start + "\n".join(retrieved_prompts) + "\n" + prompt,
+            self.format_output(input) if answer else None,
+        )
 
     def format_input(self, entry):
         return str(entry["tokens"])
-    
+
     def format_output(self, entry):
         return extract_bio_tokens(entry)
-
-

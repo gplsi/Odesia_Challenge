@@ -122,8 +122,8 @@ class ReRankRetriever(Retriever):
         """
         if self.dataset_id is None:
             raise ValueError("No dataset collection specified for retrieval")
-        
-        return self.rag_service.retrieve_examples(query, limit)
+
+        return [json.loads(doc['content']) for doc in self.rag_service.retrieve_examples(query, limit)[0]]
 
 if __name__ == "__main__":
     # Simple test with mock data using the existing Dataset class

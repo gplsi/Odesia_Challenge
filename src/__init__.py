@@ -1,2 +1,1 @@
-import retrieval
 import data

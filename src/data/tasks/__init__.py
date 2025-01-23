@@ -28,7 +28,7 @@ TASK_CONFIG = {
 }
 
 from .diann_2023_t1 import Diann2023T1PromptBuilderBIO
-from .dipromats_t1 import  DipromatsT1PromptBuilder
+from .dipromats_t1 import DipromatsT1PromptBuilder
 from .dipromats_t2 import DipromatsT2PromptBuilder
 from .dipromats_t3 import DipromatsT3PromptBuilder
 from .exist_2022_t1 import Exist2022T1PromptBuilder
