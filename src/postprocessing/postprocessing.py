@@ -43,37 +43,36 @@ class PostProcessingImplementation(PostProcessing):
         output_file = f"{task_name}_{language}.json"
         results = []
 
-        for line in text.splitlines():
-            if task_name == "exist_2023_t1":
-                text_processed=text
-                test_case="EXIST2023"
-            if task_name == "exist_2023_t2":
-                text_processed=text
-                test_case="EXIST2023"
-            if task_name == "exist_2023_t3":
-                text_processed=text
-                test_case="EXIST2023"
-            if task_name == "exist_2022_t1":
-                text_processed=PostProcessingImplementation.find_last_class(text, classes)
-                test_case="EXIST2022"
-            if task_name == "exist_2022_t2":
-                text_processed=PostProcessingImplementation.find_last_class(text, classes)
-                test_case="EXIST2022"
-            if task_name == "dipromats_2023_t1":
-                text_processed=PostProcessingImplementation.find_last_class(text, classes)
-                test_case="DIPROMATS2023"
-            if task_name == "dipromats_2023_t2":
-                text_processed=PostProcessingImplementation.find_last_class(text, classes)
-                test_case="DIPROMATS2023"
-            if task_name == "dipromats_2023_t3":
-                text_processed=PostProcessingImplementation.find_last_class(text, classes)
-                test_case="DIPROMATS2023"
-            result = {
-                    "test_case": test_case,
-                    "id": str(ids),
-                    "value": text_processed
-                }
-            results.append(result)
+        if task_name == "exist_2023_t1":
+            text_processed=text
+            test_case="EXIST2023"
+        if task_name == "exist_2023_t2":
+            text_processed=text
+            test_case="EXIST2023"
+        if task_name == "exist_2023_t3":
+            text_processed=text
+            test_case="EXIST2023"
+        if task_name == "exist_2022_t1":
+            text_processed=PostProcessingImplementation.find_last_class(text, classes)
+            test_case="EXIST2022"
+        if task_name == "exist_2022_t2":
+            text_processed=PostProcessingImplementation.find_last_class(text, classes)
+            test_case="EXIST2022"
+        if task_name == "dipromats_2023_t1":
+            text_processed=PostProcessingImplementation.find_last_class(text, classes)
+            test_case="DIPROMATS2023"
+        if task_name == "dipromats_2023_t2":
+            text_processed=PostProcessingImplementation.find_last_class(text, classes)
+            test_case="DIPROMATS2023"
+        if task_name == "dipromats_2023_t3":
+            text_processed=PostProcessingImplementation.find_last_class(text, classes)
+            test_case="DIPROMATS2023"
+        result = {
+                "test_case": test_case,
+                "id": str(ids),
+                "value": text_processed
+            }
+        results.append(result)
             
 
         with open(output_file, "w") as f:

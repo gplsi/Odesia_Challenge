@@ -19,7 +19,8 @@ from src.data.config import (
     K,
 )
 from tqdm.auto import tqdm
-
+from src.postprocessing.postprocessing import PostProcessingImplementation
+from src.evaluation import evaluation
 
 
 load_dotenv()  # Loads variables from .env into environment
@@ -88,14 +89,13 @@ def main(args):
         ]
         for instruction in encoder_dict[encoder.PROMPTS]
     ]
-  
 
     pipe = pipeline(
         "text-generation",
         model=os.getenv("HUGGINGFACE_MODEL"),
         token=os.getenv("HUGGINGFACE_APIKEY"),
         max_length=3000,
-        device_map="auto"
+        device_map="auto",
     )
     pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
 
@@ -105,12 +105,48 @@ def main(args):
         "temperature": 1e-3,
         "top_p": 0.9,
     }
-   
-    for out in tqdm(pipe(messages, batch_size=32, truncation="only_first", **generate_kwargs), total=len(messages)):
+
+    ids = 0  ########## Sacar este valor del dataset
+    for out in tqdm(pipe(messages, batch_size=32, truncation="only_first", **generate_kwargs),total=len(messages)):
         results.append(out)
+        if text_key == "diann_2023_t1":
+            # Generates a json with answers in the correct format to be evaluated
+            PostProcessingImplementation.process_ner(out, text_key, language, ids)
+        if (
+            text_key == "dipromats_2023_t1"
+            or text_key == "dipromats_2023_t2"
+            or text_key == "dipromats_2023_t3"
+            or text_key == "exist_2023_t1"
+            or text_key == "exist_2023_t2"
+            or text_key == "exist_2023_t3"
+            or text_key == "exist_2022_t1"
+            or text_key == "exist_2022_t2"
+        ):
+            # Generates a json with answers in the correct format to be evaluated
+            PostProcessingImplementation.process_classification(out, text_key, language, ids)
+        if text_key == "sqac_squad_2024_t1":
+            # Generates a json with answers in the correct format to be evaluated
+            PostProcessingImplementation.process_qa(out, text_key, language, ids)
+
     print(results)
-    # 
+    #
     # results = pipe(messages)
+
+    dataset_name=f"{text_key}_{language}"
+    predictions_file=f"{text_key}_{language}.json"
+    gold_file=f"./../../data/{text_key[:-3]}/gold/{text_key}_{language}_gold.json"
+    if text_key == "diann_2023_t1":
+        evaluation.evaluate_diann_2023(predictions_file,gold_file,dataset_name)
+    if text_key == "dipromats_2023_t1" or text_key == "dipromats_2023_t2" or text_key == "dipromats_2023_t3":
+        evaluation.evaluate_dipromats_2023(predictions_file,gold_file,dataset_name)
+    if text_key == "exist_2022_t1":
+        evaluation.evaluate_exist_2022_t1(predictions_file,gold_file,dataset_name)
+    if text_key == "exist_2022_t2":
+        evaluation.evaluate_exist_2022_t2(predictions_file,gold_file,dataset_name)
+    if text_key == "exist_2023_t1" or text_key == "exist_2023_t2" or text_key == "exist_2023_t3":
+        evaluation.evaluate_exist_2023(predictions_file,gold_file,dataset_name)
+    if text_key == "sqac_squad_2024_t1":
+        evaluation.evaluate_sqac_squad_2024(predictions_file,gold_file,dataset_name)
 
 
 if __name__ == "__main__":
