@@ -8,10 +8,10 @@ import contextlib
 @contextlib.contextmanager
 def get_weaviate_client():
     connection_params = ConnectionParams.from_params(
-        http_host="gplsi1.iuii.ua.es",
-        http_port=8150,
-        grpc_host="gplsi1.iuii.ua.es",
-        grpc_port=8151,
+        http_host="127.0.0.1",
+        http_port=8080,
+        grpc_host="127.0.0.1",
+        grpc_port=50051,
         http_secure=False,
         grpc_secure=False,
     )

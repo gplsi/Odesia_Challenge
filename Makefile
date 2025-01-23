@@ -14,9 +14,10 @@ run_weaviate:
 		-p 50051:50051 \
 		-e QUERY_DEFAULTS_LIMIT=25 \
 		-e AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=true \
-		-e ENABLE_MODULES=text2vec-huggingface \
 		-e PERSISTENCE_DATA_PATH=/var/lib/weaviate \
-		-e HUGGINGFACE_APIKEY=$$HUGGINGFACE_APIKEY \
+		-e CLUSTER_HOSTNAME=node1 \
+		--gpus device=3\
+		-v /raid/gplsi/robiert/docker_vol/Odesia_Challenge/weaviate:/var/lib/weaviate \
 		--network="host" \
 		semitechnologies/weaviate:latest
 
