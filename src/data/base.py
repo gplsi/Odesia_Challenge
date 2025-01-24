@@ -79,6 +79,7 @@ class DataEncoder:
     PROMPTS = "prompts"
     USER = "user"
     ANSWER = "answer"
+    ID = "id"
 
     def __init__(self, answer: bool):
         self.answer = answer
@@ -115,13 +116,14 @@ class DataEncoder:
     ) -> List[Dict[str, str]]:
         samples = []
         for key, item in tqdm(source.items()):
-            docs_retrieval = retriever.retrieve(key,limit=k) if k>0 else []
+            item_id = item[self.ID]
+            docs_retrieval = retriever.retrieve(key, limit=k) if k > 0 else []
             prompt, anwser = prompt_builder.build(
                 prompt_syntax,
                 item,
                 docs_retrieval,
                 self.answer,
             )
-            sample = {self.USER: prompt, self.ANSWER: anwser}
+            sample = {self.ID: item_id, self.USER: prompt, self.ANSWER: anwser}
             samples.append(sample)
         return samples
