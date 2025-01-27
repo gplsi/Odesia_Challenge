@@ -36,7 +36,7 @@ def main(args):
     k = task_config[K] if K in task_config else shot_count
 
     dataset = get_dataset(task_key, partition, language, text_key, transform)
-    reRankRetrieval = ReRankRetriever(dataset_id=task_key)
+    reRankRetrieval = ReRankRetriever(dataset_id=task_key) if k > 0 else None
     encoder = DataEncoder(True)
 
     encoded = encoder.encode(

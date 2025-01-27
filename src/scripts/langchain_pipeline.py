@@ -22,6 +22,8 @@ from tqdm.auto import tqdm
 import os
 
 os.getcwd()
+from src.postprocessing.postprocessing import PostProcessingImplementation
+from src.evaluation import evaluation
 
 
 load_dotenv()  # Loads variables from .env into environment
@@ -84,6 +86,9 @@ def main(args):
         dataset, reRankRetrieval, k, class_builder, syntax, system_prompt
     )
 
+    messages_ids = [
+        instruction[encoder.ID] for instruction in encoder_dict[encoder.PROMPTS]
+    ]
     messages = [
         [
             {"role": "system", "content": encoder_dict[encoder.SYSTEM]},
@@ -100,7 +105,7 @@ def main(args):
         tokenizer=tokenizer,
         token=os.getenv("HUGGINGFACE_APIKEY"),
         max_length=3000,
-        device_map="auto"
+        device_map="auto",
     )
     pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
 
@@ -111,11 +116,63 @@ def main(args):
         "top_p": 0.9,
     }
     messages = messages[0:64]
-    for out in tqdm(pipe(messages, batch_size=32, truncation="only_first", **generate_kwargs), total=len(messages)):
+
+    for ids, out in tqdm(
+        zip(
+            messages_ids,
+            pipe(messages, batch_size=32, truncation="only_first", **generate_kwargs),
+        ),
+        total=len(messages),
+    ):
         results.append(out)
+        if text_key == "diann_2023_t1":
+            # Generates a json with answers in the correct format to be evaluated
+            PostProcessingImplementation.process_ner(out, text_key, language, ids)
+        elif text_key in (
+            "dipromats_2023_t1",
+            "dipromats_2023_t2",
+            "dipromats_2023_t3",
+            "exist_2023_t1",
+            "exist_2023_t2",
+            "exist_2023_t3",
+            "exist_2022_t1",
+            "exist_2022_t2",
+        ):
+            # Generates a json with answers in the correct format to be evaluated
+            PostProcessingImplementation.process_classification(
+                out, text_key, language, ids
+            )
+        elif text_key == "sqac_squad_2024_t1":
+            # Generates a json with answers in the correct format to be evaluated
+            PostProcessingImplementation.process_qa(out, text_key, language, ids)
+
     print(results)
-    # 
+    #
     # results = pipe(messages)
+
+    dataset_name = f"{text_key}_{language}"
+    predictions_file = f"{text_key}_{language}.json"
+    gold_file = f"./../../data/{text_key[:-3]}/gold/{text_key}_{language}_gold.json"
+    if text_key == "diann_2023_t1":
+        evaluation.evaluate_diann_2023(predictions_file, gold_file, dataset_name)
+    if (
+        text_key == "dipromats_2023_t1"
+        or text_key == "dipromats_2023_t2"
+        or text_key == "dipromats_2023_t3"
+    ):
+        evaluation.evaluate_dipromats_2023(predictions_file, gold_file, dataset_name)
+    if text_key == "exist_2022_t1":
+        evaluation.evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name)
+    if text_key == "exist_2022_t2":
+        evaluation.evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name)
+    if (
+        text_key == "exist_2023_t1"
+        or text_key == "exist_2023_t2"
+        or text_key == "exist_2023_t3"
+    ):
+        evaluation.evaluate_exist_2023(predictions_file, gold_file, dataset_name)
+    if text_key == "sqac_squad_2024_t1":
+        evaluation.evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name)
 
 
 if __name__ == "__main__":
