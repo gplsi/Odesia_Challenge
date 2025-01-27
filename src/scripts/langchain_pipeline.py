@@ -115,7 +115,8 @@ def main(args):
         "temperature": 1e-3,
         "top_p": 0.9,
     }
-    messages = messages[0:64]
+    # /messages = messages[0:64]
+    post_processor = PostProcessingImplementation()
 
     for ids, out in tqdm(
         zip(
@@ -124,54 +125,65 @@ def main(args):
         ),
         total=len(messages),
     ):
-        results.append(out)
-        if text_key == "diann_2023_t1":
-            # Generates a json with answers in the correct format to be evaluated
-            PostProcessingImplementation.process_ner(out, text_key, language, ids)
-        elif text_key in (
-            "dipromats_2023_t1",
-            "dipromats_2023_t2",
-            "dipromats_2023_t3",
-            "exist_2023_t1",
-            "exist_2023_t2",
-            "exist_2023_t3",
-            "exist_2022_t1",
-            "exist_2022_t2",
-        ):
-            # Generates a json with answers in the correct format to be evaluated
-            PostProcessingImplementation.process_classification(
-                out, text_key, language, ids
-            )
-        elif text_key == "sqac_squad_2024_t1":
-            # Generates a json with answers in the correct format to be evaluated
-            PostProcessingImplementation.process_qa(out, text_key, language, ids)
+        results.append({'id': ids, 'out': out})
+    
+
+    if task_key == "diann_2023_t1":
+        # Generates a json with answers in the correct format to be evaluated
+        post_processor.process_ner(results, task_key, language, ids)
+    if task_key == "dipromats_2023_t1":
+        classes=["true","false"]
+        # Generates a json with answers in the correct format to be evaluated
+        post_processor.process_classification(
+            results, classes, task_key, language, partition
+        )
+    elif task_key in (
+        "dipromats_2023_t1",
+        "dipromats_2023_t2",
+        "dipromats_2023_t3",
+        "exist_2023_t1",
+        "exist_2023_t2",
+        "exist_2023_t3",
+        "exist_2022_t1",
+        "exist_2022_t2",
+    ):
+        # Generates a json with answers in the correct format to be evaluated
+        post_processor.process_classification(
+            results, task_key, classes, language, ids
+        )
+    elif task_key == "sqac_squad_2024_t1":
+        # Generates a json with answers in the correct format to be evaluated
+        post_processor.process_qa(results, task_key, language, ids)
 
     print(results)
     #
     # results = pipe(messages)
 
-    dataset_name = f"{text_key}_{language}"
-    predictions_file = f"{text_key}_{language}.json"
-    gold_file = f"./../../data/{text_key[:-3]}/gold/{text_key}_{language}_gold.json"
-    if text_key == "diann_2023_t1":
+    dataset_name = f"{task_key}_{language}"
+    # predictions_file = f"./outputs/{task_key[:-3]}/{partition}_{task_key[-3:]}_{language}.json"
+    predictions_file = f"{task_key}_{language}.json"
+    # gold_file = f"./src/data/gold/{task_key[:-3]}/{partition}{task_key[-3:]}_{language}_gold.json"
+    gold_file = f"{task_key}_{language}_{partition}_gold.json"
+    print("gold_file: ",gold_file)
+    if task_key == "diann_2023_t1":
         evaluation.evaluate_diann_2023(predictions_file, gold_file, dataset_name)
     if (
-        text_key == "dipromats_2023_t1"
-        or text_key == "dipromats_2023_t2"
-        or text_key == "dipromats_2023_t3"
+        task_key == "dipromats_2023_t1"
+        or task_key == "dipromats_2023_t2"
+        or task_key == "dipromats_2023_t3"
     ):
         evaluation.evaluate_dipromats_2023(predictions_file, gold_file, dataset_name)
-    if text_key == "exist_2022_t1":
+    if task_key == "exist_2022_t1":
         evaluation.evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name)
-    if text_key == "exist_2022_t2":
+    if task_key == "exist_2022_t2":
         evaluation.evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name)
     if (
-        text_key == "exist_2023_t1"
-        or text_key == "exist_2023_t2"
-        or text_key == "exist_2023_t3"
+        task_key == "exist_2023_t1"
+        or task_key == "exist_2023_t2"
+        or task_key == "exist_2023_t3"
     ):
         evaluation.evaluate_exist_2023(predictions_file, gold_file, dataset_name)
-    if text_key == "sqac_squad_2024_t1":
+    if task_key == "sqac_squad_2024_t1":
         evaluation.evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name)
 
 

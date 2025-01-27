@@ -28,11 +28,16 @@ def evaluate_dipromats_2023(predictions_file, gold_file, dataset_name):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.ICMNorm.value]
     params = dict()
-    report = test.evaluate(predictions_file, gold_file, metrics, **params)
-    report.print_report()
-    
-    metric_results = {"ICMNorm": report.results[0]["value"]}
-    write_metrics_to_csv(dataset_name, metric_results)
+    report = test.evaluate(predictions_file, gold_file, metrics, **params).report
+
+    try:
+        print("report: ",report)
+        icm_norm_metric = report["metrics"]["ICMNorm"]["results"]["average_per_test_case"]
+        print(f"ICM-Norm Result: {icm_norm_metric}")
+        metric_results = {"ICMNorm": icm_norm_metric}
+        write_metrics_to_csv(dataset_name, metric_results)
+    except AttributeError as e:
+        print(f"Error: Unable to access ICM-Norm metric. {e}")
 
 def evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name):
     test = PyEvALLEvaluation()

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import json
 import uuid
+import os
 
 class PostProcessing(ABC):
     
@@ -21,9 +22,10 @@ class PostProcessing(ABC):
 
 class PostProcessingImplementation(PostProcessing):
 
-    def process_ner(self, text: str, task_name: str, language: str, ids: int):
+    def process_ner(self, text: str, task_name: str, language: str, ids: int, partition: str):
         task_name = task_name.lower()
-        output_file = f"{task_name}_{language}.json"
+        output_file = f"./outputs/{task_name[:-3]}/{partition}_{task_name[-3:]}_{language}.json"
+        # output_file = f"{task_name}_{language}.json"
         results = []
 
         text_processed = text
@@ -38,49 +40,55 @@ class PostProcessingImplementation(PostProcessing):
         with open(output_file, "w") as f:
             json.dump(results, f, indent=4)
 
-    def process_classification(self, text: str, classes: list, task_name: str, language: str, ids: int):
-        task_name = task_name.lower()
-        output_file = f"{task_name}_{language}.json"
+    def process_classification(self, outputs: str, classes: list, task_name: str, language: str, partition: str):
         results = []
-
-        if task_name == "exist_2023_t1":
-            text_processed=text
-            test_case="EXIST2023"
-        if task_name == "exist_2023_t2":
-            text_processed=text
-            test_case="EXIST2023"
-        if task_name == "exist_2023_t3":
-            text_processed=text
-            test_case="EXIST2023"
-        if task_name == "exist_2022_t1":
-            text_processed=PostProcessingImplementation.find_last_class(text, classes)
-            test_case="EXIST2022"
-        if task_name == "exist_2022_t2":
-            text_processed=PostProcessingImplementation.find_last_class(text, classes)
-            test_case="EXIST2022"
-        if task_name == "dipromats_2023_t1":
-            text_processed=PostProcessingImplementation.find_last_class(text, classes)
-            test_case="DIPROMATS2023"
-        if task_name == "dipromats_2023_t2":
-            text_processed=PostProcessingImplementation.find_last_class(text, classes)
-            test_case="DIPROMATS2023"
-        if task_name == "dipromats_2023_t3":
-            text_processed=PostProcessingImplementation.find_last_class(text, classes)
-            test_case="DIPROMATS2023"
-        result = {
-                "test_case": test_case,
-                "id": str(ids),
-                "value": text_processed
-            }
-        results.append(result)
-            
+        for output in outputs:
+            task_name = task_name.lower()
+            # output_file = f"./outputs/{task_name[:-3]}/{partition}_{task_name[-3:]}_{language}.json"
+            output_file = f"{task_name}_{language}.json"
+            text=output["out"]
+            ids=output["id"]
+            if task_name == "exist_2023_t1":
+                text_processed=text
+                test_case="EXIST2023"
+            if task_name == "exist_2023_t2":
+                text_processed=text
+                test_case="EXIST2023"
+            if task_name == "exist_2023_t3":
+                text_processed=text
+                test_case="EXIST2023"
+            if task_name == "exist_2022_t1":
+                text_processed=PostProcessingImplementation.find_last_class(text, classes)
+                test_case="EXIST2022"
+            if task_name == "exist_2022_t2":
+                text_processed=PostProcessingImplementation.find_last_class(text, classes)
+                test_case="EXIST2022"
+            if task_name == "dipromats_2023_t1":
+                text=text[0]['generated_text'][2]['content']
+                text_processed=PostProcessingImplementation.find_last_class(text, classes)
+                if not text_processed:
+                    text_processed="false"
+                test_case="DIPROMATS2023"
+            if task_name == "dipromats_2023_t2":
+                text_processed=PostProcessingImplementation.find_last_class(text, classes)
+                test_case="DIPROMATS2023"
+            if task_name == "dipromats_2023_t3":
+                text_processed=PostProcessingImplementation.find_last_class(text, classes)
+                test_case="DIPROMATS2023"
+            result = {
+                    "test_case": test_case,
+                    "id": str(ids),
+                    "value": text_processed
+                }
+            results.append(result)                  
 
         with open(output_file, "w") as f:
             json.dump(results, f, indent=4)
 
-    def process_qa(self, text: str, task_name: str, language: str, ids: int):
+    def process_qa(self, text: str, task_name: str, language: str, ids: int, partition: str):
         task_name = task_name.lower()
-        output_file = f"{task_name}_{language}.json"
+        output_file = f"./outputs/{task_name[:-3]}/{partition}_{task_name[-3:]}_{language}.json"
+        # output_file = f"{task_name}_{language}.json"
         results = []
 
         text_processed=text
