@@ -1,6 +1,6 @@
 pandas
 torch
-transformers
+transformers==4.44.2
 weaviate-client
 langchain
 langchain-community

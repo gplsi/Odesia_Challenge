@@ -7,8 +7,8 @@ import os
 import argparse
 from src.data.base import Dataset, DataEncoder
 from src.data import *
-from src.retrieval import ReRankRetriever
-from transformers import pipeline
+#from src.retrieval import ReRankRetriever
+from transformers import pipeline, AutoTokenizer
 from src.data.config import (
     TASK_CONFIG,
     CLASS_BUILDER,
@@ -19,7 +19,9 @@ from src.data.config import (
     K,
 )
 from tqdm.auto import tqdm
+import os
 
+os.getcwd()
 
 
 load_dotenv()  # Loads variables from .env into environment
@@ -62,7 +64,8 @@ def main(args):
     language = args.language
     shot_count = args.shot_value
 
-    reRankRetrieval = ReRankRetriever(dataset_id=task_key)
+    #reRankRetrieval = ReRankRetriever(dataset_id=task_key)
+    reRankRetrieval = None
     answer = partition != "test"
     encoder = DataEncoder(answer)
 
@@ -88,11 +91,13 @@ def main(args):
         ]
         for instruction in encoder_dict[encoder.PROMPTS]
     ]
-  
+    
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B-Instruct",token=os.getenv("HUGGINGFACE_APIKEY"), use_fast=False)
 
     pipe = pipeline(
         "text-generation",
         model=os.getenv("HUGGINGFACE_MODEL"),
+        tokenizer=tokenizer,
         token=os.getenv("HUGGINGFACE_APIKEY"),
         max_length=3000,
         device_map="auto"
@@ -105,7 +110,7 @@ def main(args):
         "temperature": 1e-3,
         "top_p": 0.9,
     }
-   
+    messages = messages[0:64]
     for out in tqdm(pipe(messages, batch_size=32, truncation="only_first", **generate_kwargs), total=len(messages)):
         results.append(out)
     print(results)
@@ -116,7 +121,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Language chain pipeline")
     parser.add_argument(
-        "--task_key", type=str, help="Task key", default="dipromats_2023_t1"
+        "--task_key", type=str, help="Task key", default="sqac_squad_2024_t1"
     )
     parser.add_argument("--partition", type=str, help="Partition file", default="val")
     parser.add_argument("--language", type=str, help="Language key", default="es")
