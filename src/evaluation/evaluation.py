@@ -1,6 +1,7 @@
 
 from pyevall.evaluation import PyEvALLEvaluation
 from pyevall.metrics.metricfactory import MetricFactory
+from pyevall.utils.utils import PyEvALLUtils
 import json
 from evaluate import load
 import csv
@@ -27,8 +28,19 @@ def write_metrics_to_csv(dataset_name, metric_results, output_file="evaluation_m
 def evaluate_dipromats_2023(predictions_file, gold_file, dataset_name):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.ICMNorm.value]
-    params = dict()
+    # params = dict() #TASK 1
+    DIPROMATS_TASK3={"True":{
+        "1 appeal to commonality":["1 appeal to commonality - ad populum", "1 appeal to commonality - flag waving"],
+        "2 discrediting the opponent":["2 discrediting the opponent - absurdity appeal","2 discrediting the opponent - demonization", "2 discrediting the opponent - doubt", "2 discrediting the opponent - fear appeals (destructive)", "2 discrediting the opponent - name calling", "2 discrediting the opponent - propaganda slinging", "2 discrediting the opponent - scapegoating", "2 discrediting the opponent - undiplomatic assertiveness/whataboutism"],
+        "3 loaded language":[], 
+        "4 appeal to authority":["4 appeal to authority - appeal to false authority", "4 appeal to authority - bandwagoning"]}, 
+        "False":[]}
+    params = {PyEvALLUtils.PARAM_HIERARCHY: DIPROMATS_TASK3}
     report = test.evaluate(predictions_file, gold_file, metrics, **params).report
+
+    # DIPROMATS_TASK2={"True":["1 appeal to commonality", "2 discrediting the opponent", "3 loaded language", "4 appeal to authority"],"False":[]}
+
+    # params[PyEvALLUtils.PARAM_HIERARCHY]= DIPROMATS_TASK2
 
     try:
         print("report: ",report)
@@ -43,31 +55,46 @@ def evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.Accuracy.value]
     params = dict()
-    report = test.evaluate(predictions_file, gold_file, metrics, **params)
-    report.print_report()
-
-    metric_results = {"Accuracy": report.results[0]["value"]}
-    write_metrics_to_csv(dataset_name, metric_results)
+    report = test.evaluate(predictions_file, gold_file, metrics, **params).report
+    
+    try:
+        print("report: ",report)
+        accuracy = report["metrics"]["Accuracy"]["results"]["average_per_test_case"]
+        print(f"Accuracy Result: {accuracy}")
+        metric_results = {"Accuracy": accuracy}
+        write_metrics_to_csv(dataset_name, metric_results)
+    except AttributeError as e:
+        print(f"Error: Unable to access Accuracy metric. {e}")
 
 def evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.FMeasure.value]
     params = dict()
-    report = test.evaluate(predictions_file, gold_file, metrics, **params)
-    report.print_report()
+    report = test.evaluate(predictions_file, gold_file, metrics, **params).report
 
-    metric_results = {"FMeasure": report.results[0]["value"]}
-    write_metrics_to_csv(dataset_name, metric_results)
+    try:
+        print("report: ",report)
+        fmeasure = report["metrics"]["FMeasure"]["results"]["average_per_test_case"]
+        print(f"FMeasure Result: {fmeasure}")
+        metric_results = {"FMeasure": fmeasure}
+        write_metrics_to_csv(dataset_name, metric_results)
+    except AttributeError as e:
+        print(f"Error: Unable to access F-Measure metric. {e}")
 
 def evaluate_exist_2023(predictions_file, gold_file, dataset_name):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.ICMSoftNorm.value]
     params = dict()
-    report = test.evaluate(predictions_file, gold_file, metrics, **params)
-    report.print_report()
+    report = test.evaluate(predictions_file, gold_file, metrics, **params).report
 
-    metric_results = {"ICMSoftNorm": report.results[0]["value"]}
-    write_metrics_to_csv(dataset_name, metric_results)
+    try:
+        print("report: ",report)
+        icmSoftNorm = report["metrics"]["ICMSoftNorm"]["results"]["average_per_test_case"]
+        print(f"ICMSoftNorm Result: {icmSoftNorm}")
+        metric_results = {"ICMSoftNorm": icmSoftNorm}
+        write_metrics_to_csv(dataset_name, metric_results)
+    except AttributeError as e:
+        print(f"Error: Unable to access ICMSoftNorm metric. {e}")
 
 def evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name):
     squad_metric = load("squad")

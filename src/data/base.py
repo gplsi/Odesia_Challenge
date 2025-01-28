@@ -117,6 +117,7 @@ class DataEncoder:
         samples = []
         for key, item in tqdm(source.items()):
             item_id = item[self.ID]
+            k=int(k)
             docs_retrieval = retriever.retrieve(key, limit=k) if k > 0 else []
             prompt, anwser = prompt_builder.build(
                 prompt_syntax,

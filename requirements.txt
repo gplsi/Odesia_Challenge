@@ -20,3 +20,5 @@ langgraph
 ollama
 langchain_ollama
 python-dotenv
+pyevall
+evaluate

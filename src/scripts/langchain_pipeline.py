@@ -17,6 +17,7 @@ from src.data.config import (
     TEXT_KEY,
     TRANSFORM,
     K,
+    BATCH_SIZE,
 )
 from tqdm.auto import tqdm
 import os
@@ -97,7 +98,7 @@ def main(args):
         for instruction in encoder_dict[encoder.PROMPTS]
     ]
     
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B-Instruct",token=os.getenv("HUGGINGFACE_APIKEY"), use_fast=False)
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B-Instruct",token=os.getenv("HUGGINGFACE_APIKEY"), use_fast=False, padding_side='left')
 
     pipe = pipeline(
         "text-generation",
@@ -109,34 +110,37 @@ def main(args):
     )
     pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
 
-    results = []
+    model_outputs = []
     generate_kwargs = {
         "do_sample": True,
         "temperature": 1e-3,
         "top_p": 0.9,
     }
-    # /messages = messages[0:64]
+    # messages = messages[0:64]
+    
     post_processor = PostProcessingImplementation()
+    batch_size = BATCH_SIZE[task_key]
+    for i in tqdm(range(0, len(messages), batch_size)):
+        batch_data = messages[i:i + batch_size]
+        # ids = messages_ids[i:i + batch_size]
+        out= pipe(batch_data, batch_size=batch_size, truncation="only_first", pad_token_id=pipe.tokenizer.eos_token_id, **generate_kwargs)
+        
+    # for ids, out in tqdm(
+    #     zip(
+    #         messages_ids,
+    #         pipe(messages, batch_size=BATCH_SIZE[task_key], truncation="only_first", **generate_kwargs),
+    #     ),
+    #     total=len(messages),
+    # ):
+        model_outputs.extend(out)
 
-    for ids, out in tqdm(
-        zip(
-            messages_ids,
-            pipe(messages, batch_size=32, truncation="only_first", **generate_kwargs),
-        ),
-        total=len(messages),
-    ):
-        results.append({'id': ids, 'out': out})
+    # print(model_outputs) 
+    results = [{"id": id, 'out': out} for id, out in zip(messages_ids, model_outputs)]    
     
 
     if task_key == "diann_2023_t1":
         # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_ner(results, task_key, language, ids)
-    if task_key == "dipromats_2023_t1":
-        classes=["true","false"]
-        # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_classification(
-            results, classes, task_key, language, partition
-        )
+        post_processor.process_ner(results, task_key, language, partition)
     elif task_key in (
         "dipromats_2023_t1",
         "dipromats_2023_t2",
@@ -149,22 +153,19 @@ def main(args):
     ):
         # Generates a json with answers in the correct format to be evaluated
         post_processor.process_classification(
-            results, task_key, classes, language, ids
+            results, task_key, language, partition
         )
     elif task_key == "sqac_squad_2024_t1":
         # Generates a json with answers in the correct format to be evaluated
         post_processor.process_qa(results, task_key, language, ids)
 
-    print(results)
+    # print(results)
     #
     # results = pipe(messages)
 
     dataset_name = f"{task_key}_{language}"
-    # predictions_file = f"./outputs/{task_key[:-3]}/{partition}_{task_key[-3:]}_{language}.json"
-    predictions_file = f"{task_key}_{language}.json"
-    # gold_file = f"./src/data/gold/{task_key[:-3]}/{partition}{task_key[-3:]}_{language}_gold.json"
+    predictions_file = f"{task_key}_{language}_{partition}.json"
     gold_file = f"{task_key}_{language}_{partition}_gold.json"
-    print("gold_file: ",gold_file)
     if task_key == "diann_2023_t1":
         evaluation.evaluate_diann_2023(predictions_file, gold_file, dataset_name)
     if (

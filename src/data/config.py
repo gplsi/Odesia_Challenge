@@ -153,3 +153,41 @@ TASK_CONFIG = {
         TEXT_KEY: "question",
     },
 }
+
+BATCH_SIZE = {
+        "diann_2023_t1": 8,
+        "dipromats_2023_t1": 32,
+        "dipromats_2023_t2": 32,
+        "dipromats_2023_t3": 32,
+        "exist_2023_t1": 32,
+        "exist_2023_t2": 32,
+        "exist_2023_t3": 32,
+        "exist_2022_t1": 32,
+        "exist_2022_t2": 32,
+        "sqac_squad_2024_t1": 32,
+    }
+
+CLASSES_DIPROMATS_2023_T1 = ['true', 'false']
+CLASSES_DIPROMATS_2023_T2 = ['1 appeal to commonality', '2 discrediting the opponent', '3 loaded language', '4 appeal to authority', 'false']
+CLASSES_DIPROMATS_2023_T3 = ['1 appeal to commonality - ad populum',
+            '1 appeal to commonality - flag waving',
+            '2 discrediting the opponent - absurdity appeal',
+            '2 discrediting the opponent - demonization',
+            '2 discrediting the opponent - doubt',
+            '2 discrediting the opponent - fear appeals (destructive)',
+            '2 discrediting the opponent - name calling',
+            '2 discrediting the opponent - propaganda slinging',
+            '2 discrediting the opponent - scapegoating',
+            '2 discrediting the opponent - personal attacks',
+            '2 discrediting the opponent - undiplomatic assertiveness/whataboutism',
+            '2 discrediting the opponent - reductio ad hitlerum',
+            '3 loaded language',
+            '4 appeal to authority - appeal to false authority',
+            '4 appeal to authority - bandwagoning',
+            'false']
+
+CLASSES_EXIST_2022_T1 = ['sexist', 'non-sexist']
+CLASSES_EXIST_2022_T2 = ['IDEOLOGICAL-INEQUALITY', 'MISOGYNY-NON-SEXUAL-VIOLENCE', 'OBJECTIFICATION', 'SEXUAL-VIOLENCE', 'STEREOTYPING-DOMINANCE', 'NO']
+CLASSES_EXIST_2023_T1 = ['YES', 'NO']
+CLASSES_EXIST_2023_T2 = ['DIRECT', 'JUDGEMENTAL', 'REPORTED', 'NO']
+CLASSES_EXIST_2023_T3 = ['IDEOLOGICAL-INEQUALITY', 'MISOGYNY-NON-SEXUAL-VIOLENCE', 'OBJECTIFICATION', 'SEXUAL-VIOLENCE', 'STEREOTYPING-DOMINANCE', 'NO']
