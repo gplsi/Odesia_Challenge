@@ -24,7 +24,6 @@ def main(args):
     task_key = args.task_key
     partition = args.partition
     language = args.language
-    output_path = args.output
     shot_count = args.shot_value
 
     task_config = TASK_CONFIG[task_key]
@@ -34,6 +33,9 @@ def main(args):
     prompt_syntax = task_config[PROMPT_SYNTAX]
     transform = task_config.get(TRANSFORM)
     k = task_config[K] if K in task_config else shot_count
+    output_path = (
+        args.output if args.output else f"{task_key}_{language}_{partition}_{k}.json"
+    )
 
     dataset = get_dataset(task_key, partition, language, text_key, transform)
     reRankRetrieval = ReRankRetriever(dataset_id=task_key) if k > 0 else None
@@ -60,9 +62,21 @@ if __name__ == "__main__":
     parser.add_argument(
         "--task_key", type=str, help="Task key", default="dipromats_2023_t1"
     )
-    parser.add_argument("--partition", type=str, help="Partition file", default="val")
-    parser.add_argument("--language", type=str, help="Language key", default="es")
+    parser.add_argument(
+        "--partition",
+        type=str,
+        help="Partition file",
+        default="val",
+        choices=["train", "val", "test"],
+    )
+    parser.add_argument(
+        "--language",
+        type=str,
+        help="Language key",
+        default="es",
+        choices=["es", "en"],
+    )
     parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
-    parser.add_argument("--output", type=str, help="Output file", default="dipromats_2023_t1.json")
+    parser.add_argument("--output", type=str, help="Output file", default="")
     args = parser.parse_args()
     main(args)

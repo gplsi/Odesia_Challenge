@@ -1,3 +1,4 @@
+import json
 import ollama
 from langchain_ollama import ChatOllama
 import base64
@@ -7,7 +8,8 @@ import os
 import argparse
 from src.data.base import Dataset, DataEncoder
 from src.data import *
-#from src.retrieval import ReRankRetriever
+
+from src.retrieval import ReRankRetriever
 from transformers import pipeline, AutoTokenizer
 from src.data.config import (
     TASK_CONFIG,
@@ -25,6 +27,7 @@ import os
 os.getcwd()
 from src.postprocessing.postprocessing import PostProcessingImplementation
 from src.evaluation import evaluation
+from pathlib import Path
 
 
 load_dotenv()  # Loads variables from .env into environment
@@ -61,14 +64,12 @@ def get_dataset(task_key, partition, language, text_key, transform=None):
     return dataset
 
 
-def main(args):
-    task_key = args.task_key
-    partition = args.partition
-    language = args.language
-    shot_count = args.shot_value
+def get_overridden_shot_count(task_key, shot_count):
+    task_config = TASK_CONFIG[task_key]
+    return task_config[K] if K in task_config else shot_count
 
-    #reRankRetrieval = ReRankRetriever(dataset_id=task_key)
-    reRankRetrieval = None
+
+def get_encoded_data(task_key, partition, language, shot_count):
     answer = partition != "test"
     encoder = DataEncoder(answer)
 
@@ -79,26 +80,55 @@ def main(args):
     syntax = task_config[PROMPT_SYNTAX]
     transform = task_config.get(TRANSFORM)
 
-    k = task_config[K] if K in task_config else shot_count
+    k = get_overridden_shot_count(task_key, shot_count)
+    reRankRetrieval = ReRankRetriever(dataset_id=task_key) if k > 0 else None
 
     dataset = get_dataset(task_key, partition, language, text_key, transform)
 
-    encoder_dict = encoder.encode(
+    return encoder.encode(
         dataset, reRankRetrieval, k, class_builder, syntax, system_prompt
     )
 
+
+def get_encoded_data_from_cache(task_key, partition, language, shot_count, path):
+    k = get_overridden_shot_count(task_key, shot_count)
+    cache_file = Path(path) / f"{task_key}_{language}_{partition}_{k}.json"
+    with open(cache_file, "r") as file:
+        return json.load(file)
+
+
+def main(args):
+    task_key = args.task_key
+    partition = args.partition
+    language = args.language
+    shot_count = args.shot_value
+    cache_path = args.cache
+
+    encoder_dict = (
+        get_encoded_data_from_cache(
+            task_key, partition, language, shot_count, cache_path
+        )
+        if cache_path
+        else get_encoded_data(task_key, partition, language, shot_count)
+    )
+
     messages_ids = [
-        instruction[encoder.ID] for instruction in encoder_dict[encoder.PROMPTS]
+        instruction[DataEncoder.ID] for instruction in encoder_dict[DataEncoder.PROMPTS]
     ]
     messages = [
         [
-            {"role": "system", "content": encoder_dict[encoder.SYSTEM]},
-            {"role": "user", "content": instruction[encoder.USER]},
+            {"role": "system", "content": encoder_dict[DataEncoder.SYSTEM]},
+            {"role": "user", "content": instruction[DataEncoder.USER]},
         ]
-        for instruction in encoder_dict[encoder.PROMPTS]
+        for instruction in encoder_dict[DataEncoder.PROMPTS]
     ]
-    
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B-Instruct",token=os.getenv("HUGGINGFACE_APIKEY"), use_fast=False, padding_side='left')
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        "meta-llama/Llama-3.2-1B-Instruct",
+        token=os.getenv("HUGGINGFACE_APIKEY"),
+        use_fast=False,
+        padding_side="left",
+    )
 
     pipe = pipeline(
         "text-generation",
@@ -117,26 +147,31 @@ def main(args):
         "top_p": 0.9,
     }
     # messages = messages[0:64]
-    
+
     post_processor = PostProcessingImplementation()
     batch_size = BATCH_SIZE[task_key]
     for i in tqdm(range(0, len(messages), batch_size)):
-        batch_data = messages[i:i + batch_size]
+        batch_data = messages[i : i + batch_size]
         # ids = messages_ids[i:i + batch_size]
-        out= pipe(batch_data, batch_size=batch_size, truncation="only_first", pad_token_id=pipe.tokenizer.eos_token_id, **generate_kwargs)
-        
-    # for ids, out in tqdm(
-    #     zip(
-    #         messages_ids,
-    #         pipe(messages, batch_size=BATCH_SIZE[task_key], truncation="only_first", **generate_kwargs),
-    #     ),
-    #     total=len(messages),
-    # ):
+        out = pipe(
+            batch_data,
+            batch_size=batch_size,
+            truncation="only_first",
+            pad_token_id=pipe.tokenizer.eos_token_id,
+            **generate_kwargs,
+        )
+
+        # for ids, out in tqdm(
+        #     zip(
+        #         messages_ids,
+        #         pipe(messages, batch_size=BATCH_SIZE[task_key], truncation="only_first", **generate_kwargs),
+        #     ),
+        #     total=len(messages),
+        # ):
         model_outputs.extend(out)
 
-    # print(model_outputs) 
-    results = [{"id": id, 'out': out} for id, out in zip(messages_ids, model_outputs)]    
-    
+    # print(model_outputs)
+    results = [{"id": id, "out": out} for id, out in zip(messages_ids, model_outputs)]
 
     if task_key == "diann_2023_t1":
         # Generates a json with answers in the correct format to be evaluated
@@ -152,9 +187,7 @@ def main(args):
         "exist_2022_t2",
     ):
         # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_classification(
-            results, task_key, language, partition
-        )
+        post_processor.process_classification(results, task_key, language, partition)
     elif task_key == "sqac_squad_2024_t1":
         # Generates a json with answers in the correct format to be evaluated
         post_processor.process_qa(results, task_key, language, ids)
@@ -196,5 +229,6 @@ if __name__ == "__main__":
     parser.add_argument("--partition", type=str, help="Partition file", default="val")
     parser.add_argument("--language", type=str, help="Language key", default="es")
     parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
+    parser.add_argument("--cache", type=str, help="Cache", default="")
     args = parser.parse_args()
     main(args)
