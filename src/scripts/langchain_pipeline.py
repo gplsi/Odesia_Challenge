@@ -18,40 +18,28 @@ from src.data.config import (
     TRANSFORM,
     K,
     BATCH_SIZE,
+    EVALUATION
 )
 from tqdm.auto import tqdm
 import os
+import json
 
 os.getcwd()
 from src.postprocessing.postprocessing import PostProcessingImplementation
-from src.evaluation import evaluation
+#from src.evaluation import evaluation
 
+from src.utils import evaluation_error_handler
+
+from src.evaluation.evaluation import (
+    evaluate_diann_2023,
+    evaluate_dipromats_2023,
+    evaluate_exist_2022_t1,
+    evaluate_exist_2022_t2,
+    evaluate_exist_2023,
+    evaluate_sqac_squad_2024, 
+)
 
 load_dotenv()  # Loads variables from .env into environment
-
-
-def get_request(ollama_client, instruction, system_prompt):
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": instruction},
-    ]
-    response = ollama_client.chat(
-        model=os.getenv("OLLAMA_MODEL"),
-        options={"num_ctx": int(os.getenv("OLLAMA_CONTEXT"))},
-        messages=messages,
-    )
-    print(response["message"]["content"])
-    return response["message"]["content"]
-
-
-def get_client(server: str, username: str, password: str) -> Client:
-
-    print("Initialising ollama client...")
-
-    auth_string = f"{username}:{password}"
-    auth_base64 = base64.b64encode(auth_string.encode()).decode()
-    headers = {"Authorization": f"Basic {auth_base64}"}
-    return Client(host=server, headers=headers)
 
 
 def get_dataset(task_key, partition, language, text_key, transform=None):
@@ -98,14 +86,14 @@ def main(args):
         for instruction in encoder_dict[encoder.PROMPTS]
     ]
     
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B-Instruct",token=os.getenv("HUGGINGFACE_APIKEY"), use_fast=False, padding_side='left')
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-3B-Instruct",token=os.getenv("HUGGINGFACE_APIKEY"), use_fast=False, padding_side='left')
 
     pipe = pipeline(
         "text-generation",
         model=os.getenv("HUGGINGFACE_MODEL"),
         tokenizer=tokenizer,
         token=os.getenv("HUGGINGFACE_APIKEY"),
-        max_length=3000,
+        max_length=5000,
         device_map="auto",
     )
     pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
@@ -116,84 +104,30 @@ def main(args):
         "temperature": 1e-3,
         "top_p": 0.9,
     }
-    # messages = messages[0:64]
     
-    post_processor = PostProcessingImplementation()
     batch_size = BATCH_SIZE[task_key]
+    
     for i in tqdm(range(0, len(messages), batch_size)):
         batch_data = messages[i:i + batch_size]
-        # ids = messages_ids[i:i + batch_size]
-        out= pipe(batch_data, batch_size=batch_size, truncation="only_first", pad_token_id=pipe.tokenizer.eos_token_id, **generate_kwargs)
-        
-    # for ids, out in tqdm(
-    #     zip(
-    #         messages_ids,
-    #         pipe(messages, batch_size=BATCH_SIZE[task_key], truncation="only_first", **generate_kwargs),
-    #     ),
-    #     total=len(messages),
-    # ):
+        out = pipe(batch_data, batch_size=batch_size, truncation="only_first", pad_token_id=pipe.tokenizer.eos_token_id, **generate_kwargs)
         model_outputs.extend(out)
 
-    # print(model_outputs) 
-    results = [{"id": id, 'out': out} for id, out in zip(messages_ids, model_outputs)]    
+    model_outputs = [{"id": id, 'out': out} for id, out in zip(messages_ids, model_outputs)]
+    outputs_dir = f"./data/model_outputs_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
     
-
-    if task_key == "diann_2023_t1":
-        # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_ner(results, task_key, language, partition)
-    elif task_key in (
-        "dipromats_2023_t1",
-        "dipromats_2023_t2",
-        "dipromats_2023_t3",
-        "exist_2023_t1",
-        "exist_2023_t2",
-        "exist_2023_t3",
-        "exist_2022_t1",
-        "exist_2022_t2",
-    ):
-        # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_classification(
-            results, task_key, language, partition
-        )
-    elif task_key == "sqac_squad_2024_t1":
-        # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_qa(results, task_key, language, ids)
-
-    # print(results)
-    #
-    # results = pipe(messages)
-
-    dataset_name = f"{task_key}_{language}"
-    predictions_file = f"{task_key}_{language}_{partition}.json"
-    gold_file = f"{task_key}_{language}_{partition}_gold.json"
-    if task_key == "diann_2023_t1":
-        evaluation.evaluate_diann_2023(predictions_file, gold_file, dataset_name)
-    if (
-        task_key == "dipromats_2023_t1"
-        or task_key == "dipromats_2023_t2"
-        or task_key == "dipromats_2023_t3"
-    ):
-        evaluation.evaluate_dipromats_2023(predictions_file, gold_file, dataset_name)
-    if task_key == "exist_2022_t1":
-        evaluation.evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name)
-    if task_key == "exist_2022_t2":
-        evaluation.evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name)
-    if (
-        task_key == "exist_2023_t1"
-        or task_key == "exist_2023_t2"
-        or task_key == "exist_2023_t3"
-    ):
-        evaluation.evaluate_exist_2023(predictions_file, gold_file, dataset_name)
-    if task_key == "sqac_squad_2024_t1":
-        evaluation.evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name)
-
+    if not os.path.exists(f"./data/model_outputs_{partition}"):
+        os.makedirs(f"./data/model_outputs_{partition}")
+    
+    with open(outputs_dir, "w") as f:
+        json.dump(model_outputs, f, indent=4)
+        
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Language chain pipeline")
     parser.add_argument(
-        "--task_key", type=str, help="Task key", default="sqac_squad_2024_t1"
+        "--task_key", type=str, help="Task key", default="diann_2023_t1"
     )
-    parser.add_argument("--partition", type=str, help="Partition file", default="val")
+    parser.add_argument("--partition", type=str, help="Partition file", default="test")
     parser.add_argument("--language", type=str, help="Language key", default="es")
     parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
     args = parser.parse_args()

@@ -12,7 +12,7 @@ class Exist2023T3PromptBuilder(GenericTaskPromptBuilder):
         super().__init__(prompt_start, prompt_guide, prompt_end)
 
     def format_input(self, entry):
-        return entry["tweet"]
+        return entry["text"]
 
     def format_output(self, entry):
         counts = get_counts(entry)

@@ -6,10 +6,13 @@ import json
 from evaluate import load
 import csv
 
+from src.data.config import CLASSES_DIANN_2023_T3
+
 
 # Función para recolectar métricas y escribir en un CSV
-def write_metrics_to_csv(dataset_name, metric_results, output_file="evaluation_metrics.csv"):
+def write_metrics_to_csv(dataset_name, metric_results, partition):
     # Crear archivo si no existe y escribir encabezados
+    output_file=f"./data/{partition}_metrics.csv"
     try:
         with open(output_file, mode='x', newline='') as file:
             writer = csv.writer(file)
@@ -25,33 +28,20 @@ def write_metrics_to_csv(dataset_name, metric_results, output_file="evaluation_m
         writer.writerow(row)
 
 # Funciones de evaluación con recolectores de métricas
-def evaluate_dipromats_2023(predictions_file, gold_file, dataset_name):
+def evaluate_dipromats_2023(predictions_file, gold_file, dataset_name, params, partition):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.ICMNorm.value]
-    # params = dict() #TASK 1
-    DIPROMATS_TASK3={"True":{
-        "1 appeal to commonality":["1 appeal to commonality - ad populum", "1 appeal to commonality - flag waving"],
-        "2 discrediting the opponent":["2 discrediting the opponent - absurdity appeal","2 discrediting the opponent - demonization", "2 discrediting the opponent - doubt", "2 discrediting the opponent - fear appeals (destructive)", "2 discrediting the opponent - name calling", "2 discrediting the opponent - propaganda slinging", "2 discrediting the opponent - scapegoating", "2 discrediting the opponent - undiplomatic assertiveness/whataboutism"],
-        "3 loaded language":[], 
-        "4 appeal to authority":["4 appeal to authority - appeal to false authority", "4 appeal to authority - bandwagoning"]}, 
-        "False":[]}
-    params = {PyEvALLUtils.PARAM_HIERARCHY: DIPROMATS_TASK3}
     report = test.evaluate(predictions_file, gold_file, metrics, **params).report
-
-    # DIPROMATS_TASK2={"True":["1 appeal to commonality", "2 discrediting the opponent", "3 loaded language", "4 appeal to authority"],"False":[]}
-
-    # params[PyEvALLUtils.PARAM_HIERARCHY]= DIPROMATS_TASK2
-
     try:
         print("report: ",report)
         icm_norm_metric = report["metrics"]["ICMNorm"]["results"]["average_per_test_case"]
         print(f"ICM-Norm Result: {icm_norm_metric}")
         metric_results = {"ICMNorm": icm_norm_metric}
-        write_metrics_to_csv(dataset_name, metric_results)
+        write_metrics_to_csv(dataset_name, metric_results, partition)
     except AttributeError as e:
         print(f"Error: Unable to access ICM-Norm metric. {e}")
 
-def evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name):
+def evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name, partition):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.Accuracy.value]
     params = dict()
@@ -62,11 +52,11 @@ def evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name):
         accuracy = report["metrics"]["Accuracy"]["results"]["average_per_test_case"]
         print(f"Accuracy Result: {accuracy}")
         metric_results = {"Accuracy": accuracy}
-        write_metrics_to_csv(dataset_name, metric_results)
+        write_metrics_to_csv(dataset_name, metric_results, partition)
     except AttributeError as e:
         print(f"Error: Unable to access Accuracy metric. {e}")
 
-def evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name):
+def evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name, partition):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.FMeasure.value]
     params = dict()
@@ -77,11 +67,11 @@ def evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name):
         fmeasure = report["metrics"]["FMeasure"]["results"]["average_per_test_case"]
         print(f"FMeasure Result: {fmeasure}")
         metric_results = {"FMeasure": fmeasure}
-        write_metrics_to_csv(dataset_name, metric_results)
+        write_metrics_to_csv(dataset_name, metric_results, partition)
     except AttributeError as e:
         print(f"Error: Unable to access F-Measure metric. {e}")
 
-def evaluate_exist_2023(predictions_file, gold_file, dataset_name):
+def evaluate_exist_2023(predictions_file, gold_file, dataset_name, partition):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.ICMSoftNorm.value]
     params = dict()
@@ -92,29 +82,53 @@ def evaluate_exist_2023(predictions_file, gold_file, dataset_name):
         icmSoftNorm = report["metrics"]["ICMSoftNorm"]["results"]["average_per_test_case"]
         print(f"ICMSoftNorm Result: {icmSoftNorm}")
         metric_results = {"ICMSoftNorm": icmSoftNorm}
-        write_metrics_to_csv(dataset_name, metric_results)
+        write_metrics_to_csv(dataset_name, metric_results, partition)
     except AttributeError as e:
         print(f"Error: Unable to access ICMSoftNorm metric. {e}")
 
-def evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name):
+def evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name, partition):
     squad_metric = load("squad")
-    results = squad_metric.compute(predictions=predictions_file, references=gold_file)
+    with open(predictions_file) as f:
+        predictions = json.load(f)
+    with open(gold_file) as f:
+        golds = json.load(f)
+    predictions = [{'prediction_text': prediction["value"], 'id': prediction["id"]} for prediction in predictions]
+    golds = [{'answers': {'text': [gold["value"]], 'answer_start': [gold["context"].find(gold["value"])]}, 'id': gold["id"]} for gold in golds]
+    print(len(golds))
+    print(len(predictions))
+    results = squad_metric.compute(predictions=predictions, references=golds)
     print(results)
 
     metric_results = {"ExactMatch": results["exact_match"], "F1": results["f1"]}
-    write_metrics_to_csv(dataset_name, metric_results)
+    write_metrics_to_csv(dataset_name, metric_results, partition)
 
-def evaluate_diann_2023(predictions_file, gold_file, dataset_name):
+def evaluate_diann_2023(predictions_file, gold_file, dataset_name, partition):
     f1_metric = load("f1")
-    results = f1_metric.compute(references=gold_file, predictions=predictions_file, average="macro")
-    print(results)
-
+    
+    with open(predictions_file) as f:
+        predictions = json.load(f)
+        
+    with open(gold_file) as f:
+        golds = json.load(f)
+    
+    # Create dicts keyed by ID
+    gold_dict = {item["id"]: item["value"] for item in golds}
+    
+    # turn list CLASSES_DIANN_2023_T3 to dictionary with value being index
+    classes_dict = {CLASSES_DIANN_2023_T3[i]: i for i in range(len(CLASSES_DIANN_2023_T3))}
+    
+    gold_cls = []
+    pred_cls = []
+    for i in range(len(predictions)):
+        gold_tokens = gold_dict[predictions[i]["id"]]
+        pred_tokens = predictions[i]["value"]
+        
+        gold_cls += [classes_dict[item] for item in gold_tokens]
+        pred_cls += [classes_dict[item] for item in pred_tokens]
+        
+    results = f1_metric.compute(references=gold_cls, predictions=pred_cls, average="macro")
     metric_results = {"MacroF1": results["f1"]}
-    write_metrics_to_csv(dataset_name, metric_results)
-
-
-
-
+    write_metrics_to_csv(dataset_name, metric_results, partition)
 
 
 #EJEMPLOS DE FORMATO

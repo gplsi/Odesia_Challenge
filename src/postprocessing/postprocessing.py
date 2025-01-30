@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import json
+from typing import List
 import uuid
 import os
 import ast
@@ -13,11 +14,15 @@ from src.data.config import (
     CLASSES_EXIST_2023_T2,
     CLASSES_EXIST_2023_T3,
 )
+from src.utils import post_processing_error_handler
+import nltk
+from nltk.tokenize import word_tokenize
+import string
+nltk.download("punkt", quiet=True)
 
 class PostProcessing(ABC):
-    
     @abstractmethod
-    def process_ner(self, text: str, task_name: str, language: str, start_id: int):
+    def process_ner(self, text: str, task_name: str, language: str, start_id: int, shot_count: int):
         """Postprocesa la salida del modelo para tareas de NER."""
         pass
 
@@ -33,17 +38,22 @@ class PostProcessing(ABC):
 
 class PostProcessingImplementation(PostProcessing):
 
-    def process_ner(self, outputs: dict, task_name: str, language: str, partition: str):
+    def process_ner(self, tokens: List[List[str]], outputs: List, task_name: str, language: str, partition: str, shot_count: int = 5):
         task_name = task_name.lower()
-        output_file = f"{task_name}_{language}_{partition}.json"
+        if not os.path.exists(f"data/results_{partition}"):
+            os.makedirs(f"data/results_{partition}")
+        output_file = f"data/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
         results = []
-
-        for output in outputs:
+        
+        for i in range(len(outputs)):
+            token_list = tokens[i]
+            output = outputs[i]
             text=output["out"]
             ids=output["id"]
             text=text[0]['generated_text'][2]['content']
-            text_processed = PostProcessingImplementation.extract_and_convert_to_list(text)
-
+            
+            text_processed = PostProcessingImplementation._extract_and_convert_to_list(token_list, text)
+            
             result = {
                 "id": str(ids),
                 "test_case": "DIANN2023",
@@ -51,86 +61,98 @@ class PostProcessingImplementation(PostProcessing):
             }
             results.append(result)
 
+        os.makedirs("data/results", exist_ok=True)
         with open(output_file, "w") as f:
             json.dump(results, f, indent=4)
+        
+        return results
 
-    def process_classification(self, outputs: dict, task_name: str, language: str, partition: str):
+    def process_classification(self, outputs: dict, task_name: str, language: str, partition: str, shot_count: int):
+        if not os.path.exists(f"data/results_{partition}"):
+            os.makedirs(f"data/results_{partition}")
+        
         results = []
         for output in outputs:
             task_name = task_name.lower()
-            output_file = f"{task_name}_{language}_{partition}.json"
-            text=output["out"]
+            output_file = f"data/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
+            text=output["out"][0]['generated_text'][2]['content']
             ids=output["id"]
-            
-            if task_name == "exist_2023_t1":
-                text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_EXIST_2023_T1)
-                test_case="EXIST2023"
-            
-            if task_name == "exist_2023_t2":
-                text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_EXIST_2023_T2)
-                test_case="EXIST2023"
-            
-            if task_name == "exist_2023_t3":
-                text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_EXIST_2023_T3)
-                test_case="EXIST2023"
-            
-            if task_name == "exist_2022_t1":
-                text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_EXIST_2022_T1)
-                test_case="EXIST2022"
-            
-            if task_name == "exist_2022_t2":
-                text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_EXIST_2022_T2)
-                test_case="EXIST2022"
-            
-            if task_name == "dipromats_2023_t1":
-                text=text[0]['generated_text'][2]['content']
-                text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_DIPROMATS_2023_T1)
-                if not text_processed:
-                    text_processed="false"
+            try:
+                if task_name == "exist_2023_t1":
+                    text_processed=PostProcessingImplementation.find_classes_and_convert_to_dict(text, CLASSES_EXIST_2023_T1)
+                    test_case="EXIST2023"
                 
-                test_case="DIPROMATS2023"
+                if task_name == "exist_2023_t2":
+                    text_processed=PostProcessingImplementation.find_classes_and_convert_to_dict(text, CLASSES_EXIST_2023_T2)
+                    test_case="EXIST2023"
+                
+                if task_name == "exist_2023_t3":
+                    text_processed=PostProcessingImplementation.find_classes_and_convert_to_dict(text, CLASSES_EXIST_2023_T3)
+                    test_case="EXIST2023"
+                
+                if task_name == "exist_2022_t1":
+                    text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_EXIST_2022_T1)
+                    test_case="EXIST2022"
+                
+                if task_name == "exist_2022_t2":
+                    text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_EXIST_2022_T2)
+                    test_case="EXIST2022"
+                
+                if task_name == "dipromats_2023_t1":
+                    text_processed=PostProcessingImplementation.find_last_class(text, CLASSES_DIPROMATS_2023_T1)
+                    if not text_processed:
+                        text_processed="false"
+                    
+                    test_case="DIPROMATS2023"
             
-            if task_name == "dipromats_2023_t2":
-                # print("text: ",text)
-                text=text[0]['generated_text'][2]['content']
-                if text!="false":
-                    print("text: ",text)
-                text_processed=PostProcessingImplementation.find_classes_and_convert_to_list(text, CLASSES_DIPROMATS_2023_T2)
-                test_case="DIPROMATS2023"
-            
-            if task_name == "dipromats_2023_t3":
-                text_processed=PostProcessingImplementation.find_classes_and_convert_to_list(text, CLASSES_DIPROMATS_2023_T3)
-                test_case="DIPROMATS2023"
-            result = {
-                    "test_case": test_case,
-                    "id": str(ids),
-                    "value": text_processed
-                }
-            results.append(result)                  
+                if task_name == "dipromats_2023_t2":
+                    text_processed=PostProcessingImplementation.find_classes_and_convert_to_list(text, CLASSES_DIPROMATS_2023_T2)
+                    test_case="DIPROMATS2023"
+                
+                if task_name == "dipromats_2023_t3":
+                    text_processed=PostProcessingImplementation.find_classes_and_convert_to_list(text, CLASSES_DIPROMATS_2023_T3)
+                    test_case="DIPROMATS2023"
+                result = {
+                        "test_case": test_case,
+                        "id": str(ids),
+                        "value": text_processed
+                    }
+                results.append(result)                  
+
+            except Exception as e:
+                post_processing_error_handler(e, text, ids, task_name, language, partition)
+                continue
 
         with open(output_file, "w") as f:
             json.dump(results, f, indent=4)
 
-    def process_qa(self, outputs: dict, task_name: str, language: str, partition: str):
+    def process_qa(self, outputs: dict, task_name: str, language: str, partition: str, shot_count: int):
+        if not os.path.exists(f"data/results_{partition}"):
+            os.makedirs(f"data/results_{partition}")
+        
         task_name = task_name.lower()
-        output_file = f"{task_name}_{language}_{partition}.json"
+        output_file = f"data/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
         results = []
 
         for output in outputs:
-            text=output["out"]
+            text=output["out"][0]['generated_text'][2]['content']
             ids=output["id"]
             text_processed=text
 
-            result = {
-                "id": str(ids),
-                "test_case": "SQAC_SQUAD_2024",
-                "value": text_processed
-            }
-            results.append(result)
-
+            try:
+                result = {
+                    "id": str(ids),
+                    "test_case": "SQAC_SQUAD_2024",
+                    "value": text_processed
+                }
+                results.append(result)
+            except Exception as e:
+                post_processing_error_handler(e, text, ids, task_name, language, partition)
+                continue
+            
+            
         with open(output_file, "w") as f:
             json.dump(results, f, indent=4)
-
 
     def find_last_class(text, classes):
         """
@@ -150,23 +172,30 @@ class PostProcessingImplementation(PostProcessing):
 
         return None  # Si no se encuentra ninguna clase
     
-    def extract_and_convert_to_list(text):
+    """ def extract_and_convert_to_list(text, ids):
         try:
             # Buscar el índice del primer y último corchete
             start_index = text.find('[')
             end_index = text.rfind(']')
 
             if start_index == -1:
+                post_processing_error_handler(ValueError("No se encontró ningún '[' en el texto."), text, ids, "DIANN_2023_T1")
                 raise ValueError("No se encontró ningún '[' en el texto.")
             
-            if text.strip().endswith("'"):
-                text = text.strip()[:-1]
+            # Fix potential unterminated string element (add missing closing single quote)
+            if text.strip()[-1] != "'" and text.strip()[-2:] != "']":
+                # Add the missing single quote only if necessary
+                end_bracket_pos = text.rfind("]")
+                if end_bracket_pos != -1:
+                    text = text[:end_bracket_pos] + "'" + text[end_bracket_pos:]
+                else:
+                    text = text.strip() + "'"
 
             # Si no hay un ] al final, lo añade
             if end_index == -1 or end_index < start_index:
                 end_index = len(text)
                 text = text[:end_index] + ']'
-            
+
             # Extraer el contenido desde el primer [ hasta el último ]
             list_str = text[start_index:end_index + 1]
 
@@ -175,13 +204,40 @@ class PostProcessingImplementation(PostProcessing):
             
             # Validar que el resultado sea una lista
             if not isinstance(result_list, list):
+                post_processing_error_handler(ValueError("El contenido extraído no es una lista."), text, ids, "DIANN_2023_T1")
                 raise ValueError("El contenido extraído no es una lista.")
             
             return result_list
         except (SyntaxError, ValueError) as e:
+            post_processing_error_handler(e, text, ids, "DIANN_2023_T1")
             print(f"Error al procesar el texto: {e}")
-            return None
+            return None """
 
+    def _extract_and_convert_to_list(tokens: List[str], text: str):
+        result_list = ['O']*len(tokens)
+            
+        # Trim any leading or trailing whitespace
+        text = text.strip()
+        text = text.replace(" ", "")
+        text = text.replace("[", "")
+        text = text.replace("]", "")
+        text = text.replace("'", "")
+        
+        outputed_tokens = text.split(",")
+        for i in range(len(outputed_tokens)):
+            if i >= len(result_list):
+                break
+            
+            result_token_i = outputed_tokens[i]
+            if (result_token_i == ""):
+                continue
+            
+            result_list[i] = result_token_i
+                
+        # Ensure the result is a list
+        if not isinstance(result_list, list):
+            raise ValueError("El contenido corregido no es una lista válida.")
+        return result_list
 
     def find_classes_and_convert_to_list(text,classes):
         """
@@ -198,18 +254,16 @@ class PostProcessingImplementation(PostProcessing):
         text = text.lower()
         # Convertir las clases a minúsculas para que coincidan
         classes = [cls.lower() for cls in classes]
-        
-        # Si "false" está en la lista de clases y es la única opción, devolver ["false"]
-        if "false" in classes and len(classes) == 1:
-            return ["false"]
 
         # Evaluar si cada clase está presente en el texto
         detected_classes = [cls for cls in classes if cls in text]
         
+        
         # Si no se encuentra ninguna clase, devolver ["false"]
         return detected_classes if detected_classes else ["false"]
-
-
+    
+    def find_classes_and_convert_to_dict(text,classes):
+        return ast.literal_eval(text)
 
 # Ejemplo de uso
 if __name__ == "__main__":
@@ -220,7 +274,7 @@ if __name__ == "__main__":
     processor = PostProcessingImplementation()
 
     # Procesamiento de NER
-    processor.process_ner(text_example_ner, "DIANN_2023_T1", "es", 100)
+    processor.process_ner(text_example_ner, "DIANN_2023_T1", "es", "val", shot_count=5)
 
     # Procesamiento de Clasificación
     processor.process_classification(text_example_classification, ["CLASS_A", "CLASS_B", "CLASS_C"], "EXIST_2023_T1", "en", 500)

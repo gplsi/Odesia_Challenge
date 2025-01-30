@@ -11,6 +11,7 @@ from src.data.tasks import (
     Exist2023T3PromptBuilder,
     SqacSquad2024PromptBuilder,
 )
+from pyevall.utils.utils import PyEvALLUtils
 
 CLASS_BUILDER = "class_builder"
 SYSTEM_PROMPT = "system_prompt"
@@ -18,6 +19,16 @@ PROMPT_SYNTAX = "syntax_prompt"
 TEXT_KEY = "text_key"
 TRANSFORM = "transform"
 K = "k"
+EVALUATION = "evaluation"
+
+DIPROMATS_TASK3 = {"True":{
+        "1 appeal to commonality":["1 appeal to commonality - ad populum", "1 appeal to commonality - flag waving"],
+        "2 discrediting the opponent":["2 discrediting the opponent - absurdity appeal","2 discrediting the opponent - demonization", "2 discrediting the opponent - doubt", "2 discrediting the opponent - fear appeals (destructive)", "2 discrediting the opponent - name calling", "2 discrediting the opponent - propaganda slinging", "2 discrediting the opponent - scapegoating", "2 discrediting the opponent - undiplomatic assertiveness/whataboutism"],
+        "3 loaded language":[], 
+        "4 appeal to authority":["4 appeal to authority - appeal to false authority", "4 appeal to authority - bandwagoning"]}, 
+        "False":[]}
+
+DIPROMATS_TASK2 = {"True":["1 appeal to commonality", "2 discrediting the opponent", "3 loaded language", "4 appeal to authority"],"False":[]}
 
 TASK_CONFIG = {
     "diann_2023_t1": {
@@ -42,6 +53,7 @@ TASK_CONFIG = {
         SYSTEM_PROMPT: "You are an expert at solving binary classification problems.",
         PROMPT_SYNTAX: BasicSyntax(),
         TEXT_KEY: "text",
+        EVALUATION: {},
     },
     "dipromats_2023_t2": {
         CLASS_BUILDER: DipromatsT2PromptBuilder(
@@ -54,6 +66,7 @@ TASK_CONFIG = {
         SYSTEM_PROMPT: "You are an expert at solving multi-label classification problems.",
         PROMPT_SYNTAX: BasicSyntax(),
         TEXT_KEY: "text",
+        EVALUATION: {PyEvALLUtils.PARAM_HIERARCHY: DIPROMATS_TASK2}
     },
     "dipromats_2023_t3": {
         CLASS_BUILDER: DipromatsT3PromptBuilder(
@@ -81,6 +94,7 @@ TASK_CONFIG = {
         SYSTEM_PROMPT: "You are an expert at solving multi-label classification problems.",
         PROMPT_SYNTAX: BasicSyntax(),
         TEXT_KEY: "text",
+        EVALUATION: {PyEvALLUtils.PARAM_HIERARCHY: DIPROMATS_TASK3}
     },
     "exist_2022_t1": {
         CLASS_BUILDER: Exist2022T1PromptBuilder(
@@ -114,7 +128,7 @@ TASK_CONFIG = {
         ),
         SYSTEM_PROMPT: "You are an expert at solving binary classification problems.",
         PROMPT_SYNTAX: BasicSyntax(),
-        TEXT_KEY: "tweet",
+        TEXT_KEY: "text",
     },
     "exist_2023_t2": {
         CLASS_BUILDER: Exist2023T2PromptBuilder(
@@ -126,7 +140,7 @@ TASK_CONFIG = {
         ),
         SYSTEM_PROMPT: "You are an expert at solving mono-label classification problems.",
         PROMPT_SYNTAX: BasicSyntax(),
-        TEXT_KEY: "tweet",
+        TEXT_KEY: "text",
     },
     "exist_2023_t3": {
         CLASS_BUILDER: Exist2023T3PromptBuilder(
@@ -138,7 +152,7 @@ TASK_CONFIG = {
         ),
         SYSTEM_PROMPT: "You are an expert at solving multi-label classification problems.",
         PROMPT_SYNTAX: BasicSyntax(),
-        TEXT_KEY: "tweet",
+        TEXT_KEY: "text",
     },
     "sqac_squad_2024_t1": {
         CLASS_BUILDER: SqacSquad2024PromptBuilder(
@@ -162,9 +176,9 @@ BATCH_SIZE = {
         "exist_2023_t1": 32,
         "exist_2023_t2": 32,
         "exist_2023_t3": 32,
-        "exist_2022_t1": 32,
-        "exist_2022_t2": 32,
-        "sqac_squad_2024_t1": 32,
+        "exist_2022_t1": 16,
+        "exist_2022_t2": 16,
+        "sqac_squad_2024_t1": 1,
     }
 
 CLASSES_DIPROMATS_2023_T1 = ['true', 'false']
@@ -187,7 +201,9 @@ CLASSES_DIPROMATS_2023_T3 = ['1 appeal to commonality - ad populum',
             'false']
 
 CLASSES_EXIST_2022_T1 = ['sexist', 'non-sexist']
-CLASSES_EXIST_2022_T2 = ['IDEOLOGICAL-INEQUALITY', 'MISOGYNY-NON-SEXUAL-VIOLENCE', 'OBJECTIFICATION', 'SEXUAL-VIOLENCE', 'STEREOTYPING-DOMINANCE', 'NO']
+CLASSES_EXIST_2022_T2 = ['sexual-violence', 'stereotyping-dominance', 'non-sexist', 'misogyny-non-sexual-violence', 'objectification', 'ideological-inequality']
 CLASSES_EXIST_2023_T1 = ['YES', 'NO']
 CLASSES_EXIST_2023_T2 = ['DIRECT', 'JUDGEMENTAL', 'REPORTED', 'NO']
 CLASSES_EXIST_2023_T3 = ['IDEOLOGICAL-INEQUALITY', 'MISOGYNY-NON-SEXUAL-VIOLENCE', 'OBJECTIFICATION', 'SEXUAL-VIOLENCE', 'STEREOTYPING-DOMINANCE', 'NO']
+
+CLASSES_DIANN_2023_T3 = ['O', 'B-DIS', 'I-DIS']

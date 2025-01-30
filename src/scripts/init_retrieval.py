@@ -10,7 +10,7 @@ TASK_CONFIG = {
     "diann_2023": ("tokens", lambda row: " ".join(row["tokens"])),
     "dipromats_2023": ("text", None),
     "exist_2022": ("text", None),
-    "exist_2023": ("tweet", None),
+    "exist_2023": ("text", None),
     "sqac_squad_2024": ("question", None),
 }
 

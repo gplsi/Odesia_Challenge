@@ -25,7 +25,7 @@ def main(args):
     partition = args.partition
     language = args.language
     output_path = args.output
-    shot_count = args.shot_value
+    shot_count = int(args.shot_value)
 
     task_config = TASK_CONFIG[task_key]
     text_key = task_config[TEXT_KEY]
@@ -37,7 +37,8 @@ def main(args):
 
     dataset = get_dataset(task_key, partition, language, text_key, transform)
     reRankRetrieval = ReRankRetriever(dataset_id=task_key) if k > 0 else None
-    encoder = DataEncoder(True)
+    awnser = partition != "test"
+    encoder = DataEncoder(awnser)
 
     encoded = encoder.encode(
         dataset,
@@ -62,7 +63,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--partition", type=str, help="Partition file", default="val")
     parser.add_argument("--language", type=str, help="Language key", default="es")
-    parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
+    parser.add_argument("--shot_value", type=str, help="Count of shot", default=5)
     parser.add_argument("--output", type=str, help="Output file", default="dipromats_2023_t1.json")
     args = parser.parse_args()
     main(args)
