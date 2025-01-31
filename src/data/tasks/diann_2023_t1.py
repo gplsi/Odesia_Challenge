@@ -1,4 +1,4 @@
-from src.preprocessing.diann_2023_t1 import extract_bio_tokens
+from src.preprocessing.diann_2023_t1 import extract_bio_tokens, extract_bio_spans
 from src.data.tasks.base import GenericTaskPromptBuilder
 
 
@@ -46,4 +46,4 @@ class Diann2023T1PromptBuilderGenerativeNER(GenericTaskPromptBuilder):
         return str.join(" ", entry["tokens"])
 
     def format_output(self, entry):
-        return extract_bio_tokens(entry)
+        return extract_bio_spans(entry)
