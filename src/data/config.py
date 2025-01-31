@@ -91,6 +91,22 @@ TASK_CONFIG = {
             TRANSFORM: lambda row: " ".join(row["tokens"]),
             USE_BIO: False,
         },
+        {
+            CLASS_BUILDER: Diann2023T1PromptBuilderTokenIdentification(
+                prompt_start=(
+                    "Your task is to identify all disability mentions in the text. "
+                    "For each mention, please output the disability present (if any) in that mention."
+                    "Your answer must be a list of strings, where each string is the explicit mention of a disability."
+                ),
+                prompt_guide="Here are some examples to guide you:",
+                prompt_end="Now, extract the disability mentions from the following sequence:",
+            ),
+            SYSTEM_PROMPT: "You are an expert at identifying disability mentions in text.",
+            PROMPT_SYNTAX: BasicSyntax(),
+            TEXT_KEY: "tokens",
+            TRANSFORM: lambda row: " ".join(row["tokens"]),
+            USE_BIO: False,
+        },
     ],
     "dipromats_2023_t1": [
         {
