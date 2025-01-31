@@ -2,6 +2,7 @@ from src.data.prompt_syntax import BasicSyntax
 from src.data.tasks import (
     Diann2023T1PromptBuilderBIO,
     Diann2023T1PromptBuilderTokenIdentification,
+    Diann2023T1PromptBuilderGenerativeNER,
     DipromatsT1PromptBuilder,
     DipromatsT2PromptBuilder,
     DipromatsT3PromptBuilder,
@@ -92,7 +93,7 @@ TASK_CONFIG = {
             USE_BIO: False,
         },
         {
-            CLASS_BUILDER: Diann2023T1PromptBuilderTokenIdentification(
+            CLASS_BUILDER: Diann2023T1PromptBuilderGenerativeNER(
                 prompt_start=(
                     "Your task is to identify all disability mentions in the text. "
                     "For each mention, please output the disability present (if any) in that mention."

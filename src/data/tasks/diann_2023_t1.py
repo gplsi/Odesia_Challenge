@@ -32,3 +32,18 @@ class Diann2023T1PromptBuilderTokenIdentification(GenericTaskPromptBuilder):
 
     def format_output(self, entry):
         return extract_bio_tokens(entry)
+
+class Diann2023T1PromptBuilderGenerativeNER(GenericTaskPromptBuilder):
+    def __init__(
+        self,
+        prompt_start="For this task, solve the following Named Entity Recognition problem:\n",
+        prompt_guide="",
+        prompt_end="",
+    ):
+        super().__init__(prompt_start, prompt_guide, prompt_end)
+
+    def format_input(self, entry):
+        return str.join(" ", entry["tokens"])
+
+    def format_output(self, entry):
+        return extract_bio_tokens(entry)
