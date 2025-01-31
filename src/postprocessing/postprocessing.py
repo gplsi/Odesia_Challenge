@@ -311,7 +311,6 @@ class PostProcessingImplementation(PostProcessing):
         return result_list
 
     def _extract_entities(tokens: List[str], text: str):
-        result_list = ["O"] * len(tokens)
 
         # Trim any leading or trailing whitespace
         text = text.strip()
@@ -335,7 +334,7 @@ class PostProcessingImplementation(PostProcessing):
             result.append(label)
             prev_label = label
 
-        return result_list
+        return result
 
     def find_classes_and_convert_to_list(text, classes):
         """

@@ -126,7 +126,7 @@ def main(args):
         model=os.getenv("HUGGINGFACE_MODEL"),
         tokenizer=tokenizer,
         token=os.getenv("HUGGINGFACE_APIKEY"),
-        max_length=10000,
+        max_length=5000,
         device_map="auto",
     )
     pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
@@ -143,6 +143,7 @@ def main(args):
         if use_global_batch_size
         else RELATIVE_BATCH_SIZE[task_key][version][shot_count]
     )
+
 
     for i in tqdm(range(0, len(messages), batch_size)):
         batch_data = messages[i : i + batch_size]
