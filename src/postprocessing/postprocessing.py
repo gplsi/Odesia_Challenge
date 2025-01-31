@@ -15,11 +15,6 @@ from src.data.config import (
     CLASSES_EXIST_2023_T3,
 )
 from src.utils import post_processing_error_handler
-import nltk
-from nltk.tokenize import word_tokenize
-import string
-
-nltk.download("punkt", quiet=True)
 
 
 class PostProcessing(ABC):
@@ -310,7 +305,9 @@ class PostProcessingImplementation(PostProcessing):
             raise ValueError("El contenido corregido no es una lista válida.")
         return result_list
 
+    @staticmethod
     def _extract_entities(tokens: List[str], text: str):
+        result_list = ["O"] * len(tokens)
 
         # Trim any leading or trailing whitespace
         text = text.strip()
@@ -320,21 +317,39 @@ class PostProcessingImplementation(PostProcessing):
 
         # Split the text by commas
         outputed_tokens = text.split(",")
-        outputed_tokens = [y for t in outputed_tokens for y in t.split(" ") if y != "" and y != " "]  # Split by spaces
-
+        
+        response_token_dict = dict()
+        for t in outputed_tokens:
+            splitted_tokens = [y for y in t.split(" ") if y != "" and y != " "]  # Split by spaces
+            if splitted_tokens:
+                response_token_dict[splitted_tokens[-1]] = splitted_tokens
+                
         # Iterate over the outputed tokens and replace the tokens in the result list
-        outputed_tokens_set = set(outputed_tokens)
-        result = []
-        prev_label = "O"
-        for token in tokens:
-            if token in outputed_tokens_set:
-                label = "B-DIS" if prev_label == "O" else "I-DIS"
-            else:
-                label = "O"
-            result.append(label)
-            prev_label = label
-
-        return result
+        for i in range(len(tokens)):
+            token = tokens[i]
+            if token in response_token_dict.keys():
+                span = response_token_dict[token]
+                
+                all_match = True
+                # check if the tokens from before match the full detected span
+                for j in range(len(span)):
+                    token_i = i - len(span) + j + 1
+                    if token_i < 0:
+                        all_match = False
+                        break
+                    
+                    if tokens[token_i] != span[j]:
+                        all_match = False
+                        break
+                    
+                if all_match:
+                    prev_label = "O"
+                    for j in range(len(span)):
+                        token_i = i - len(span) + j + 1
+                        label = "B-DIS" if prev_label == "O" else "I-DIS"
+                        result_list[token_i] = label
+                        prev_label = label
+        return result_list
 
     def find_classes_and_convert_to_list(text, classes):
         """
@@ -372,17 +387,10 @@ if __name__ == "__main__":
 
     processor = PostProcessingImplementation()
 
+    tokens = ["This", "is", "a", "test", "text", "with", "CRONIC", "DISABILITY", "and", "another", "CRONIC", "thing", "appearing", "DISABILITY"]
+    output = "['CRONIC DISABILITY', 'a test']"
+
+    print("here")
     # Procesamiento de NER
-    processor.process_ner(text_example_ner, "DIANN_2023_T1", "es", "val", shot_count=5)
-
-    # Procesamiento de Clasificación
-    processor.process_classification(
-        text_example_classification,
-        ["CLASS_A", "CLASS_B", "CLASS_C"],
-        "EXIST_2023_T1",
-        "en",
-        500,
-    )
-
-    # Procesamiento de QA
-    processor.process_qa(text_example_qa, "SQAC_SQUAD_2024", "en", 1)
+    result = PostProcessingImplementation._extract_entities(tokens, output)
+    print(result)
