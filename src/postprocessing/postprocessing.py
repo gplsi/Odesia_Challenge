@@ -54,11 +54,12 @@ class PostProcessingImplementation(PostProcessing):
         partition: str,
         shot_count: int = 5,
         use_bio_format: bool = True,
+        tag: str='.',
     ):
         task_name = task_name.lower()
-        if not os.path.exists(f"data/results_{partition}"):
-            os.makedirs(f"data/results_{partition}")
-        output_file = f"data/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
+        if not os.path.exists(f"data/{tag}/results_{partition}"):
+            os.makedirs(f"data/{tag}/results_{partition}")
+        output_file = f"data/{tag}/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
         results = []
 
         for i in range(len(outputs)):
@@ -92,14 +93,15 @@ class PostProcessingImplementation(PostProcessing):
         language: str,
         partition: str,
         shot_count: int,
+        tag: str='.'
     ):
-        if not os.path.exists(f"data/results_{partition}"):
-            os.makedirs(f"data/results_{partition}")
+        if not os.path.exists(f"data/{tag}/results_{partition}"):
+            os.makedirs(f"data/{tag}/results_{partition}")
 
         results = []
         for output in outputs:
             task_name = task_name.lower()
-            output_file = f"data/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
+            output_file = f"data/{tag}/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
             text = output["out"][0]["generated_text"][2]["content"]
             ids = output["id"]
             try:
@@ -186,12 +188,13 @@ class PostProcessingImplementation(PostProcessing):
         language: str,
         partition: str,
         shot_count: int,
+        tag: str='.'
     ):
-        if not os.path.exists(f"data/results_{partition}"):
-            os.makedirs(f"data/results_{partition}")
+        if not os.path.exists(f"data/{tag}/results_{partition}"):
+            os.makedirs(f"data/{tag}/results_{partition}")
 
         task_name = task_name.lower()
-        output_file = f"data/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
+        output_file = f"data/{tag}/results_{partition}/{task_name}_{language}_{partition}_{shot_count}.json"
         results = []
 
         for output in outputs:

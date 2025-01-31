@@ -10,9 +10,9 @@ from src.data.config import CLASSES_DIANN_2023_T3
 
 
 # Función para recolectar métricas y escribir en un CSV
-def write_metrics_to_csv(dataset_name, metric_results, partition):
+def write_metrics_to_csv(dataset_name, metric_results, partition,tag):
     # Crear archivo si no existe y escribir encabezados
-    output_file=f"./data/{partition}_metrics.csv"
+    output_file=f"./data/{tag}/{partition}_metrics.csv"
     try:
         with open(output_file, mode='x', newline='') as file:
             writer = csv.writer(file)
@@ -28,7 +28,7 @@ def write_metrics_to_csv(dataset_name, metric_results, partition):
         writer.writerow(row)
 
 # Funciones de evaluación con recolectores de métricas
-def evaluate_dipromats_2023(predictions_file, gold_file, dataset_name, params, partition):
+def evaluate_dipromats_2023(predictions_file, gold_file, dataset_name, params, partition,tag):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.ICMNorm.value]
     report = test.evaluate(predictions_file, gold_file, metrics, **params).report
@@ -37,11 +37,11 @@ def evaluate_dipromats_2023(predictions_file, gold_file, dataset_name, params, p
         icm_norm_metric = report["metrics"]["ICMNorm"]["results"]["average_per_test_case"]
         print(f"ICM-Norm Result: {icm_norm_metric}")
         metric_results = {"ICMNorm": icm_norm_metric}
-        write_metrics_to_csv(dataset_name, metric_results, partition)
+        write_metrics_to_csv(dataset_name, metric_results, partition,tag)
     except AttributeError as e:
         print(f"Error: Unable to access ICM-Norm metric. {e}")
 
-def evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name, partition):
+def evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name, partition,tag):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.Accuracy.value]
     params = dict()
@@ -52,11 +52,11 @@ def evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name, partition)
         accuracy = report["metrics"]["Accuracy"]["results"]["average_per_test_case"]
         print(f"Accuracy Result: {accuracy}")
         metric_results = {"Accuracy": accuracy}
-        write_metrics_to_csv(dataset_name, metric_results, partition)
+        write_metrics_to_csv(dataset_name, metric_results, partition,tag)
     except AttributeError as e:
         print(f"Error: Unable to access Accuracy metric. {e}")
 
-def evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name, partition):
+def evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name, partition,tag):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.FMeasure.value]
     params = dict()
@@ -67,11 +67,11 @@ def evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name, partition)
         fmeasure = report["metrics"]["FMeasure"]["results"]["average_per_test_case"]
         print(f"FMeasure Result: {fmeasure}")
         metric_results = {"FMeasure": fmeasure}
-        write_metrics_to_csv(dataset_name, metric_results, partition)
+        write_metrics_to_csv(dataset_name, metric_results, partition, tag)
     except AttributeError as e:
         print(f"Error: Unable to access F-Measure metric. {e}")
 
-def evaluate_exist_2023(predictions_file, gold_file, dataset_name, partition):
+def evaluate_exist_2023(predictions_file, gold_file, dataset_name, partition, tag):
     test = PyEvALLEvaluation()
     metrics = [MetricFactory.ICMSoftNorm.value]
     params = dict()
@@ -82,11 +82,11 @@ def evaluate_exist_2023(predictions_file, gold_file, dataset_name, partition):
         icmSoftNorm = report["metrics"]["ICMSoftNorm"]["results"]["average_per_test_case"]
         print(f"ICMSoftNorm Result: {icmSoftNorm}")
         metric_results = {"ICMSoftNorm": icmSoftNorm}
-        write_metrics_to_csv(dataset_name, metric_results, partition)
+        write_metrics_to_csv(dataset_name, metric_results, partition, tag)
     except AttributeError as e:
         print(f"Error: Unable to access ICMSoftNorm metric. {e}")
 
-def evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name, partition):
+def evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name, partition, tag):
     squad_metric = load("squad")
     with open(predictions_file) as f:
         predictions = json.load(f)
@@ -100,9 +100,9 @@ def evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name, partitio
     print(results)
 
     metric_results = {"ExactMatch": results["exact_match"], "F1": results["f1"]}
-    write_metrics_to_csv(dataset_name, metric_results, partition)
+    write_metrics_to_csv(dataset_name, metric_results, partition, tag)
 
-def evaluate_diann_2023(predictions_file, gold_file, dataset_name, partition):
+def evaluate_diann_2023(predictions_file, gold_file, dataset_name, partition, tag):
     f1_metric = load("f1")
     
     with open(predictions_file) as f:
@@ -128,7 +128,7 @@ def evaluate_diann_2023(predictions_file, gold_file, dataset_name, partition):
         
     results = f1_metric.compute(references=gold_cls, predictions=pred_cls, average="macro")
     metric_results = {"MacroF1": results["f1"]}
-    write_metrics_to_csv(dataset_name, metric_results, partition)
+    write_metrics_to_csv(dataset_name, metric_results, partition, tag)
 
 
 #EJEMPLOS DE FORMATO

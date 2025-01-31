@@ -57,6 +57,7 @@ def main(args):
             partition,
             shot_count,
             use_bio_format=task_config[USE_BIO],
+            tag=tag
         )
 
     elif task_key in (
@@ -71,12 +72,12 @@ def main(args):
     ):
         # Generates a json with answers in the correct format to be evaluated
         post_processor.process_classification(
-            results, task_key, language, partition, shot_count
+            results, task_key, language, partition, shot_count, tag
         )
 
     elif task_key == "sqac_squad_2024_t1":
         # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_qa(results, task_key, language, partition, shot_count)
+        post_processor.process_qa(results, task_key, language, partition, shot_count, tag)
 
     else:
         raise ValueError(f"Task key {task_key} not supported")
@@ -89,7 +90,7 @@ def main(args):
     gold_file = f"data/data_gold_val/{task_key}_{language}_{partition}_gold.json"
 
     if task_key == "diann_2023_t1":
-        evaluate_diann_2023(predictions_file, gold_file, dataset_name, partition)
+        evaluate_diann_2023(predictions_file, gold_file, dataset_name, partition, tag)
 
     elif (
         task_key == "dipromats_2023_t1"
@@ -102,23 +103,24 @@ def main(args):
             dataset_name,
             task_config[EVALUATION],
             partition,
+            tag
         )
 
     elif task_key == "exist_2022_t1":
-        evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name, partition)
+        evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name, partition, tag)
 
     elif task_key == "exist_2022_t2":
-        evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name, partition)
+        evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name, partition, tag)
 
     elif (
         task_key == "exist_2023_t1"
         or task_key == "exist_2023_t2"
         or task_key == "exist_2023_t3"
     ):
-        evaluate_exist_2023(predictions_file, gold_file, dataset_name, partition)
+        evaluate_exist_2023(predictions_file, gold_file, dataset_name, partition, tag)
 
     elif task_key == "sqac_squad_2024_t1":
-        evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name, partition)
+        evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name, partition, tag)
 
 
 if __name__ == "__main__":
