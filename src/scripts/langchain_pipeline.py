@@ -17,6 +17,7 @@ from src.data.config import (
     TRANSFORM,
     K,
     BATCH_SIZE,
+    RELATIVE_BATCH_SIZE,
     EVALUATION,
 )
 from tqdm.auto import tqdm
@@ -87,9 +88,10 @@ def main(args):
     task_key = args.task_key
     partition = args.partition
     language = args.language
-    shot_count = int(args.shot_value)
+    shot_count = args.shot_value
     cache_path = args.cache
     version = args.version
+    use_global_batch_size = args.use_global_batch_size
 
     encoder_dict = (
         get_encoded_data_from_cache(
@@ -134,7 +136,11 @@ def main(args):
         "top_p": 0.9,
     }
 
-    batch_size = BATCH_SIZE[task_key]
+    batch_size = (
+        BATCH_SIZE[task_key]
+        if use_global_batch_size
+        else RELATIVE_BATCH_SIZE[task_key][version][shot_count]
+    )
 
     for i in tqdm(range(0, len(messages), batch_size)):
         batch_data = messages[i : i + batch_size]
@@ -166,8 +172,9 @@ if __name__ == "__main__":
     )
     parser.add_argument("--partition", type=str, help="Partition file", default="test")
     parser.add_argument("--language", type=str, help="Language key", default="es")
-    parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
+    parser.add_argument("--shot_value", type=int, help="Count of shot", default=0)
     parser.add_argument("--cache", type=str, help="Cache", default="")
     parser.add_argument("--version", type=int, help="Version", default=0)
+    parser.add_argument("--use-global-batch-size", action="store_true")
     args = parser.parse_args()
     main(args)

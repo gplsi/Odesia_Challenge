@@ -248,6 +248,19 @@ BATCH_SIZE = {
     "sqac_squad_2024_t1": 1,
 }
 
+RELATIVE_BATCH_SIZE = {
+    "diann_2023_t1": [{0: 8, 5: 8}, {0: 8, 5: 8}],
+    "dipromats_2023_t1": [{0: 8, 5: 8}],
+    "dipromats_2023_t2": [{0: 8, 5: 8}],
+    "dipromats_2023_t3": [{0: 8, 5: 8}],
+    "exist_2023_t1": [{0: 8, 5: 8}],
+    "exist_2023_t2": [{0: 8, 5: 8}],
+    "exist_2023_t3": [{0: 8, 5: 8}],
+    "exist_2022_t1": [{0: 8, 5: 8}],
+    "exist_2022_t2": [{0: 8, 5: 8}],
+    "sqac_squad_2024_t1": [{0: 1, 5: 1}],
+}
+
 CLASSES_DIPROMATS_2023_T1 = ["true", "false"]
 CLASSES_DIPROMATS_2023_T2 = [
     "1 appeal to commonality",
