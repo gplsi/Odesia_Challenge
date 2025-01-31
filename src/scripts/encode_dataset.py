@@ -25,8 +25,9 @@ def main(args):
     partition = args.partition
     language = args.language
     shot_count = int(args.shot_value)
-
-    task_config = TASK_CONFIG[task_key]
+    version = args.version
+    
+    task_config = TASK_CONFIG[task_key][version]
     text_key = task_config[TEXT_KEY]
     class_builder = task_config[CLASS_BUILDER]
     system_prompt = task_config[SYSTEM_PROMPT]
@@ -79,5 +80,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--shot_value", type=str, help="Count of shot", default=5)
     parser.add_argument("--output", type=str, help="Output file", default="")
+    parser.add_argument("--version", type=int, help="Version", default=0)
+
     args = parser.parse_args()
     main(args)

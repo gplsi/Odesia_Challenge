@@ -1,5 +1,4 @@
 pandas
-torch
 transformers==4.44.2
 weaviate-client
 langchain
@@ -17,8 +16,6 @@ gradio
 cohere
 FlagEmbedding
 langgraph
-ollama
-langchain_ollama
 python-dotenv
 pyevall
 evaluate

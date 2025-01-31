@@ -20,7 +20,8 @@ from src.data.config import (
     TRANSFORM,
     K,
     BATCH_SIZE,
-    EVALUATION
+    EVALUATION,
+    USE_BIO
 )
 
 
@@ -29,8 +30,9 @@ def main(args):
     partition = args.partition
     language = args.language
     shot_count = args.shot_value
+    version = args.version
     results_dir = f"data/model_outputs_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
-    task_config = TASK_CONFIG[task_key]
+    task_config = TASK_CONFIG[task_key][version]
 
     with open(results_dir, "r") as f:
         results = json.load(f)
@@ -46,7 +48,7 @@ def main(args):
         tokens = [item["tokens"] for item in original_data]
         
         # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_ner(tokens, results, task_key, language, partition, shot_count)
+        post_processor.process_ner(tokens, results, task_key, language, partition, shot_count, use_bio_format=task_config[USE_BIO])
     
     elif task_key in (
         "dipromats_2023_t1",
@@ -114,5 +116,7 @@ if __name__ == "__main__":
     parser.add_argument("--partition", type=str, help="Partition file", default="val")
     parser.add_argument("--language", type=str, help="Language key", default="es")
     parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
+    parser.add_argument("--version", type=int, help="Version", default=0)
+
     args = parser.parse_args()
     main(args)

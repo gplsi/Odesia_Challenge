@@ -14,4 +14,4 @@ def extract_bio_tokens(data):
     bio_tokens = [token for token, label in zip(tokens, labels) if label in {'B-DIS', 'I-DIS'}]
 
     # Convertirlos a una cadena separada por comas
-    return ", ".join(bio_tokens)
+    return str(bio_tokens)

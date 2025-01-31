@@ -1,8 +1,5 @@
 import json
-import ollama
-from langchain_ollama import ChatOllama
 import base64
-from ollama import Client
 from dotenv import load_dotenv
 import os
 import argparse
@@ -20,7 +17,7 @@ from src.data.config import (
     TRANSFORM,
     K,
     BATCH_SIZE,
-    EVALUATION
+    EVALUATION,
 )
 from tqdm.auto import tqdm
 import os
@@ -38,7 +35,7 @@ from src.evaluation.evaluation import (
     evaluate_exist_2022_t1,
     evaluate_exist_2022_t2,
     evaluate_exist_2023,
-    evaluate_sqac_squad_2024, 
+    evaluate_sqac_squad_2024,
 )
 
 load_dotenv()  # Loads variables from .env into environment
@@ -51,23 +48,23 @@ def get_dataset(task_key, partition, language, text_key, transform=None):
     return dataset
 
 
-def get_overridden_shot_count(task_key, shot_count):
-    task_config = TASK_CONFIG[task_key]
+def get_overridden_shot_count(task_key, shot_count, version):
+    task_config = TASK_CONFIG[task_key][version]
     return task_config[K] if K in task_config else shot_count
 
 
-def get_encoded_data(task_key, partition, language, shot_count):
+def get_encoded_data(task_key, partition, language, shot_count, version):
     answer = partition != "test"
     encoder = DataEncoder(answer)
 
-    task_config = TASK_CONFIG[task_key]
+    task_config = TASK_CONFIG[task_key][version]
     text_key = task_config[TEXT_KEY]
     class_builder = task_config[CLASS_BUILDER]
     system_prompt = task_config[SYSTEM_PROMPT]
     syntax = task_config[PROMPT_SYNTAX]
     transform = task_config.get(TRANSFORM)
 
-    k = get_overridden_shot_count(task_key, shot_count)
+    k = get_overridden_shot_count(task_key, shot_count, version)
     reRankRetrieval = ReRankRetriever(dataset_id=task_key) if k > 0 else None
 
     dataset = get_dataset(task_key, partition, language, text_key, transform)
@@ -77,9 +74,11 @@ def get_encoded_data(task_key, partition, language, shot_count):
     )
 
 
-def get_encoded_data_from_cache(task_key, partition, language, shot_count, path):
-    k = get_overridden_shot_count(task_key, shot_count)
-    cache_file = Path(path) / f"{task_key}_{language}_{partition}_{k}.json"
+def get_encoded_data_from_cache(
+    task_key, partition, language, shot_count, path, version
+):
+    k = get_overridden_shot_count(task_key, shot_count, version)
+    cache_file = Path(path) / f"{task_key}-{language}-{partition}_{k}.json"
     with open(cache_file, "r") as file:
         return json.load(file)
 
@@ -88,15 +87,16 @@ def main(args):
     task_key = args.task_key
     partition = args.partition
     language = args.language
-    shot_count = args.shot_value
+    shot_count = int(args.shot_value)
     cache_path = args.cache
+    version = args.version
 
     encoder_dict = (
         get_encoded_data_from_cache(
-            task_key, partition, language, shot_count, cache_path
+            task_key, partition, language, shot_count, cache_path, version
         )
         if cache_path
-        else get_encoded_data(task_key, partition, language, shot_count)
+        else get_encoded_data(task_key, partition, language, shot_count, version)
     )
 
     messages_ids = [
@@ -109,15 +109,20 @@ def main(args):
         ]
         for instruction in encoder_dict[DataEncoder.PROMPTS]
     ]
-    
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-3B-Instruct",token=os.getenv("HUGGINGFACE_APIKEY"), use_fast=False, padding_side='left')
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        "meta-llama/Llama-3.2-3B-Instruct",
+        token=os.getenv("HUGGINGFACE_APIKEY"),
+        use_fast=False,
+        padding_side="left",
+    )
 
     pipe = pipeline(
         "text-generation",
         model=os.getenv("HUGGINGFACE_MODEL"),
         tokenizer=tokenizer,
         token=os.getenv("HUGGINGFACE_APIKEY"),
-        max_length=5000,
+        max_length=4000,
         device_map="auto",
     )
     pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
@@ -128,23 +133,31 @@ def main(args):
         "temperature": 1e-3,
         "top_p": 0.9,
     }
-    
+
     batch_size = BATCH_SIZE[task_key]
-    
+
     for i in tqdm(range(0, len(messages), batch_size)):
-        batch_data = messages[i:i + batch_size]
-        out = pipe(batch_data, batch_size=batch_size, truncation="only_first", pad_token_id=pipe.tokenizer.eos_token_id, **generate_kwargs)
+        batch_data = messages[i : i + batch_size]
+        out = pipe(
+            batch_data,
+            batch_size=batch_size,
+            truncation="only_first",
+            pad_token_id=pipe.tokenizer.eos_token_id,
+            **generate_kwargs,
+        )
         model_outputs.extend(out)
 
-    model_outputs = [{"id": id, 'out': out} for id, out in zip(messages_ids, model_outputs)]
+    model_outputs = [
+        {"id": id, "out": out} for id, out in zip(messages_ids, model_outputs)
+    ]
     outputs_dir = f"./data/model_outputs_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
-    
+
     if not os.path.exists(f"./data/model_outputs_{partition}"):
         os.makedirs(f"./data/model_outputs_{partition}")
-    
+
     with open(outputs_dir, "w") as f:
         json.dump(model_outputs, f, indent=4)
-        
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Language chain pipeline")
@@ -155,5 +168,6 @@ if __name__ == "__main__":
     parser.add_argument("--language", type=str, help="Language key", default="es")
     parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
     parser.add_argument("--cache", type=str, help="Cache", default="")
+    parser.add_argument("--version", type=int, help="Version", default=0)
     args = parser.parse_args()
     main(args)
