@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # Define arrays for languages, partitions, and task keys
-languages=("es" "en")  # ["en", "es"]
+languages=("es")  # ["en", "es"]
 partition="test"   # ["val", "test"]
 indexes=(1 0 0 0 0 0 0 0 0 0)
+#indexes=(0)
 #task_keys=("dipromats_2023_t1" "dipromats_2023_t2" "dipromats_2023_t3" "exist_2022_t1" "exist_2022_t2" "exist_2023_t1" "exist_2023_t2" "exist_2023_t3" "sqac_squad_2024_t1")
 #task_keys=("exist_2023_t1" "exist_2023_t2" "exist_2023_t3" "sqac_squad_2024_t1")
 task_keys=("diann_2023_t1" "dipromats_2023_t1" "dipromats_2023_t2" "dipromats_2023_t3" "exist_2022_t1" "exist_2022_t2" "exist_2023_t1" "exist_2023_t2" "exist_2023_t3" "sqac_squad_2024_t1")
-#task_keys=("diann_2023_t1")
-shot_value=0
+#task_keys=("sqac_squad_2024_t1")
+shot_value=5
 cache_path=''
 
 # Iterate over each combination of language, partition, and task key

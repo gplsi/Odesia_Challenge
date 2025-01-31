@@ -79,7 +79,8 @@ def get_encoded_data_from_cache(
     task_key, partition, language, shot_count, path, version
 ):
     k = get_overridden_shot_count(task_key, shot_count, version)
-    cache_file = Path(path) / f"{task_key}-{language}-{partition}_{k}.json"
+    cache_file = Path(path) / f"{task_key}-{language}-{partition}-{k}.json"
+    print(f"Loading data from cache: {cache_file}")
     with open(cache_file, "r") as file:
         return json.load(file)
 
@@ -125,7 +126,7 @@ def main(args):
         model=os.getenv("HUGGINGFACE_MODEL"),
         tokenizer=tokenizer,
         token=os.getenv("HUGGINGFACE_APIKEY"),
-        max_length=4000,
+        max_length=10000,
         device_map="auto",
     )
     pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
