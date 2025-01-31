@@ -315,22 +315,25 @@ class PostProcessingImplementation(PostProcessing):
 
         # Trim any leading or trailing whitespace
         text = text.strip()
-        text = text.replace(" ", "")
         text = text.replace("[", "")
         text = text.replace("]", "")
         text = text.replace("'", "")
 
         # Split the text by commas
         outputed_tokens = text.split(",")
+        outputed_tokens = [y for t in outputed_tokens for y in t.split(" ") if y != "" and y != " "]  # Split by spaces
 
         # Iterate over the outputed tokens and replace the tokens in the result list
         outputed_tokens_set = set(outputed_tokens)
-        for i in range(len(tokens)):
-            token_i = tokens[i]
-            if token_i in outputed_tokens_set:
-                result_list[i] = (
-                    "B-DIS" if i == 0 or result_list[i - 1] == "O" else "I-DIS"
-                )
+        result = []
+        prev_label = "O"
+        for token in tokens:
+            if token in outputed_tokens_set:
+                label = "B-DIS" if prev_label == "O" else "I-DIS"
+            else:
+                label = "O"
+            result.append(label)
+            prev_label = label
 
         return result_list
 
