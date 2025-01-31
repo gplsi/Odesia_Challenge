@@ -324,19 +324,13 @@ class PostProcessingImplementation(PostProcessing):
         outputed_tokens = text.split(",")
 
         # Iterate over the outputed tokens and replace the tokens in the result list
-        pointer = 0
+        outputed_tokens_set = set(outputed_tokens)
         for i in range(len(tokens)):
-            if pointer >= len(outputed_tokens):
-                break
-
             token_i = tokens[i]
-
-            if token_i == outputed_tokens[pointer]:
+            if token_i in outputed_tokens_set:
                 result_list[i] = (
                     "B-DIS" if i == 0 or result_list[i - 1] == "O" else "I-DIS"
                 )
-                pointer += 1
-                continue
 
         return result_list
 
