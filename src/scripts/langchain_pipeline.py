@@ -92,6 +92,7 @@ def main(args):
     cache_path = args.cache
     version = args.version
     use_global_batch_size = args.use_global_batch_size
+    tag = args.tag
 
     encoder_dict = (
         get_encoded_data_from_cache(
@@ -156,10 +157,10 @@ def main(args):
     model_outputs = [
         {"id": id, "out": out} for id, out in zip(messages_ids, model_outputs)
     ]
-    outputs_dir = f"./data/model_outputs_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
+    outputs_dir = f"./data/{tag}/model_outputs_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
 
-    if not os.path.exists(f"./data/model_outputs_{partition}"):
-        os.makedirs(f"./data/model_outputs_{partition}")
+    if not os.path.exists(f"./data/{tag}/model_outputs_{partition}"):
+        os.makedirs(f"./data/{tag}/model_outputs_{partition}", exist_ok=True)
 
     with open(outputs_dir, "w") as f:
         json.dump(model_outputs, f, indent=4)
@@ -176,5 +177,6 @@ if __name__ == "__main__":
     parser.add_argument("--cache", type=str, help="Cache", default="")
     parser.add_argument("--version", type=int, help="Version", default=0)
     parser.add_argument("--use-global-batch-size", action="store_true")
+    parser.add_argument("--tag", type=str, help="Tag", default=".")
     args = parser.parse_args()
     main(args)

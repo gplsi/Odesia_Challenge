@@ -7,7 +7,7 @@ from src.evaluation.evaluation import (
     evaluate_exist_2022_t1,
     evaluate_exist_2022_t2,
     evaluate_exist_2023,
-    evaluate_sqac_squad_2024, 
+    evaluate_sqac_squad_2024,
 )
 from src.postprocessing.postprocessing import PostProcessingImplementation
 from src.utils import evaluation_error_handler
@@ -21,7 +21,7 @@ from src.data.config import (
     K,
     BATCH_SIZE,
     EVALUATION,
-    USE_BIO
+    USE_BIO,
 )
 
 
@@ -31,7 +31,8 @@ def main(args):
     language = args.language
     shot_count = args.shot_value
     version = args.version
-    results_dir = f"data/model_outputs_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
+    tag = args.tag
+    results_dir = f"data/{tag}/model_outputs_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
     task_config = TASK_CONFIG[task_key][version]
 
     with open(results_dir, "r") as f:
@@ -41,15 +42,23 @@ def main(args):
 
     if task_key.startswith("diann_2023"):
         original_data_dir = f"data/diann_2023/{partition}_t1_{language}.json"
-        
+
         with open(original_data_dir, "r") as f:
             original_data = json.load(f)
-            
+
         tokens = [item["tokens"] for item in original_data]
-        
+
         # Generates a json with answers in the correct format to be evaluated
-        post_processor.process_ner(tokens, results, task_key, language, partition, shot_count, use_bio_format=task_config[USE_BIO])
-    
+        post_processor.process_ner(
+            tokens,
+            results,
+            task_key,
+            language,
+            partition,
+            shot_count,
+            use_bio_format=task_config[USE_BIO],
+        )
+
     elif task_key in (
         "dipromats_2023_t1",
         "dipromats_2023_t2",
@@ -64,7 +73,7 @@ def main(args):
         post_processor.process_classification(
             results, task_key, language, partition, shot_count
         )
-        
+
     elif task_key == "sqac_squad_2024_t1":
         # Generates a json with answers in the correct format to be evaluated
         post_processor.process_qa(results, task_key, language, partition, shot_count)
@@ -73,37 +82,41 @@ def main(args):
         raise ValueError(f"Task key {task_key} not supported")
 
     dataset_name = f"{task_key}_{language}"
-    predictions_file = f"data/results_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
-    
+    predictions_file = f"data/{tag}/results_{partition}/{task_key}_{language}_{partition}_{shot_count}.json"
+
     # regex for eliminating _t1, _t2, _t3 from task key
-    #gold_file = f"data_gold/{task_key[:-3]}/{partition}_{task_key[-2:]}_{language}_gold.json"
+    # gold_file = f"data_gold/{task_key[:-3]}/{partition}_{task_key[-2:]}_{language}_gold.json"
     gold_file = f"data/data_gold_val/{task_key}_{language}_{partition}_gold.json"
-    
+
     if task_key == "diann_2023_t1":
         evaluate_diann_2023(predictions_file, gold_file, dataset_name, partition)
-    
+
     elif (
         task_key == "dipromats_2023_t1"
         or task_key == "dipromats_2023_t2"
         or task_key == "dipromats_2023_t3"
     ):
-        evaluate_dipromats_2023(predictions_file, gold_file, dataset_name, task_config[EVALUATION], partition)
-    
-    
+        evaluate_dipromats_2023(
+            predictions_file,
+            gold_file,
+            dataset_name,
+            task_config[EVALUATION],
+            partition,
+        )
+
     elif task_key == "exist_2022_t1":
         evaluate_exist_2022_t1(predictions_file, gold_file, dataset_name, partition)
-    
+
     elif task_key == "exist_2022_t2":
         evaluate_exist_2022_t2(predictions_file, gold_file, dataset_name, partition)
-    
+
     elif (
         task_key == "exist_2023_t1"
         or task_key == "exist_2023_t2"
         or task_key == "exist_2023_t3"
     ):
         evaluate_exist_2023(predictions_file, gold_file, dataset_name, partition)
-    
-    
+
     elif task_key == "sqac_squad_2024_t1":
         evaluate_sqac_squad_2024(predictions_file, gold_file, dataset_name, partition)
 
@@ -117,6 +130,7 @@ if __name__ == "__main__":
     parser.add_argument("--language", type=str, help="Language key", default="es")
     parser.add_argument("--shot_value", type=str, help="Count of shot", default=0)
     parser.add_argument("--version", type=int, help="Version", default=0)
+    parser.add_argument("--tag", type=str, help="Tag", default=".")
 
     args = parser.parse_args()
     main(args)
