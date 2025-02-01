@@ -31,6 +31,7 @@ from .diann_2023_t1 import (
     Diann2023T1PromptBuilderBIO,
     Diann2023T1PromptBuilderTokenIdentification,
     Diann2023T1PromptBuilderGenerativeNER,
+    Diann2023T1ContextualPromptBuilderNER,
 )
 from .dipromats_t1 import DipromatsT1PromptBuilder
 from .dipromats_t2 import DipromatsT2PromptBuilder
