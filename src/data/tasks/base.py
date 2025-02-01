@@ -54,3 +54,39 @@ class GenericTaskPromptBuilder(TaskPromptBuilder):
 
     def format_context(self, entry) -> str | None:
         return None
+
+
+class ContextualTaskPromptBuilder(TaskPromptBuilder):
+    def __init__(
+        self,
+        prompt_start="",
+    ):
+        self.prompt_start = prompt_start
+
+    def build(
+        self,
+        prompt_syntax: PromptSyntax,
+        input: dict,
+        retrieved: List[dict],
+        answer: bool,
+    ) -> Tuple[str, str]:
+        prompt = prompt_syntax.build(
+            formated_question=self.format_input(input),
+            formated_context=self.format_context(input, retrieved),
+        )
+        return (
+            f"{self.prompt_start}\n{prompt}",
+            self.format_output(input) if answer else None,
+        )
+
+    @abstractmethod
+    def format_input(self, entry) -> str:
+        pass
+
+    @abstractmethod
+    def format_output(self, entry) -> str | None:
+        pass
+
+    @abstractmethod
+    def format_context(self, entry, retrieved) -> str | None:
+        pass

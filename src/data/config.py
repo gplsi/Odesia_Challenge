@@ -1,8 +1,9 @@
-from src.data.prompt_syntax import BasicSyntax
+from src.data.prompt_syntax import BasicSyntax, CustomSyntax
 from src.data.tasks import (
     Diann2023T1PromptBuilderBIO,
     Diann2023T1PromptBuilderTokenIdentification,
     Diann2023T1PromptBuilderGenerativeNER,
+    Diann2023T1ContextualPromptBuilderNER,
     DipromatsT1PromptBuilder,
     DipromatsT2PromptBuilder,
     DipromatsT3PromptBuilder,
@@ -104,6 +105,23 @@ TASK_CONFIG = {
             ),
             SYSTEM_PROMPT: "You are an expert at identifying disability mentions in text.",
             PROMPT_SYNTAX: BasicSyntax(),
+            TEXT_KEY: "tokens",
+            TRANSFORM: lambda row: " ".join(row["tokens"]),
+            USE_BIO: False,
+        },
+        {
+            CLASS_BUILDER: Diann2023T1ContextualPromptBuilderNER(
+                prompt_start=(
+                    "Your task is to identify all disability mentions in the text. "
+                    "For each mention, please output the disability present (if any) in that mention."
+                    "Your answer must be a list of strings, where each string is the explicit mention of a disability."
+                )
+            ),
+            SYSTEM_PROMPT: "You are an expert at identifying disability mentions in text.",
+            PROMPT_SYNTAX: CustomSyntax(
+                prompt_guide="Here are some examples of disabilities to guide you:",
+                prompt_end="Now, extract the disability mentions from the following sequence:",
+            ),
             TEXT_KEY: "tokens",
             TRANSFORM: lambda row: " ".join(row["tokens"]),
             USE_BIO: False,

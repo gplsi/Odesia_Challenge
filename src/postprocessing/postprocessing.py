@@ -349,7 +349,22 @@ class PostProcessingImplementation(PostProcessing):
                         label = "B-DIS" if prev_label == "O" else "I-DIS"
                         result_list[token_i] = label
                         prev_label = label
-        return result_list
+                        
+        
+        prev_label = "O"
+        processed_result = []
+        for result_label in result_list:
+            if result_label == "B-DIS":
+                # fix the B token
+                if prev_label == 'O':
+                    result_label = "B-DIS"
+                else:
+                    result_label = "I-DIS"
+                    
+            prev_label = result_label
+            processed_result.append(result_label)
+            
+        return processed_result
 
     def find_classes_and_convert_to_list(text, classes):
         """
