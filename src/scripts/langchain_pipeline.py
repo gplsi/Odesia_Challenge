@@ -115,7 +115,7 @@ def main(args):
     ]
 
     tokenizer = AutoTokenizer.from_pretrained(
-        "meta-llama/Llama-3.2-3B-Instruct",
+        "meta-llama/Llama-3.1-8B-Instruct",
         token=os.getenv("HUGGINGFACE_APIKEY"),
         use_fast=False,
         padding_side="left",
@@ -126,14 +126,14 @@ def main(args):
         model=os.getenv("HUGGINGFACE_MODEL"),
         tokenizer=tokenizer,
         token=os.getenv("HUGGINGFACE_APIKEY"),
-        max_length=5000,
+        max_length=4000,
         device_map="auto",
     )
     pipe.tokenizer.pad_token_id = pipe.tokenizer.eos_token_id
 
     model_outputs = []
     generate_kwargs = {
-        "do_sample": True,
+        "do_sample": False,
         "temperature": 1e-3,
         "top_p": 0.9,
     }

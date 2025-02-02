@@ -1,10 +1,15 @@
 script_name=$(basename -- "$0" .sh)
 languages=("es")
-partition="val"
-#indexes=(1 0 0 0 0 0 0 0 0 0)
+partition="test"
+#indexes=(2 0 0 0 0 0 0 0 0 0)
 #task_keys=("diann_2023_t1" "dipromats_2023_t1" "dipromats_2023_t2" "dipromats_2023_t3" "exist_2022_t1" "exist_2022_t2" "exist_2023_t1" "exist_2023_t2" "exist_2023_t3" "sqac_squad_2024_t1")
-indexes=(1)
-task_keys=("diann_2023_t1")
+indexes=(0 0)
+task_keys=("exist_2023_t3" "sqac_squad_2024_t1")
+
+
+# Version de Ernesto
+# indexes=(2)
+# task_keys=("diann_2023_t1")
 
 shot_value=0
 

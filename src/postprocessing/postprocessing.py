@@ -71,6 +71,7 @@ class PostProcessingImplementation(PostProcessing):
                 if use_bio_format
                 else PostProcessingImplementation._extract_entities(token_list, text)
             )
+            #PostProcessingImplementation._extract_entities(token_list, text)
 
             result = {"id": str(ids), "test_case": "DIANN2023", "value": text_processed}
             results.append(result)
@@ -391,6 +392,93 @@ class PostProcessingImplementation(PostProcessing):
     def find_classes_and_convert_to_dict(text, classes):
         return ast.literal_eval(text)
 
+
+    def _extract_entities_JP(tokens: List[str], text: str):
+        result_list = ["O"] * len(tokens)
+
+        # Trim any leading or trailing whitespace
+        text = text.strip()
+        text = text.replace(" ", "")
+        text = text.replace("[", "")
+        text = text.replace("]", "")
+        text = text.replace("'", "")
+
+        # Split the text by commas
+        outputed_tokens = text.split(",")
+
+        # Iterate over the outputed tokens and replace the tokens in the result list
+        pointer = 0
+        for i in range(len(tokens)):
+            if pointer >= len(outputed_tokens):
+                break
+
+            token_i = tokens[i]
+
+            if token_i == outputed_tokens[pointer]:
+                result_list[i] = (
+                    "B-DIS" if i == 0 or result_list[i - 1] == "O" else "I-DIS"
+                )
+                pointer += 1
+                continue
+
+        return result_list
+
+
+    def _test_extract_entities(input_tokens: List[str], output_text: str):
+        """
+        input_tokens: List[str]
+            List of the original input tokens to the model.
+            i.e. ["This", "is", "a", "test", "text", "with", "CRONIC", "DISABILITY", ...]
+        
+        output_text: str
+            The output text from the model. It might have errors and need to be formatted to a list.
+            i.e. "['CRONIC DISABILITY', 'Alzheimer' ,']"
+        """
+        
+        result_list = ["O"] * len(input_tokens)
+
+        # --- Preprocessing of output_text ---
+        # Note: This preprocessing is brittle and may need improvements in a real-world scenario.
+        output_text = output_text.strip()
+        output_text = output_text.replace("[", "")
+        output_text = output_text.replace("]", "")
+        output_text = output_text.replace("'", "")
+        
+        # Split the text by commas
+        outputed_tokens = output_text.split(",")
+        
+        # --- Build a robust dictionary of candidate spans ---
+        # Instead of a dictionary that maps the last token to a single span, we map it to a list of spans.
+        # This avoids overwriting if multiple entity spans end with the same token.
+        response_token_dict = {}
+        for current_tokens in outputed_tokens:
+            # Split by any whitespace and filter out empty tokens
+            splitted_tokens = [token for token in current_tokens.split() if token]
+            if splitted_tokens:
+                last_token = splitted_tokens[-1]
+                response_token_dict.setdefault(last_token, []).append(splitted_tokens)
+        
+        # --- Iterate over the input tokens and substitute labels if a span is matched ---
+        # When matching, convert input tokens to lowercase for comparison
+        for i, token in enumerate(input_tokens):
+            lower_token = token.lower()
+            if lower_token in response_token_dict:
+                candidate_spans = response_token_dict[lower_token]
+                for span in candidate_spans:
+                    span_length = len(span)
+                    start_index = i - span_length + 1
+                    # Ensure there are enough tokens before the current token
+                    if start_index < 0:
+                        continue
+                    # Check if the candidate span matches the tokens in input_tokens in lowercase
+                    if [t.lower() for t in input_tokens[start_index:i+1]] == span:
+                        # Label the tokens: the first token gets "B-DIS", and the rest get "I-DIS"
+                        result_list[start_index] = "B-DIS"
+                        for k in range(1, span_length):
+                            result_list[start_index + k] = "I-DIS"
+                        # Once a match is found for this candidate, no need to check further candidates
+                        break
+        return result_list
 
 # Ejemplo de uso
 if __name__ == "__main__":
