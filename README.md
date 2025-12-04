@@ -521,30 +521,54 @@ bash scripts/post_val.sh
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
-| **Language Models** | LLaMA 3B/8B, Salamandra 8B, DeepSeek R1 | Decoder-only models for text generation |
-| **Deep Learning** | PyTorch 2.5.1+ | Neural network framework |
+| **Language Models** | LLaMA 3.1/3.2 (1B-8B), Salamandra 8B, DeepSeek R1 | Decoder-only models for text generation |
+| **Deep Learning** | PyTorch 2.5.1+ with CUDA 12.1 | Neural network framework |
+| **Transformers** | HuggingFace Transformers 4.48.1 | Model loading and inference |
 | **Vector Database** | Weaviate | Similarity search and retrieval |
-| **Embeddings** | Sentence Transformers | Text encoding for retrieval |
-| **API Framework** | FastAPI | RESTful API endpoints |
-| **UI Framework** | Gradio | Interactive web interface |
+| **Embeddings** | Sentence Transformers, FlagEmbedding | Text encoding and reranking |
+| **LLM Framework** | LangChain, LangGraph | Orchestration and workflow management |
+| **Evaluation** | pyevall, HuggingFace Evaluate, NLTK | Metrics and evaluation |
+| **API Framework** | FastAPI + Uvicorn | RESTful API endpoints (stub) |
 | **Containerization** | Docker | Deployment and orchestration |
-| **Progress Display** | Rich | Beautiful console output and progress bars |
+| **Acceleration** | Accelerate | Distributed training and inference |
 
 ### Python Libraries
 
 ```
-torch>=2.5.1
-transformers
+# Core ML/DL
+pandas
+torch
+transformers==4.48.1
 datasets
+accelerate
+
+# Vector DB & Retrieval
 weaviate-client
 sentence-transformers
+FlagEmbedding
+
+# LLM Orchestration
 langchain
+langchain-community
+langchain-weaviate
+langchain_ollama
+langgraph
+
+# Evaluation
+pyevall
+evaluate
+nltk
+
+# API & Serving
 fastapi
+uvicorn[standard]
 gradio
-rich
-numpy
-pandas
-scikit-learn
+ollama
+
+# Utilities
+python-dotenv
+tiktoken
+cohere
 ```
 
 ---
