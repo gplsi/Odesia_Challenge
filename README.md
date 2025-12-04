@@ -1,9 +1,6 @@
 # Odesia Challenge - GPLSI Experiments
 
-![License](https://img.shields. io/badge/License-Apache%202.0-blue.svg)
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1+-red.svg)
-![CUDA](https://img.shields. io/badge/CUDA-12.1+-green.svg)
+![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg) ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg) ![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1+-red.svg) ![CUDA](https://img.shields.io/badge/CUDA-12.1+-green.svg)
 
 ## 🚩 Purpose of This Repository
 
