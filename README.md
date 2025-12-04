@@ -323,36 +323,46 @@ High-level scripts for managing the entire pipeline:
 
 ```mermaid
 graph TB
+    %% Define styles
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px,color:#000;
+    classDef input fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    classDef process fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,color:#e65100;
+    classDef storage fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c;
+    classDef inference fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c;
+    classDef output fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    classDef config fill:#fff8e1,stroke:#fbc02d,stroke-width:2px,color:#f57f17;
+
     subgraph Input["📥 Input"]
-        TaskData[Task Dataset<br/>JSON files]
-        TaskConfig[Task Configuration<br/>config.py]
-        ModelChoice[Model Selection<br/>Pretrained or Fine-tuned]
+        direction TB
+        TaskData[Task Dataset<br/>JSON files]:::input
+        TaskConfig[Task Configuration<br/>config.py]:::config
+        ModelChoice[Model Selection<br/>Pretrained or Fine-tuned]:::config
     end
     
     subgraph DataPrep["📋 Data Preparation"]
-        DataLoader[Dataset Loader<br/>src/data/base.py]
-        TaskDef[Task Definition<br/>Prompt Builder]
+        DataLoader[Dataset Loader<br/>src/data/base.py]:::process
+        TaskDef[Task Definition<br/>Prompt Builder]:::process
     end
     
-    subgraph Retrieval["🔍 RAG Retrieval<br/><i>Optional: k>0</i>"]
-        Weaviate[(Weaviate<br/>Vector DB)]
-        ReRank[ReRank<br/>Retriever]
+    subgraph Retrieval["🔍 RAG Retrieval (Optional: k>0)"]
+        Weaviate[(Weaviate<br/>Vector DB)]:::storage
+        ReRank[ReRank<br/>Retriever]:::process
     end
     
     subgraph Encoding["✍️ Prompt Construction"]
-        DataEnc[DataEncoder<br/>Builds prompts]
-        Context[Add Retrieved<br/>Examples]
+        DataEnc[DataEncoder<br/>Builds prompts]:::process
+        Context[Add Retrieved<br/>Examples]:::process
     end
     
     subgraph Inference["🤖 LLM Inference"]
-        HFPipe[HuggingFace<br/>Pipeline]
-        LLM[Decoder-Only LLM<br/>LLaMA/Salamandra/DeepSeek]
+        HFPipe[HuggingFace<br/>Pipeline]:::inference
+        LLM[Decoder-Only LLM<br/>LLaMA/Salamandra/DeepSeek]:::inference
     end
     
-    subgraph PostEval["� Post-Processing & Evaluation"]
-        PostProc[Postprocessing<br/>Format outputs]
-        TaskEval[Task-Specific<br/>Evaluation]
-        Metrics[Metrics & CSVs]
+    subgraph PostEval["📊 Post-Processing & Evaluation"]
+        PostProc[Postprocessing<br/>Format outputs]:::output
+        TaskEval[Task-Specific<br/>Evaluation]:::output
+        Metrics[Metrics & CSVs]:::output
     end
     
     TaskData --> DataLoader
@@ -373,8 +383,13 @@ graph TB
     PostProc --> TaskEval
     TaskEval --> Metrics
     
-    style Retrieval fill:#e1f5ff
-    style Inference fill:#fff4e1
+    %% Subgraph Styles
+    style Input fill:#f5faff,stroke:#1565c0,stroke-width:2px,color:#1565c0
+    style DataPrep fill:#fff8f0,stroke:#ef6c00,stroke-width:2px,color:#ef6c00
+    style Retrieval fill:#faf5ff,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2
+    style Encoding fill:#fff8f0,stroke:#ef6c00,stroke-width:2px,color:#ef6c00
+    style Inference fill:#fff5f5,stroke:#c62828,stroke-width:2px,color:#c62828
+    style PostEval fill:#f1f8e9,stroke:#2e7d32,stroke-width:2px,color:#2e7d32
 ```
 
 ### Pipeline Flow
