@@ -322,61 +322,79 @@ High-level scripts for managing the entire pipeline:
 
 ## 🏗️ System Architecture
 
-### High-Level Architecture
+### Inference Pipeline Architecture
 
 ```mermaid
 graph TB
-    subgraph Input["📥 Input Layer"]
-        Raw[Raw Spanish Text]
-        Task[Task Definition]
+    subgraph Input["📥 Input"]
+        TaskData[Task Dataset<br/>JSON files]
+        TaskConfig[Task Configuration<br/>config.py]
+        ModelChoice[Model Selection<br/>Pretrained or Fine-tuned]
     end
     
-    subgraph Processing["⚙️ Processing Layer"]
-        Preprocess[Preprocessing Module]
-        TaskConfig[Task Configuration]
+    subgraph DataPrep["📋 Data Preparation"]
+        DataLoader[Dataset Loader<br/>src/data/base.py]
+        TaskDef[Task Definition<br/>Prompt Builder]
     end
     
-    subgraph Inference["🤖 Inference Layer"]
-        subgraph Strategies["Inference Strategies"]
-            FT[Fine-Tuning]
-            ZS[Zero-Shot]
-            RAG[RAG + Few-Shot]
-        end
-        
-        Model[Decoder-Only LLM]
-        VectorDB[(Weaviate Vector DB)]
+    subgraph Retrieval["🔍 RAG Retrieval<br/><i>Optional: k>0</i>"]
+        Weaviate[(Weaviate<br/>Vector DB)]
+        ReRank[ReRank<br/>Retriever]
     end
     
-    subgraph Output["📤 Output Layer"]
-        Postprocess[Postprocessing]
-        Eval[Evaluation Metrics]
-        Results[Results & CSVs]
+    subgraph Encoding["✍️ Prompt Construction"]
+        DataEnc[DataEncoder<br/>Builds prompts]
+        Context[Add Retrieved<br/>Examples]
     end
     
-    Raw --> Preprocess
-    Task --> TaskConfig
-    Preprocess --> FT
-    Preprocess --> ZS
-    Preprocess --> RAG
-    TaskConfig --> FT
-    TaskConfig --> ZS
-    TaskConfig --> RAG
+    subgraph Inference["🤖 LLM Inference"]
+        HFPipe[HuggingFace<br/>Pipeline]
+        LLM[Decoder-Only LLM<br/>LLaMA/Salamandra/DeepSeek]
+    end
     
-    FT --> Model
-    ZS --> Model
-    RAG --> VectorDB
-    VectorDB --> Model
+    subgraph PostEval["� Post-Processing & Evaluation"]
+        PostProc[Postprocessing<br/>Format outputs]
+        TaskEval[Task-Specific<br/>Evaluation]
+        Metrics[Metrics & CSVs]
+    end
     
-    Model --> Postprocess
-    Postprocess --> Eval
-    Eval --> Results
+    TaskData --> DataLoader
+    TaskConfig --> TaskDef
+    DataLoader --> DataEnc
+    TaskDef --> DataEnc
+    ModelChoice --> HFPipe
+    
+    DataEnc -->|k > 0| ReRank
+    ReRank --> Weaviate
+    Weaviate --> Context
+    Context --> DataEnc
+    DataEnc -->|k = 0| HFPipe
+    
+    DataEnc --> HFPipe
+    HFPipe --> LLM
+    LLM --> PostProc
+    PostProc --> TaskEval
+    TaskEval --> Metrics
+    
+    style Retrieval fill:#e1f5ff
+    style Inference fill:#fff4e1
 ```
 
-### Component Interactions
+### Pipeline Flow
 
-1. **Data Flow:** Raw data → Preprocessing → Task-specific formatting → Model inference → Postprocessing → Evaluation
-2. **RAG Flow:** Query → Embedding → Vector search → Example retrieval → Context augmentation → Generation
-3. **Experiment Flow:** Configuration → Dataset preparation → Model loading → Inference → Result collection → Analysis
+The **same inference pipeline** is used for all experiments, with variations only in:
+- **Model checkpoint:** Pretrained base vs. fine-tuned models
+- **Shot count (k):** 0 for zero-shot, 5 for few-shot with RAG retrieval
+- **Task configuration:** Different prompts, formats, and evaluation metrics per task
+
+**Key Pipeline Steps:**
+
+1. **Data Loading** (`src/data/base.py`): Load task dataset and configuration
+2. **RAG Retrieval** (`src/retrieval/`): If `k > 0`, retrieve similar examples from Weaviate
+3. **Prompt Encoding** (`DataEncoder`): Build prompts with system message + user query + optional examples
+4. **LLM Inference** (`langchain_pipeline.py`): Generate predictions using HuggingFace pipeline
+5. **Postprocessing** (`src/postprocessing/`): Format model outputs (NER, classification, QA)
+6. **Evaluation** (`src/evaluation/`): Calculate task-specific metrics (F1, precision, recall)
 
 ---
 
@@ -497,19 +515,6 @@ bash scripts/post_val.sh
 
 ---
 
-## 📊 Results & Performance
-
-> **Note:** Detailed results and performance metrics will be added as experiments are completed.
-
-### Evaluation Metrics
-
-- **Task-specific metrics:** Precision, Recall, F1-Score
-- **Overall performance:** Macro/Micro averaging across tasks
-- **Efficiency metrics:** Inference time, memory usage
-- **Comparative analysis:** Strategy comparison (Fine-tuning vs. Zero-shot vs. RAG)
-
----
-
 ## 🛠️ Technologies & Stack
 
 ### Core Technologies
@@ -575,32 +580,6 @@ BATCH_SIZE=8
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these guidelines:
-
-1. **Fork the repository** and create a feature branch
-2. **Follow code standards:** Use type hints, docstrings, and consistent formatting
-3. **Add tests:** Ensure new features have corresponding tests
-4. **Document changes:** Update README and relevant documentation
-5. **Submit a Pull Request:** With a clear description of changes
-
-### Development Setup
-
-```bash
-# Install development dependencies
-pip install -r requirements-dev.txt
-
-# Run tests
-pytest tests/
-
-# Format code
-black src/
-isort src/
-```
-
----
-
 ## 📜 License
 
 This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.
@@ -610,7 +589,7 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 ## 📚 References
 
 ### Odesia Challenge
-- [Challenge Documentation](#) *([link](https://leaderboard.odesia.uned.es/leaderboard/challenge))*
+- [Challenge Documentation](https://leaderboard.odesia.uned.es/leaderboard/challenge)
 
 ### Models Used
 - **LLaMA:** [Meta AI LLaMA](https://ai.meta.com/llama/)
@@ -642,9 +621,6 @@ Special thanks to all contributors and the organizers of the Odesia Challenge fo
 For questions, issues, or collaboration inquiries:
 
 - **GitHub Issues:** [Open an issue](https://github.com/gplsi/Odesia_Challenge/issues)
-- **Email:** *(contact email to be added)*
 - **GPLSI Website:** [gplsi.dlsi.ua.es](https://gplsi.dlsi.ua.es/)
 
 ---
-
-**Last Updated:** December 2025
