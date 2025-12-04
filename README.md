@@ -359,7 +359,7 @@ graph TB
         LLM[Decoder-Only LLM<br/>LLaMA/Salamandra/DeepSeek]:::inference
     end
     
-    subgraph PostEval["📊 Post-Processing and Evaluation"]
+    subgraph PostEval["📊 Post-Processing"]
         PostProc[Postprocessing<br/>Format outputs]:::output
         TaskEval[Task-Specific<br/>Evaluation]:::output
         Metrics[Metrics & CSVs]:::output
